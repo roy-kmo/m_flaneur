@@ -40,10 +40,11 @@ export default class PagesForm extends Component {
       path,
       isPublished
     } = formFields;
-    const editorOptions = {
+    const editorConfig = {
       imageUpload: false,
       fileUpload: false,
-      videoUpload: false
+      videoUpload: false,
+      quickInsertButtons: ['table', 'ul', 'ol', 'hr']
     };
     return (
       <div>
@@ -66,7 +67,7 @@ export default class PagesForm extends Component {
             tag="textarea"
             model={body}
             onModelChange={onBodyChange}
-            options={editorOptions}
+            config={editorConfig}
           />
         </div>
         <div className="form-group">

@@ -106,6 +106,7 @@ export default class PagesContainer extends Component {
         alert(err.reason);
       } else {
         this.setState({ view: 'list' });
+        Session.set('Pages.editPage', undefined);
       }
     });
   };
@@ -113,6 +114,7 @@ export default class PagesContainer extends Component {
   handleBack = e => {
     e.preventDefault();
     this.setState({ view: 'list' });
+    Session.set('Pages.editPage', undefined);
   }
 
   render () {
