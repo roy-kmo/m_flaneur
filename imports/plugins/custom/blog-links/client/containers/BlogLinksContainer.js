@@ -47,16 +47,19 @@ export default class BlogLinksContainer extends Component {
     // Watch for delete button click
     this.deleteTracker = Tracker.autorun(() => {
       const _id = Session.get('BlogLinks.deleteId');
-      if (_id && confirm('Are you sure you want to delete this blog post link?')) {
-        Meteor.call('BlogLinks.delete', _id, (err) => {
-          if (err) {
-            alert(err.reason);
-          } else {
-            this.setState({
-              view: 'list'
-            });
-          }
-        })
+      if (_id) {
+        Session.set('BlogLinks.deleteId', undefined);
+        if (confirm('Are you sure you want to delete this blog post link?')) {
+          Meteor.call('BlogLinks.delete', _id, (err) => {
+            if (err) {
+              alert(err.reason);
+            } else {
+              this.setState({
+                view: 'list'
+              });
+            }
+          });
+        }
       }
     });
   };

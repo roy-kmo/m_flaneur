@@ -45,7 +45,7 @@ Meteor.methods({
     }
 
     if (Reaction.hasAdminAccess() === false) {
-      throw new Meteor.Error(403, 'You do not have admin permissions.');
+      throw new Meteor.Error(403, 'You do not have admin permissions');
     }
 
     const existingByURL = BlogLinks.findOne({ url }, { fields: { _id: 1 }});
@@ -81,7 +81,7 @@ Meteor.methods({
     }
 
     if (Reaction.hasAdminAccess() === false) {
-      throw new Meteor.Error(403, 'You do not have admin permissions.');
+      throw new Meteor.Error(403, 'You do not have admin permissions');
     }
 
     if (_id === '') {
@@ -123,7 +123,7 @@ Meteor.methods({
     }
 
     if (Reaction.hasAdminAccess() === false) {
-      throw new Meteor.Error(403, 'You do not have admin permissions.');
+      throw new Meteor.Error(403, 'You do not have admin permissions');
     }
 
     if (_id === '') {

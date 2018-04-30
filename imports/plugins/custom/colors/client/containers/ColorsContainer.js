@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TabularTable from '/imports/plugins/custom/flaneur/client/components/TabularTable';
-import { PagesTable } from '../../lib/tables';
-import { PagesForm } from '../components';
+import { ColorsTable } from '../../lib/tables';
+import ColorForm from '../components/ColorForm';
 import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
+import { Reaction, Logger } from "/client/api";
 
-export default class PagesContainer extends Component {
+export default class ColorsContainer extends Component {
 
   constructor (props) {
     super(props);
 
     this.newFormFields = {
       _id: '',
-      title: '',
-      body: '',
-      path: '',
-      isPublished: false
+      name: '',
+      description: '',
+      pantoneCode: '',
+      hexCode: ''
     };
 
     this.state = {
@@ -32,22 +33,22 @@ export default class PagesContainer extends Component {
   initTrackers = () => {
     // Watch for edit button click
     this.editTracker = Tracker.autorun(() => {
-      const page = Session.get('Pages.editPage');
-      if (page) {
+      const color = Session.get('Colors.editColor');
+      if (color) {
         this.setState({
           view: 'edit',
-          formFields: page
+          formFields: color
         });
       }
     });
 
     // Watch for delete button click
     this.deleteTracker = Tracker.autorun(() => {
-      const _id = Session.get('Pages.deleteId');
+      const _id = Session.get('Colors.deleteId');
       if (_id) {
-        Session.set('Pages.deleteId', undefined);
-        if (confirm('Are you sure you want to delete this page?')) {
-          Meteor.call('Pages.delete', _id, (err) => {
+        Session.set('Colors.deleteId', undefined);
+        if (confirm('Are you sure you want to delete this color?')) {
+          Meteor.call('Colors.delete', _id, (err) => {
             if (err) {
               alert(err.reason);
             } else {
@@ -55,7 +56,7 @@ export default class PagesContainer extends Component {
                 view: 'list'
               });
             }
-          });
+          })
         }
       }
     });
@@ -79,21 +80,15 @@ export default class PagesContainer extends Component {
     this.setState({ formFields });
   };
 
-  handleBodyChange = body => {
+  handleDescriptionChange = description => {
     const { formFields } = this.state;
-    formFields.body = body;
+    formFields.description = description;
     this.setState({ formFields });
   };
 
-  handlePublishedChange = e => {
-    const { formFields } = this.state;
-    formFields.isPublished = e.target.checked;
-    this.setState({ formFields });
-  };
-
-  handleNewPageSave = e => {
+  handleNewColorSave = e => {
     e.preventDefault();
-    Meteor.call('Pages.create', this.state.formFields, (err) => {
+    Meteor.call('Colors.create', this.state.formFields, (err) => {
       if (err) {
         alert(err.reason);
       } else {
@@ -102,14 +97,14 @@ export default class PagesContainer extends Component {
     });
   };
 
-  handleEditPageSave = e => {
+  handleEditColorSave = e => {
     e.preventDefault();
-    Meteor.call('Pages.update', this.state.formFields, (err) => {
+    Meteor.call('Colors.update', this.state.formFields, (err) => {
       if (err) {
         alert(err.reason);
       } else {
         this.setState({ view: 'list' });
-        Session.set('Pages.editPage', undefined);
+        Session.set('Colors.editColor', undefined);
       }
     });
   };
@@ -117,7 +112,7 @@ export default class PagesContainer extends Component {
   handleBack = e => {
     e.preventDefault();
     this.setState({ view: 'list' });
-    Session.set('Pages.editPage', undefined);
+    Session.set('Colors.editColor', undefined);
   }
 
   render () {
@@ -125,26 +120,25 @@ export default class PagesContainer extends Component {
     const isListView = view === 'list';
     const isAddView = view === 'add';
     const isEditView = view === 'edit';
-    const pageSaveFunc = isAddView && this.handleNewPageSave || this.handleEditPageSave;
+    const saveFunc = isAddView && this.handleNewColorSave || this.handleEditColorSave;
 
     return (
-      <div id="pages-container">
+      <div id="colors-container">
         {isListView && (
           <div>
-            <button className="btn btn-default add-btn" onClick={this.handleAddClick}>Add New Page</button>
+            <button className="btn btn-default add-btn" onClick={this.handleAddClick}>Add New Color</button>
             <TabularTable
-              table={PagesTable}
-              id="pages-table"
+              table={ColorsTable}
+              id="colors-table"
             />
           </div>
         )}
         {(isAddView || isEditView) && (
-          <PagesForm
+          <ColorForm
             formFields={formFields}
             onInputChange={this.handleInputChange}
-            onBodyChange={this.handleBodyChange}
-            onPublishedChange={this.handlePublishedChange}
-            onSave={pageSaveFunc}
+            onDescriptionChange={this.handleDescriptionChange}
+            onSave={saveFunc}
             onBack={this.handleBack}
           />
         )}
