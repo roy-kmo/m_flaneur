@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import ImageUploadField from '/imports/plugins/custom/flaneur/client/components/ImageUploadField';
 import ContentEditor from '/imports/plugins/custom/flaneur/client/components/ContentEditor';
 
-export default class PagesForm extends Component {
+export default class BlogLinkForm extends Component {
 
   static propTypes = {
     // Values for form fields, keyed by name
     formFields: PropTypes.object.isRequired,
     onInputChange: PropTypes.func.isRequired,
-    onBodyChange: PropTypes.func.isRequired,
-    onPublishedChange: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired
+    onDescriptionChange: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
+    onImageUpload: PropTypes.func.isRequired,
+    onImageRemove: PropTypes.func.isRequired
   };
 
   constructor (props) {
@@ -22,16 +25,18 @@ export default class PagesForm extends Component {
     const {
       formFields,
       onInputChange,
-      onBodyChange,
-      onPublishedChange,
+      onDescriptionChange,
       onSave,
-      onBack
+      onBack,
+      onImageUpload,
+      onImageRemove
     } = this.props;
     const {
       title,
-      body,
-      path,
-      isPublished
+      imageFileId,
+      imageFileName,
+      description,
+      url
     } = formFields;
 
     return (
@@ -49,30 +54,27 @@ export default class PagesForm extends Component {
             onChange={onInputChange}
           />
         </div>
+        <ImageUploadField
+          label="Image"
+          fileId={imageFileId}
+          fileName={imageFileName}
+          onChange={onImageUpload}
+          onRemove={onImageRemove}
+        />
         <div className="form-group">
-          <label>Body</label>
-          <ContentEditor value={body} onChange={onBodyChange} />
+          <label>Description</label>
+          <ContentEditor value={description} onChange={onDescriptionChange} />
         </div>
         <div className="form-group">
-          <label>Path</label>
+          <label>URL</label>
           <input
             type="text"
             className="form-control"
-            name="path"
-            value={path}
-            placeholder="about-us"
+            name="url"
+            value={url}
+            placeholder="https://"
             onChange={onInputChange}
           />
-        </div>
-        <div className="form-group">
-          <input
-            type="checkbox"
-            name="published"
-            checked={isPublished}
-            onChange={onPublishedChange}
-            className="form-check-input"
-          />
-          <label className="form-check-label">&nbsp;&nbsp;Published?</label>
         </div>
         <button className="btn btn-default" onClick={onSave}>Save</button>
       </div>

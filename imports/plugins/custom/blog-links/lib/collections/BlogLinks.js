@@ -1,22 +1,25 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-const Pages = new Mongo.Collection('Pages');
+const BlogLinks = new Mongo.Collection('BlogLinks');
 
-Pages.schema = new SimpleSchema({
+BlogLinks.schema = new SimpleSchema({
   title: {
     type: String
   },
-  path: {
-    type: String
-  },
-  isPublished: {
-    type: Boolean,
-    optional: true
-  },
-  body: {
+  imageFileId: {
     type: String,
     optional: true
+  },
+  imageFileName: {
+    type: String,
+    optional: true
+  },
+  description: {
+    type: String
+  },
+  url: {
+    type: String
   },
   createdAt: {
     type: Date,
@@ -28,4 +31,4 @@ Pages.schema = new SimpleSchema({
   }
 });
 
-export default Pages;
+export default BlogLinks;
