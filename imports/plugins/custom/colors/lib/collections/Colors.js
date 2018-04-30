@@ -1,22 +1,21 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-const Pages = new Mongo.Collection('Pages');
+const Colors = new Mongo.Collection('Colors');
 
-Pages.schema = new SimpleSchema({
-  title: {
+Colors.schema = new SimpleSchema({
+  name: {
     type: String
   },
-  path: {
+  pantoneCode: {
     type: String
   },
-  isPublished: {
-    type: Boolean,
-    optional: true
-  },
-  body: {
+  description: {
     type: String,
     optional: true
+  },
+  hexCode: {
+    type: String
   },
   createdAt: {
     type: Date,
@@ -28,4 +27,4 @@ Pages.schema = new SimpleSchema({
   }
 });
 
-export default Pages;
+export default Colors;

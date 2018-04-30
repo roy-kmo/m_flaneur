@@ -16,7 +16,7 @@ Reaction.registerPackage({
     label: "Pages",
     description: "Manage pages",
     icon: "fa fa-file-o",
-    priority: 0,
+    priority: 1,
     container: "core",
     template: "pages"
   }, {
@@ -26,7 +26,7 @@ Reaction.registerPackage({
     label: "Pages",
     description: "Manage pages",
     icon: "fa fa-file-o",
-    priority: 1,
+    priority: 2,
     container: "dashboard",
     template: "pages",
     audience: ["seller"]

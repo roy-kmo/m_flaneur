@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ContentEditor from '/imports/plugins/custom/flaneur/client/components/ContentEditor';
 
-export default class PagesForm extends Component {
+export default class ColorForm extends Component {
 
   static propTypes = {
     // Values for form fields, keyed by name
     formFields: PropTypes.object.isRequired,
     onInputChange: PropTypes.func.isRequired,
-    onBodyChange: PropTypes.func.isRequired,
-    onPublishedChange: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired
+    onDescriptionChange: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired
   };
 
   constructor (props) {
@@ -22,16 +22,15 @@ export default class PagesForm extends Component {
     const {
       formFields,
       onInputChange,
-      onBodyChange,
-      onPublishedChange,
+      onDescriptionChange,
       onSave,
       onBack
     } = this.props;
     const {
-      title,
-      body,
-      path,
-      isPublished
+      name,
+      pantoneCode,
+      hexCode,
+      description
     } = formFields;
 
     return (
@@ -40,39 +39,38 @@ export default class PagesForm extends Component {
           <button className="btn btn-default" onClick={onBack}>Back</button>
         </div>
         <div className="form-group">
-          <label>Title</label>
+          <label>Name</label>
           <input
             type="text"
             className="form-control"
-            name="title"
-            value={title}
+            name="name"
+            value={name}
             onChange={onInputChange}
           />
         </div>
         <div className="form-group">
-          <label>Body</label>
-          <ContentEditor value={body} onChange={onBodyChange} />
+          <label>Description</label>
+          <ContentEditor value={description} onChange={onDescriptionChange} />
         </div>
         <div className="form-group">
-          <label>Path</label>
+          <label>Pantone Code</label>
           <input
             type="text"
             className="form-control"
-            name="path"
-            value={path}
-            placeholder="about-us"
+            name="pantoneCode"
+            value={pantoneCode}
             onChange={onInputChange}
           />
         </div>
         <div className="form-group">
+          <label>HEX Code</label>
           <input
-            type="checkbox"
-            name="published"
-            checked={isPublished}
-            onChange={onPublishedChange}
-            className="form-check-input"
+            type="text"
+            className="form-control"
+            name="hexCode"
+            value={hexCode}
+            onChange={onInputChange}
           />
-          <label className="form-check-label">&nbsp;&nbsp;Published?</label>
         </div>
         <button className="btn btn-default" onClick={onSave}>Save</button>
       </div>

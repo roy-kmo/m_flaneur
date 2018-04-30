@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TabularTable from '/imports/plugins/custom/flaneur/client/components/TabularTable';
-import { PagesTable } from '../../lib/tables';
-import { PagesForm } from '../components';
+import { BlogLinksTable } from '../../lib/tables';
+import BlogLinkForm from '../components/BlogLinkForm';
 import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
+import { Reaction, Logger } from "/client/api";
+import { Media } from "/imports/plugins/core/files/client";
 
-export default class PagesContainer extends Component {
+export default class BlogLinksContainer extends Component {
 
   constructor (props) {
     super(props);
@@ -14,9 +16,10 @@ export default class PagesContainer extends Component {
     this.newFormFields = {
       _id: '',
       title: '',
-      body: '',
-      path: '',
-      isPublished: false
+      imageFileId: '',
+      imageFileName: '',
+      description: '',
+      url: '',
     };
 
     this.state = {
@@ -32,22 +35,22 @@ export default class PagesContainer extends Component {
   initTrackers = () => {
     // Watch for edit button click
     this.editTracker = Tracker.autorun(() => {
-      const page = Session.get('Pages.editPage');
-      if (page) {
+      const blogLink = Session.get('BlogLinks.editBlogLink');
+      if (blogLink) {
         this.setState({
           view: 'edit',
-          formFields: page
+          formFields: blogLink
         });
       }
     });
 
     // Watch for delete button click
     this.deleteTracker = Tracker.autorun(() => {
-      const _id = Session.get('Pages.deleteId');
+      const _id = Session.get('BlogLinks.deleteId');
       if (_id) {
-        Session.set('Pages.deleteId', undefined);
-        if (confirm('Are you sure you want to delete this page?')) {
-          Meteor.call('Pages.delete', _id, (err) => {
+        Session.set('BlogLinks.deleteId', undefined);
+        if (confirm('Are you sure you want to delete this blog post link?')) {
+          Meteor.call('BlogLinks.delete', _id, (err) => {
             if (err) {
               alert(err.reason);
             } else {
@@ -79,21 +82,15 @@ export default class PagesContainer extends Component {
     this.setState({ formFields });
   };
 
-  handleBodyChange = body => {
+  handleDescriptionChange = description => {
     const { formFields } = this.state;
-    formFields.body = body;
+    formFields.description = description;
     this.setState({ formFields });
   };
 
-  handlePublishedChange = e => {
-    const { formFields } = this.state;
-    formFields.isPublished = e.target.checked;
-    this.setState({ formFields });
-  };
-
-  handleNewPageSave = e => {
+  handleNewBlogLinkSave = e => {
     e.preventDefault();
-    Meteor.call('Pages.create', this.state.formFields, (err) => {
+    Meteor.call('BlogLinks.create', this.state.formFields, (err) => {
       if (err) {
         alert(err.reason);
       } else {
@@ -102,14 +99,14 @@ export default class PagesContainer extends Component {
     });
   };
 
-  handleEditPageSave = e => {
+  handleEditBlogLinkSave = e => {
     e.preventDefault();
-    Meteor.call('Pages.update', this.state.formFields, (err) => {
+    Meteor.call('BlogLinks.update', this.state.formFields, (err) => {
       if (err) {
         alert(err.reason);
       } else {
         this.setState({ view: 'list' });
-        Session.set('Pages.editPage', undefined);
+        Session.set('BlogLinks.editBlogLink', undefined);
       }
     });
   };
@@ -117,35 +114,50 @@ export default class PagesContainer extends Component {
   handleBack = e => {
     e.preventDefault();
     this.setState({ view: 'list' });
-    Session.set('Pages.editPage', undefined);
+    Session.set('BlogLinks.editBlogLink', undefined);
   }
+
+  handleImageUpload = (imageFileId, imageFileName) => {
+    const { formFields } = this.state;
+    formFields.imageFileId = imageFileId;
+    formFields.imageFileName = imageFileName;
+    this.setState({ formFields });
+  };
+
+  handleImageRemove = () => {
+    const { formFields } = this.state;
+    formFields.imageFileId = '';
+    formFields.imageFileName = '';
+    this.setState({ formFields });
+  };
 
   render () {
     const { view, formFields } = this.state;
     const isListView = view === 'list';
     const isAddView = view === 'add';
     const isEditView = view === 'edit';
-    const pageSaveFunc = isAddView && this.handleNewPageSave || this.handleEditPageSave;
+    const saveFunc = isAddView && this.handleNewBlogLinkSave || this.handleEditBlogLinkSave;
 
     return (
-      <div id="pages-container">
+      <div id="blog-links-container">
         {isListView && (
           <div>
-            <button className="btn btn-default add-btn" onClick={this.handleAddClick}>Add New Page</button>
+            <button className="btn btn-default add-btn" onClick={this.handleAddClick}>Add New Blog Link</button>
             <TabularTable
-              table={PagesTable}
-              id="pages-table"
+              table={BlogLinksTable}
+              id="blog-links-table"
             />
           </div>
         )}
         {(isAddView || isEditView) && (
-          <PagesForm
+          <BlogLinkForm
             formFields={formFields}
             onInputChange={this.handleInputChange}
-            onBodyChange={this.handleBodyChange}
-            onPublishedChange={this.handlePublishedChange}
-            onSave={pageSaveFunc}
+            onDescriptionChange={this.handleDescriptionChange}
+            onSave={saveFunc}
             onBack={this.handleBack}
+            onImageUpload={this.handleImageUpload}
+            onImageRemove={this.handleImageRemove}
           />
         )}
       </div>
