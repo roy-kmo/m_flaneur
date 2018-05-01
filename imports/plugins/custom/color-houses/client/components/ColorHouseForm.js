@@ -3,18 +3,26 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ImageUploadField from '/imports/plugins/custom/flaneur/client/components/ImageUploadField';
 import ContentEditor from '/imports/plugins/custom/flaneur/client/components/ContentEditor';
+import Autocomplete from '/imports/plugins/custom/flaneur/client/components/Autocomplete';
 
-export default class BlogLinkForm extends Component {
+export default class ColorHouseForm extends Component {
 
   static propTypes = {
     // Values for form fields, keyed by name
     formFields: PropTypes.object.isRequired,
+    // Options for color autocomplete
+    colorOptions: PropTypes.array.isRequired,
+    colors: PropTypes.array.isRequired,
+    isAutocompleteLoading: PropTypes.bool.isRequired,
     onInputChange: PropTypes.func.isRequired,
     onDescriptionChange: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onBack: PropTypes.func.isRequired,
     onImageUpload: PropTypes.func.isRequired,
-    onImageRemove: PropTypes.func.isRequired
+    onImageRemove: PropTypes.func.isRequired,
+    onColorSearch: PropTypes.func.isRequired,
+    onColorAdd: PropTypes.func.isRequired,
+    onColorRemove: PropTypes.func.isRequired
   };
 
   constructor (props) {
@@ -24,19 +32,24 @@ export default class BlogLinkForm extends Component {
   render () {
     const {
       formFields,
+      colorOptions,
+      isAutocompleteLoading,
+      colors,
       onInputChange,
       onDescriptionChange,
       onSave,
       onBack,
       onImageUpload,
-      onImageRemove
+      onImageRemove,
+      onColorSearch,
+      onColorAdd,
+      onColorRemove
     } = this.props;
     const {
       title,
-      imageFileId,
-      imageFileName,
       description,
-      url
+      imageFileId,
+      imageFileName
     } = formFields;
 
     return (
@@ -66,14 +79,23 @@ export default class BlogLinkForm extends Component {
           onRemove={onImageRemove}
         />
         <div className="form-group">
-          <label>URL</label>
-          <input
-            type="text"
-            className="form-control"
-            name="url"
-            value={url}
-            placeholder="https://"
-            onChange={onInputChange}
+          <label>Colors</label>
+          <ul className="list-group">
+            {colors.map(color => {
+              return (
+                <li key={color._id} className="list-group-item">
+                  {color.name} - <a href="javascript:void(0)" onClick={() => onColorRemove(color)}>Remove</a>
+                </li>
+              );
+            })}
+          </ul>
+          <Autocomplete
+            labelKey="name"
+            placeholder="Enter a color name to add..."
+            options={colorOptions}
+            isLoading={isAutocompleteLoading}
+            onSearch={onColorSearch}
+            onEnter={onColorAdd}
           />
         </div>
         <button className="btn btn-default" onClick={onSave}>Save</button>
