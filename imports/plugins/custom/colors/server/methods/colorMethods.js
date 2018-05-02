@@ -139,5 +139,32 @@ Meteor.methods({
     }
 
     Colors.remove(_id);
+  },
+
+  'Colors.autocompleteSearch' (query) {
+    check(query, String);
+
+    if (!this.userId) {
+      throw new Meteor.Error(401, 'Unauthorized');
+    }
+
+    if (Reaction.hasAdminAccess() === false) {
+      throw new Meteor.Error(403, 'You do not have admin permissions.');
+    }
+
+    return Colors.find({
+      name: {
+        $regex: `.*${query}*.`,
+        $options: 'i'
+      }
+    }, {
+      sort: {
+        name: 1
+      },
+      fields: {
+        _id: 1,
+        name: 1
+      }
+    }).fetch();
   }
 });
