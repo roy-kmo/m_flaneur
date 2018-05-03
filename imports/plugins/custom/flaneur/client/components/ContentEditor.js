@@ -7,7 +7,8 @@ export default class ContentEditor extends Component {
 
   static propTypes = {
     value: PropTypes.string,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func
   };
 
   componentDidMount () {
@@ -16,7 +17,7 @@ export default class ContentEditor extends Component {
   }
 
   render () {
-    const { value, onChange } = this.props;
+    const { value, onChange, onBlur } = this.props;
 
     return (
       <div id="content-editor">
@@ -36,6 +37,7 @@ export default class ContentEditor extends Component {
             ]
           }}
           onChange={onChange}
+          onBlur={(e) => { if (onBlur) onBlur(e) }}
         />
       </div>
     );
