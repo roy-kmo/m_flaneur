@@ -159,7 +159,7 @@ class MediaItem extends Component {
     return (
       <img
         alt=""
-        className="img-responsive"
+        className="img-responsive test"
         src={this.getSource(size)}
       />
     );

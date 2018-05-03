@@ -142,7 +142,6 @@ class MediaGallery extends Component {
               onMove={onMoveMedia}
               onRemoveMedia={onRemoveMedia}
               source={this.featuredMedia}
-              zoomable
             />
           </div>
         }

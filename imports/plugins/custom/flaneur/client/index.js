@@ -8,3 +8,5 @@ import './less/tables.less';
 import './less/manage-feature-line.less';
 import './templates/manageFeatureLine.html';
 import './templates/manageFeatureLine.js';
+import '../lib/schemas/productsSchema';
+import './components/FlaneurProductAdmin';
