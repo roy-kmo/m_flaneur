@@ -5,6 +5,7 @@ import { FileRecord } from "@reactioncommerce/file-collections";
 import { Media } from "/imports/plugins/core/files/server";
 import { Assets } from '/lib/collections';
 import { Reaction } from '/server/api';
+import { getAsset, updateAsset } from '../lib/assets';
 
 Meteor.methods({
   'Flaneur.uploadFile' (fileInfo, fileData) {
@@ -24,7 +25,7 @@ Meteor.methods({
   },
 
   'Flaneur.getFeatureLine' () {
-    const asset = Assets.findOne({ name: 'headerFeatureLine' });
+    const asset = getAsset('headerFeatureLine');
     if (!asset) {
       return {
         content: '',
@@ -32,11 +33,7 @@ Meteor.methods({
       };
     }
 
-    const content = JSON.parse(asset.content);
-    return {
-      content: content.content,
-      isEnabled: content.isEnabled
-    };
+    return asset;
   },
 
   'Flaneur.updateFeatureLine' (data) {
@@ -58,27 +55,11 @@ Meteor.methods({
       throw new Meteor.Error(403, 'You do not have admin permissions');
     }
 
-    const assetContentStr = JSON.stringify(assetContent);
-    const name = 'headerFeatureLine';
-    const existing = Assets.findOne({ name });
-
-    if (existing) {
-      Assets.update({ name }, {
-        $set: {
-          content: assetContentStr
-        }
-      });
-    } else {
-      Assets.insert({
-        name,
-        type: 'setting',
-        content: assetContentStr
-      });
-    }
+    updateAsset('headerFeatureLine', assetContent);
   },
 
   'Flaneur.getHomepageBanner' () {
-    const asset = Assets.findOne({ name: 'homepageBanner' });
+    const asset = getAsset('homepageBanner');
     if (!asset) {
       return {
         imageFileId: '',
@@ -89,15 +70,7 @@ Meteor.methods({
       };
     }
 
-    const content = JSON.parse(asset.content);
-    const { imageFileId, imageFileName, title, buttonText, linkUrl } = content;
-    return {
-      imageFileId,
-      imageFileName,
-      title,
-      buttonText,
-      linkUrl
-    };
+    return asset;
   },
 
   'Flaneur.updateHomepageBanner' (data) {
@@ -131,22 +104,55 @@ Meteor.methods({
       throw new Meteor.Error(403, 'You do not have admin permissions');
     }
 
-    const assetContentStr = JSON.stringify(assetContent);
-    const name = 'homepageBanner';
-    const existing = Assets.findOne({ name });
+    updateAsset('homepageBanner', assetContent);
+  },
 
-    if (existing) {
-      Assets.update({ name }, {
-        $set: {
-          content: assetContentStr
-        }
-      });
-    } else {
-      Assets.insert({
-        name,
-        type: 'setting',
-        content: assetContentStr
-      });
+  'Flaneur.getHomepageInfo' () {
+    const asset = getAsset('homepageInfo');
+    if (!asset) {
+      return {
+        imageFileId: '',
+        imageFileName: '',
+        title: '',
+        buttonText: '',
+        linkUrl: ''
+      };
     }
+
+    return asset;
+  },
+
+  'Flaneur.updateHomepageInfo' (data) {
+    check(data, Object);
+    const {
+      imageFileId,
+      imageFileName,
+      title,
+      buttonText,
+      linkUrl
+    } = data;
+    check(imageFileId, String);
+    check(imageFileName, String);
+    check(title, String);
+    check(buttonText, String);
+    check(linkUrl, String);
+
+    const assetContent = {
+      imageFileId,
+      imageFileName,
+      title,
+      buttonText,
+      linkUrl
+    };
+
+    if (!this.userId) {
+      throw new Meteor.Error(401, 'Unauthorized');
+    }
+
+    if (Reaction.hasAdminAccess() === false) {
+      throw new Meteor.Error(403, 'You do not have admin permissions');
+    }
+
+    updateAsset('homepageInfo', assetContent);
   }
 });
