@@ -10,7 +10,7 @@ export default class Autocomplete extends Component {
     placeholder: PropTypes.string,
     options: PropTypes.array.isRequired,
     onSearch: PropTypes.func.isRequired,
-    onEnter: PropTypes.func.isRequired
+    onEnter: PropTypes.func
   };
 
   constructor (props) {
@@ -18,7 +18,7 @@ export default class Autocomplete extends Component {
   }
 
   onKeyDown = e => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && this.props.onEnter) {
       this._typeahead.getInstance().clear();
       this.props.onEnter(e.target.value);
     }
