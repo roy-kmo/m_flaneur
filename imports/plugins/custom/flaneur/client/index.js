@@ -6,8 +6,11 @@ dataTablesBootstrap(window, $);
 
 import './less/tables.less';
 import './less/manage-feature-line.less';
+import './less/manage-homepage-banner.less';
 import './templates/manageFeatureLine.html';
-import './templates/manageFeatureLine.js';
+import './templates/manageFeatureLine';
+import './templates/manageHomepageBanner.html';
+import './templates/manageHomepageBanner';
 import './templates/intercom.html';
 import '../lib/schemas/productsSchema';
 import './components/FlaneurProductAdmin';

@@ -75,5 +75,78 @@ Meteor.methods({
         content: assetContentStr
       });
     }
+  },
+
+  'Flaneur.getHomepageBanner' () {
+    const asset = Assets.findOne({ name: 'homepageBanner' });
+    if (!asset) {
+      return {
+        imageFileId: '',
+        imageFileName: '',
+        title: '',
+        buttonText: '',
+        linkUrl: ''
+      };
+    }
+
+    const content = JSON.parse(asset.content);
+    const { imageFileId, imageFileName, title, buttonText, linkUrl } = content;
+    return {
+      imageFileId,
+      imageFileName,
+      title,
+      buttonText,
+      linkUrl
+    };
+  },
+
+  'Flaneur.updateHomepageBanner' (data) {
+    check(data, Object);
+    const {
+      imageFileId,
+      imageFileName,
+      title,
+      buttonText,
+      linkUrl
+    } = data;
+    check(imageFileId, String);
+    check(imageFileName, String);
+    check(title, String);
+    check(buttonText, String);
+    check(linkUrl, String);
+
+    const assetContent = {
+      imageFileId,
+      imageFileName,
+      title,
+      buttonText,
+      linkUrl
+    };
+
+    if (!this.userId) {
+      throw new Meteor.Error(401, 'Unauthorized');
+    }
+
+    if (Reaction.hasAdminAccess() === false) {
+      throw new Meteor.Error(403, 'You do not have admin permissions');
+    }
+
+    const assetContentStr = JSON.stringify(assetContent);
+    const name = 'homepageBanner';
+    const existing = Assets.findOne({ name });
+
+    if (existing) {
+      Assets.update({ name }, {
+        $set: {
+          content: assetContentStr
+        }
+      });
+    } else {
+      Assets.insert({
+        name,
+        type: 'setting',
+        content: assetContentStr
+      });
+    }
   }
 });
