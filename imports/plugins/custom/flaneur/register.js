@@ -52,5 +52,27 @@ Reaction.registerPackage({
     container: "dashboard",
     template: "manageHomepageBanner",
     audience: ["seller"]
+  }, {
+    route: "/dashboard/homepageinfo",
+    provides: ["dashboard"],
+    workflow: "coreWorkflow",
+    name: "manageHomepageInfo",
+    label: "Homepage Info",
+    description: "Manage homepage info",
+    icon: "fa fa-info",
+    priority: 7,
+    container: "core",
+    template: "manageHomepageInfo"
+  }, {
+    route: "/dashboard/homepageinfo",
+    name: "dashboard/homepageinfo",
+    provides: ["shortcut"],
+    label: "Homepage Info",
+    description: "Manage homepage info",
+    icon: "fa fa-info",
+    priority: 8,
+    container: "dashboard",
+    template: "manageHomepageInfo",
+    audience: ["seller"]
   }]
 });
