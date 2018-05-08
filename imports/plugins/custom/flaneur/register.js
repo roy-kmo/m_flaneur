@@ -74,5 +74,27 @@ Reaction.registerPackage({
     container: "dashboard",
     template: "manageHomepageInfo",
     audience: ["seller"]
+  }, {
+    route: "/dashboard/homepagetopsellers",
+    provides: ["dashboard"],
+    workflow: "coreWorkflow",
+    name: "manageHomepageTopSellers",
+    label: "Homepage Top Sellers",
+    description: "Manage homepage top sellers",
+    icon: "fa fa-fire",
+    priority: 8,
+    container: "core",
+    template: "manageHomepageTopSellers"
+  }, {
+    route: "/dashboard/homepagetopsellers",
+    name: "dashboard/homepagetopsellers",
+    provides: ["shortcut"],
+    label: "Homepage Top Sellers",
+    description: "Manage homepage top sellers",
+    icon: "fa fa-fire",
+    priority: 9,
+    container: "dashboard",
+    template: "manageHomepageTopSellers",
+    audience: ["seller"]
   }]
 });

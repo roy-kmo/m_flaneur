@@ -3,9 +3,10 @@ import { check, Match } from 'meteor/check';
 import { Server } from '/server/api';
 import { FileRecord } from "@reactioncommerce/file-collections";
 import { Media } from "/imports/plugins/core/files/server";
-import { Assets } from '/lib/collections';
+import { Assets, Products } from '/lib/collections';
 import { Reaction } from '/server/api';
 import { getAsset, updateAsset } from '../lib/assets';
+import { Colors } from '../../../colors/lib/collections';
 
 Meteor.methods({
   'Flaneur.uploadFile' (fileInfo, fileData) {
@@ -154,5 +155,93 @@ Meteor.methods({
     }
 
     updateAsset('homepageInfo', assetContent);
+  },
+
+  'Flaneur.getHomepageTopSellers' () {
+    const asset = getAsset('homepageTopSellers');
+    if (!asset) {
+      return {
+        title: '',
+        products: []
+      };
+    }
+
+    // Include product title and color name in products
+    asset.products = asset.products.map(product => {
+      const { id, colorId } = product;
+      const productInfo = Products.findOne(id, { fields: { title: 1 }});
+      const title = productInfo.title || '';
+      const color = Colors.findOne(colorId, { fields: { name: 1}});
+      const colorName = color.name || '';
+      return {
+        id,
+        title,
+        colorId,
+        colorName
+      };
+    });
+
+    return asset;
+  },
+
+  'Flaneur.updateHomepageTopSellers' (data) {
+    check(data, Object);
+    const {
+      title,
+    } = data;
+    check(title, String);
+    check(data.products, Array);
+
+    const products = data.products.map(product => {
+      const { id, title, colorId, colorName } = product;
+      check(id, String);
+      check(title, String);
+      check(colorId, String);
+      check(colorName, String);
+      return { id, colorId };
+    });
+
+    const assetContent = {
+      title,
+      products
+    };
+
+    if (!this.userId) {
+      throw new Meteor.Error(401, 'Unauthorized');
+    }
+
+    if (Reaction.hasAdminAccess() === false) {
+      throw new Meteor.Error(403, 'You do not have admin permissions');
+    }
+
+    updateAsset('homepageTopSellers', assetContent);
+  },
+
+  'Flaneur.productAutocompleteSearch' (query) {
+    check(query, String);
+
+    if (!this.userId) {
+      throw new Meteor.Error(401, 'Unauthorized');
+    }
+
+    if (Reaction.hasAdminAccess() === false) {
+      throw new Meteor.Error(403, 'You do not have admin permissions.');
+    }
+
+    return Products.find({
+      type: 'simple',
+      title: {
+        $regex: `.*${query}*.`,
+        $options: 'i'
+      }
+    }, {
+      sort: {
+        title: 1
+      },
+      fields: {
+        _id: 1,
+        title: 1
+      }
+    }).fetch();
   }
 });
