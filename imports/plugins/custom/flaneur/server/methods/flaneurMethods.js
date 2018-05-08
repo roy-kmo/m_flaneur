@@ -7,6 +7,7 @@ import { Assets, Products } from '/lib/collections';
 import { Reaction } from '/server/api';
 import { getAsset, updateAsset } from '../lib/assets';
 import { Colors } from '../../../colors/lib/collections';
+import { generateCartLink, applyCartLink } from '../lib/cartLinks';
 
 Meteor.methods({
   'Flaneur.uploadFile' (fileInfo, fileData) {
@@ -243,5 +244,14 @@ Meteor.methods({
         title: 1
       }
     }).fetch();
+  },
+
+  'Flaneur.generateCartLink' () {
+    return generateCartLink(this.userId);
+  },
+
+  'Flaneur.applyCartLink' (id) {
+    check(id, String);
+    return applyCartLink(id, this.userId);
   }
 });

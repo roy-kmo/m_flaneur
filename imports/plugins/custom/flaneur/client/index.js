@@ -9,6 +9,7 @@ import './less/manage-feature-line.less';
 import './less/manage-homepage-banner.less';
 import './less/manage-homepage-info.less';
 import './less/manage-homepage-top-sellers.less';
+import './less/share-cart-link.less';
 import './templates/manageFeatureLine.html';
 import './templates/manageFeatureLine';
 import './templates/manageHomepageBanner.html';
@@ -18,8 +19,11 @@ import './templates/manageHomepageInfo';
 import './templates/manageHomepageTopSellers.html';
 import './templates/manageHomepageTopSellers';
 import './templates/intercom.html';
+import './templates/applyCartLink.html';
+import './templates/applyCartLink';
 import '../lib/schemas/productsSchema';
 import './components/FlaneurProductAdmin';
+import './components/FlaneurCartDrawer';
 
 Meteor.startup(function () {
   Blaze.render(Template.intercom, $('body')[0]);

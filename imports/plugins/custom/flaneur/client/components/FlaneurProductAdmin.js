@@ -1,3 +1,9 @@
+/**
+ * @file
+ * Customized product admin template - added WYSIWYG fields to product admin.
+ * Search for "customization" to see any changes made from core file.
+ */
+
 import { isEqual } from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";

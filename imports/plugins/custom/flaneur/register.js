@@ -96,5 +96,8 @@ Reaction.registerPackage({
     container: "dashboard",
     template: "manageHomepageTopSellers",
     audience: ["seller"]
+  }, {
+    route: '/cart-link/:id',
+    template: 'applyCartLink'
   }]
 });
