@@ -31,6 +31,7 @@ export default class PagesForm extends Component {
       title,
       body,
       path,
+      description,
       isPublished
     } = formFields;
 
@@ -61,6 +62,16 @@ export default class PagesForm extends Component {
             name="path"
             value={path}
             placeholder="about-us"
+            onChange={onInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>SEO Description</label>
+          <input
+            type="text"
+            className="form-control"
+            name="description"
+            value={description}
             onChange={onInputChange}
           />
         </div>

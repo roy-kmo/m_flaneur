@@ -29,7 +29,7 @@ export default class ContentEditor extends Component {
             tooltip: false,
             toolbar: [
               ['style', ['style']],
-              ['font', ['bold', 'underline', 'clear']],
+              ['font', ['bold', 'italic', 'underline', 'clear']],
               ['para', ['ul', 'ol', 'paragraph']],
               ['table', ['table']],
               ['insert', ['link', 'picture', 'video']],

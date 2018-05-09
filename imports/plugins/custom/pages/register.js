@@ -30,5 +30,8 @@ Reaction.registerPackage({
     container: "dashboard",
     template: "pages",
     audience: ["seller"]
+  }, {
+    route: '/pages/:path',
+    template: 'page'
   }]
 });
