@@ -116,6 +116,7 @@ Meteor.methods({
         imageFileId: '',
         imageFileName: '',
         title: '',
+        description: '',
         buttonText: '',
         linkUrl: ''
       };
@@ -130,12 +131,14 @@ Meteor.methods({
       imageFileId,
       imageFileName,
       title,
+      description,
       buttonText,
       linkUrl
     } = data;
     check(imageFileId, String);
     check(imageFileName, String);
     check(title, String);
+    check(description, String);
     check(buttonText, String);
     check(linkUrl, String);
 
@@ -143,6 +146,7 @@ Meteor.methods({
       imageFileId,
       imageFileName,
       title,
+      description,
       buttonText,
       linkUrl
     };

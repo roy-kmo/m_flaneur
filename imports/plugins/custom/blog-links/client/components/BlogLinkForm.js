@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ImageUploadField from '/imports/plugins/custom/flaneur/client/components/ImageUploadField';
-import ContentEditor from '/imports/plugins/custom/flaneur/client/components/ContentEditor';
+import Loadable from 'react-loadable';
+const ContentEditor = Loadable({
+  loader: async () => {
+    const component = await import('/imports/plugins/custom/flaneur/client/components/ContentEditor');
+    return component.default;
+  },
+  loading: () => null
+});
 
 export default class BlogLinkForm extends Component {
 

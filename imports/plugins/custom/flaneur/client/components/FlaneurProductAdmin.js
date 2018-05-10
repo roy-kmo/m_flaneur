@@ -12,7 +12,14 @@ import "velocity-animate/velocity.ui";
 import { Components, replaceComponent } from "@reactioncommerce/reaction-components";
 import { Router } from "/client/api";
 import update from "immutability-helper";
-import ContentEditor from './ContentEditor';
+import Loadable from 'react-loadable';
+const ContentEditor = Loadable({
+  loader: async () => {
+    const component = await import('./ContentEditor');
+    return component.default;
+  },
+  loading: () => null
+});
 
 const fieldNames = [
   "title",
