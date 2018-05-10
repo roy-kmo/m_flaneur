@@ -1,6 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import ImageUploadField from '../components/ImageUploadField';
+import Loadable from 'react-loadable';
+const ContentEditor = Loadable({
+  loader: async () => {
+    const component = await import('/imports/plugins/custom/flaneur/client/components/ContentEditor');
+    return component.default;
+  },
+  loading: () => null
+});
 
 export default class ManageHomepageInfoContainer extends Component {
 
@@ -11,6 +19,7 @@ export default class ManageHomepageInfoContainer extends Component {
       imageFileId: '',
       imageFileName: '',
       title: '',
+      description: '',
       buttonText: '',
       linkUrl: ''
     };
@@ -47,8 +56,12 @@ export default class ManageHomepageInfoContainer extends Component {
     });
   };
 
+  handleDescriptionChange = description => {
+    this.setState({ description });
+  };
+
   render () {
-    const { imageFileId, imageFileName, title, buttonText, linkUrl } = this.state;
+    const { imageFileId, imageFileName, title, description, buttonText, linkUrl } = this.state;
     return (
       <div id="manage-homepage-info-container">
         <ImageUploadField
@@ -67,6 +80,10 @@ export default class ManageHomepageInfoContainer extends Component {
             value={title}
             onChange={this.handleInputChange}
           />
+        </div>
+        <div className="form-group">
+          <label>Description</label>
+          <ContentEditor value={description} onChange={this.handleDescriptionChange} />
         </div>
         <div className="form-group">
           <label>Button Text</label>
