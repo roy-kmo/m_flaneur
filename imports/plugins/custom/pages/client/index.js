@@ -1,7 +1,10 @@
 import './templates/pages.html';
-import './templates/pages.js';
+import './templates/pages';
 import './templates/pageActionButtons.html';
-import './templates/pageActionButtons.js';
+import './templates/pageActionButtons';
+import './templates/page.html';
+import './templates/page';
 import '../lib/collections';
 import '../lib/tables';
 import './less/pages.less';
+import './less/page.less';

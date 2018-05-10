@@ -13,7 +13,7 @@ const PagesTable = new Tabular.Table({
   collection: Pages,
   responsive: true,
   autoWidth: false,
-  extraFields: ['_id', 'body'],
+  extraFields: ['_id', 'body', 'description'],
   order: [[0, "asc"]],
   columns: [
     {
@@ -22,7 +22,10 @@ const PagesTable = new Tabular.Table({
     },
     {
       data: 'path',
-      title: 'URL path'
+      title: 'URL path',
+      render (val) {
+        return `<a href="${Meteor.absoluteUrl()}pages/${val}" target="_blank">${val}</a>`;
+      }
     },
     {
       data: 'isPublished',

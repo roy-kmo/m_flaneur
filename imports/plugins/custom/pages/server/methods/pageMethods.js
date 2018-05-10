@@ -10,11 +10,13 @@ Meteor.methods({
       title,
       body,
       path,
+      description,
       isPublished
     } = fields;
     check(title, String);
     check(body, String);
     check(path, String);
+    check(description, String);
     check(isPublished, Boolean);
 
     if (!this.userId) {
@@ -33,6 +35,7 @@ Meteor.methods({
       title,
       body,
       path,
+      description,
       isPublished,
       createdAt: new Date()
     });
@@ -45,12 +48,14 @@ Meteor.methods({
       title,
       body,
       path,
+      description,
       isPublished
     } = fields;
     check(_id, String);
     check(title, String);
     check(body, String);
     check(path, String);
+    check(description, String);
     check(isPublished, Boolean);
 
     if (!this.userId) {
@@ -75,6 +80,7 @@ Meteor.methods({
         title,
         body,
         path,
+        description,
         isPublished,
         updatedAt: new Date()
       }
@@ -97,5 +103,17 @@ Meteor.methods({
     }
 
     Pages.remove(_id);
+  },
+
+  'Pages.get' (path) {
+    check(path, String);
+
+    return Pages.findOne({ path, isPublished: true }, {
+      fields: {
+        title: 1,
+        body: 1,
+        description: 1
+      }
+    });
   }
-})
+});

@@ -16,6 +16,7 @@ export default class PagesContainer extends Component {
       title: '',
       body: '',
       path: '',
+      description: '',
       isPublished: false
     };
 

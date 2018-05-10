@@ -18,6 +18,10 @@ Pages.schema = new SimpleSchema({
     type: String,
     optional: true
   },
+  description: {
+    type: String,
+    optional: true
+  },
   createdAt: {
     type: Date,
     optional: true
