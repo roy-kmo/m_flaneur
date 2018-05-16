@@ -5,6 +5,7 @@
 
 import { Reaction, Hooks } from '/server/api';
 import { Packages } from "/lib/collections";
+import importColors from './lib/migrations/importColors';
 
 const deleteThisPackage = function () {
   console.log('Refreshing flaneur package registry');
@@ -19,4 +20,5 @@ const deleteThisPackage = function () {
 
 Hooks.Events.add('onCoreInit', function () {
   deleteThisPackage();
+  importColors();
 });
