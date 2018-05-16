@@ -13,6 +13,10 @@ class ReactionLayout extends Component {
     return this.props.layout;
   }
 
+  componentDidMount () {
+    window.prerenderReady = true;
+  }
+
   checkElementPermissions(block) {
     let permissions;
     const hasAdminAccess = Reaction.hasAdminAccess();

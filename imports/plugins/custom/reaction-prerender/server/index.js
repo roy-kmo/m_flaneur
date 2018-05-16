@@ -12,16 +12,24 @@ const cheerio = require('cheerio')
 import injectHead from './inject-head'
 import injectBody from './inject-body'
 
+import './init';
+
 Hooks.Events.add("afterCoreInit", () => {
 
-	const { settings } = Packages.findOne({ name: "reaction-ssr-preview" })
+	const { settings } = Packages.findOne({ name: "reaction-prerender" })
 
-	const server = prerender({
-		chromeLocation: settings.chromeLocation,
-    waitAfterLastRequest: settings.prerenderWaitAfterLastRequest,
-    port: settings.prerenderPort
-	})
-	server.start()
+  if (Meteor.isDevelopment) {
+    // Dev mode, run a prerender server since prerender.io can't load localhost
+    const server = prerender({
+  		chromeLocation: settings.localChromeLocation,
+      pageLoadTimeout: settings.prerenderPageLoadTimeout,
+      waitAfterLastRequest: settings.prerenderWaitAfterLastRequest,
+      port: settings.prerenderPort,
+      chromeFlags: [ '--no-sandbox', '--headless', '--disable-gpu', '--remote-debugging-port=9222', '--hide-scrollbars' ]
+  	});
+  	server.start();
+  }
+
 
 	const cache = cacheManager.caching({
 		store: 'memory',
@@ -32,13 +40,10 @@ Hooks.Events.add("afterCoreInit", () => {
 	onPageLoad(async function(sink) {
 
     // Only prerender paths defined in settings
-    let doesPathMatch = false;
-    settings.prerenderPaths.forEach(path => {
-      if (sink.request.url.path.match(path)) {
-        doesPathMatch = true;
-      }
+    const isPrerenderPath = !!Object.keys(settings.prerenderPaths).slice(1).find(path => {
+      return !!sink.request.url.path.match(path);
     });
-    if (doesPathMatch === false) {
+    if (isPrerenderPath === false) {
       return;
     }
 
@@ -50,11 +55,13 @@ Hooks.Events.add("afterCoreInit", () => {
 		var content = await promisify(cache.get)(sink.request.url.path)
 			.then(result => {
 				if (result) {
-					return result
+					return result;
 				}
 
 				try {
-					request('http://localhost:'+settings.prerenderPort+'/'+ Meteor.absoluteUrl().slice(0, -1) + sink.request.url.path).then(result => {
+
+          const prerenderUrl = Meteor.isDevelopment && 'http://localhost:'+settings.prerenderPort+'/' || 'https://service.prerender.io/';
+					request(prerenderUrl + Meteor.absoluteUrl().slice(0, -1) + sink.request.url.path).then(result => {
 
 						// remove things or they'll be in the markup twice
 						const $ = cheerio.load(result.body)
@@ -96,4 +103,11 @@ Hooks.Events.add("afterCoreInit", () => {
 
 	})
 
+
+  // Method for resetting prerender cache
+  Meteor.methods({
+    'prerender.clear' () {
+      cache.reset();
+    }
+  });
 });
