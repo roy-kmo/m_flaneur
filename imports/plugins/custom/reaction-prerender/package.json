@@ -1,0 +1,16 @@
+{
+  "name": "reaction-prerender",
+  "version": "0.0.1",
+  "description": "Reaction Commerce plugin that prerenders defined paths using prerender.io",
+  "main": "register.js",
+  "scripts": {},
+  "dependencies": {
+    "prerender": "^5.3.1",
+    "request": "^2.85.0",
+    "cheerio": "^1.0.0-rc.2",
+    "cache-manager": "^2.9.0"
+  },
+  "keywords": [],
+  "author": "dancastellon",
+  "license": "GPL-3.0"
+}
