@@ -26,6 +26,8 @@ export default class PageContainer extends Component {
           name: 'description',
           content: page.description
         });
+        // Set page title
+        document.title = page.title;
         // Tell prerender.io that our page is ready
         window.prerenderReady = true;
       } else {
