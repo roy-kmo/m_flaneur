@@ -22,7 +22,7 @@ Reaction.registerPackage({
       '*': [
         'cart-icon',
       ],
-      '/': [],
+      '^/$': [],
       '/tag/*': [],
       '/product/*': [
         'js-add-to-cart'
