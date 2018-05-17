@@ -1,13 +1,34 @@
-import { meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
 import { Server } from '/server/api';
 import { FileRecord } from "@reactioncommerce/file-collections";
 import { Media } from "/imports/plugins/core/files/server";
-import { Assets, Products } from '/lib/collections';
+import { Assets, Products, Orders } from '/lib/collections';
 import { Reaction } from '/server/api';
 import { getAsset, updateAsset } from '../lib/assets';
 import { Colors } from '../../../colors/lib/collections';
 import { generateCartLink, applyCartLink } from '../lib/cartLinks';
+import {
+  acknowledgeOrder,
+  sendOrderAcknowledgmentEmail,
+  toggleOrderException,
+  getOrderNotes,
+  addOrderNote
+} from '../lib/orders';
+
+const validateOrder = id => {
+  check(id, String);
+  if (Reaction.hasAdminAccess() === false) {
+    throw new Meteor.Error(403, 'You do not have admin permissions.');
+  }
+
+  const order = Orders.findOne(id);
+  if (!order) {
+    throw new Meteor.Error(404, 'Order not found');
+  }
+
+  return order;
+};
 
 Meteor.methods({
   'Flaneur.uploadFile' (fileInfo, fileData) {
@@ -257,5 +278,37 @@ Meteor.methods({
   'Flaneur.applyCartLink' (id) {
     check(id, String);
     return applyCartLink(id, this.userId);
+  },
+
+  'FlaneurOrders.acknowledge' (id) {
+    const order = validateOrder(id);
+
+    // Set order to acknowledged status if it wasn't previously acknowledged
+    const acknowledgedStatus = 'acknowledged';
+    const isOrWasAcknowledged = order.workflow.status === acknowledgedStatus ||
+      order.workflow.workflow.includes(acknowledgedStatus);
+    if (isOrWasAcknowledged === false) {
+      acknowledgeOrder(id);
+    }
+
+    Meteor.defer(() => {
+      sendOrderAcknowledgmentEmail(order);
+    });
+  },
+
+  'FlaneurOrders.toggleException' (id) {
+    const order = validateOrder(id);
+    toggleOrderException(order);
+  },
+
+  'FlaneurOrders.getNotes' (id) {
+    const order = validateOrder(id);
+    return getOrderNotes(order);
+  },
+
+  'FlaneurOrders.addNote' (id, text) {
+    const order = validateOrder(id);
+    check(text, String);
+    return addOrderNote(order._id, this.userId, text);
   }
 });

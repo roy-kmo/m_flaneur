@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { Meteor } from "meteor/meteor";
-import { composeWithTracker, withMoment } from "@reactioncommerce/reaction-components";
+import { composeWithTracker, withMoment, Components } from "@reactioncommerce/reaction-components";
 import { Orders } from "/lib/collections";
 import { Card, CardHeader, CardBody, CardGroup } from "/imports/plugins/core/ui/client/components";
 import { i18next } from "/client/api";
-import OrderSummary from "../components/orderSummary";
 import { getShippingInfo } from "../helpers";
 
 class OrderSummaryContainer extends Component {
@@ -116,7 +115,7 @@ class OrderSummaryContainer extends Component {
             title="Summary"
           />
           <CardBody expandable={false}>
-            <OrderSummary
+            <Components.OrderSummary
               {...this.props}
               dateFormat={this.dateFormat}
               tracking={this.tracking}

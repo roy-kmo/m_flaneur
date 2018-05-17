@@ -112,7 +112,14 @@ export function filterWorkflowStatus(filter) {
       };
       break;
 
+    // Customization - allow custom order statuses
     default:
+      if (filter) {
+        query = {
+          "workflow.status": filter
+        };
+      }
+      break;
   }
 
   return query;

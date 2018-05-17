@@ -22,8 +22,11 @@ import './templates/intercom.html';
 import './templates/applyCartLink.html';
 import './templates/applyCartLink';
 import '../lib/schemas/productsSchema';
+import '../lib/schemas/ordersSchema';
 import './components/FlaneurProductAdmin';
 import './components/FlaneurCartDrawer';
+import './components/FlaneurOrderSummary';
+import './components/FlaneurOrderFilter';
 
 Meteor.startup(function () {
   Blaze.render(Template.intercom, $('body')[0]);

@@ -24,3 +24,12 @@ Hooks.Events.add('onCoreInit', function () {
   importColors();
   configureStripe();
 });
+
+// Register custom order acknowledgement email template
+Reaction.registerTemplate({
+  title: "Orders - Acknowledged",
+  name: 'flaneurOrders/acknowledged',
+  type: "email",
+  template: Assets.getText('custom/email/orders/acknowledged.html'),
+  subject: 'Flaneur has started to dye your beddings'
+});

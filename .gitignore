@@ -40,9 +40,6 @@ public/custom/*
 public/plugins/*
 !public/plugins/.gitkeep
 
-private/custom/*
-!private/custom/.gitkeep
-
 private/plugins/*
 !private/plugins/.gitkeep
 
