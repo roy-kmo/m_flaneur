@@ -1,10 +1,24 @@
+/**
+ * @file
+ * Customized orderSummary core Reaction component.
+ * Adds acknowledge & exception buttons + notes
+ */
+
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withMoment, Components, registerComponent } from "@reactioncommerce/reaction-components";
+import { withMoment, Components, replaceComponent } from "@reactioncommerce/reaction-components";
 import { Badge, ClickToCopy } from "@reactioncommerce/reaction-ui";
-import { getOrderRiskBadge, getOrderRiskStatus, getBillingInfo, getShippingInfo, getTaxRiskStatus } from "../helpers";
+import {
+  getOrderRiskBadge,
+  getOrderRiskStatus,
+  getBillingInfo,
+  getShippingInfo,
+  getTaxRiskStatus
+} from "/imports/plugins/core/orders/client/helpers";
+import OrderButtons from './OrderButtons';
+import OrderNotes from './OrderNotes';
 
-class OrderSummary extends Component {
+class FlaneurOrderSummary extends Component {
   static propTypes = {
     dateFormat: PropTypes.func,
     moment: PropTypes.func,
@@ -180,11 +194,12 @@ class OrderSummary extends Component {
             {profileShippingAddress.city}, {profileShippingAddress.region}, {profileShippingAddress.country} {profileShippingAddress.postal}
           </span>
         </div>
+
+        <OrderButtons order={order} />
+        <OrderNotes order={order} />
       </div>
     );
   }
 }
 
-registerComponent('OrderSummary', OrderSummary);
-
-export default withMoment(OrderSummary);
+replaceComponent('OrderSummary', FlaneurOrderSummary);

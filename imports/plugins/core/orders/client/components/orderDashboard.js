@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
 import OrderTable from "../containers/orderTableContainer";
-import OrderFilter from "./orderFilter";
 import OrderSearch from "./orderSearch";
 
 class OrderDashboard extends Component {
@@ -61,7 +60,7 @@ class OrderDashboard extends Component {
         <OrderSearch
           handleChange={this.props.handleChange}
         />
-        <OrderFilter
+      <Components.OrderFilter
           clearFilter={this.props.clearFilter}
           filterDates={this.props.filterDates}
           filterShippingStatus={this.props.filterShippingStatus}
