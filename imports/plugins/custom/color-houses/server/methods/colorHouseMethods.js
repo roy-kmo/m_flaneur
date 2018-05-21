@@ -169,7 +169,7 @@ Meteor.methods({
       return [];
     }
 
-    return Colors.find({
+    const colors = Colors.find({
       _id: {
         $in: colorHouse.colorIds
       }
@@ -179,5 +179,8 @@ Meteor.methods({
         name: 1
       }
     }).fetch();
+
+    // Return colors in same order as colorIds
+    return colorHouse.colorIds.map(colorId => colors.find(color => color._id === colorId));
   }
 });

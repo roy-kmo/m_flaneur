@@ -7,6 +7,18 @@ import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 import { Reaction, Logger } from "/client/api";
 
+const arrayMove = function (arr, previousIndex, newIndex) {
+  const array = arr.slice(0);
+  if (newIndex >= array.length) {
+    let k = newIndex - array.length;
+    while (k-- + 1) {
+      array.push(undefined);
+    }
+  }
+  array.splice(newIndex, 0, array.splice(previousIndex, 1)[0]);
+  return array;
+}
+
 export default class ColorHousesContainer extends Component {
 
   constructor (props) {
@@ -187,6 +199,13 @@ export default class ColorHousesContainer extends Component {
     }
   };
 
+  handleSortEnd = ({oldIndex, newIndex}) => {
+    let { formFields, colors } = this.state;
+    formFields.colorIds = arrayMove(formFields.colorIds, oldIndex, newIndex);
+    colors = arrayMove(colors, oldIndex, newIndex);
+    this.setState({ formFields, colors });
+  };
+
   render () {
     const { view, formFields, colorOptions, isAutocompleteLoading, colors } = this.state;
     const isListView = view === 'list';
@@ -220,6 +239,7 @@ export default class ColorHousesContainer extends Component {
             onColorSearch={this.handleColorSearch}
             onColorAdd={this.handleColorAdd}
             onColorRemove={this.handleColorRemove}
+            onSortEnd={this.handleSortEnd}
           />
         )}
       </div>
