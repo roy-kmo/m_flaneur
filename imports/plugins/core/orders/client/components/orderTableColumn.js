@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames/dedupe";
@@ -122,7 +123,7 @@ class OrderTableColumn extends Component {
           <Badge
             badgeSize="large"
             i18nKeyLabel={`admin.table.data.status.${this.props.row.value}`}
-            label={this.props.row.value}
+            label={_.upperFirst(this.props.row.value)}
             status={this.props.fulfillmentBadgeStatus(this.props.row.original)}
           />
         </div>

@@ -19,16 +19,5 @@ Reaction.registerPackage({
     priority: 5,
     container: "core",
     template: "colorHouses"
-  }, {
-    route: "/dashboard/color-houses",
-    name: "dashboard/color-houses",
-    provides: ["shortcut"],
-    label: "Color Houses",
-    description: "Manage color houses",
-    icon: "fa fa-home",
-    priority: 6,
-    container: "dashboard",
-    template: "colorHouses",
-    audience: ["seller"]
   }]
 });

@@ -4,6 +4,8 @@
  * Adds acknowledge & exception buttons + notes
  */
 
+// Customization - import lodash to use upperFirst function
+import _ from 'lodash';
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withMoment, Components, replaceComponent } from "@reactioncommerce/reaction-components";
@@ -84,7 +86,7 @@ class FlaneurOrderSummary extends Component {
               <Badge
                 badgeSize="large"
                 i18nKeyLabel={`cartDrawer.${order && order.workflow && order.workflow.status}`}
-                label={order && order.workflow && order.workflow.status}
+                label={order && order.workflow && _.upperFirst(order.workflow.status)}
                 status={this.badgeStatus()}
               />
               {orderPaymentRisk &&

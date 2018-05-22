@@ -20,17 +20,6 @@ Reaction.registerPackage({
     container: "core",
     template: "pages"
   }, {
-    route: "/dashboard/pages",
-    name: "dashboard/pages",
-    provides: ["shortcut"],
-    label: "Pages",
-    description: "Manage pages",
-    icon: "fa fa-file-o",
-    priority: 2,
-    container: "dashboard",
-    template: "pages",
-    audience: ["seller"]
-  }, {
     route: '/pages/:path',
     template: 'page'
   }]
