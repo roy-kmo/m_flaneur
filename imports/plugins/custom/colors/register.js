@@ -19,16 +19,5 @@ Reaction.registerPackage({
     priority: 4,
     container: "core",
     template: "colors"
-  }, {
-    route: "/dashboard/colors",
-    name: "dashboard/colors",
-    provides: ["shortcut"],
-    label: "Colors",
-    description: "Manage colors",
-    icon: "fa fa-bullseye",
-    priority: 5,
-    container: "dashboard",
-    template: "colors",
-    audience: ["seller"]
   }]
 });

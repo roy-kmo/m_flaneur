@@ -3,7 +3,8 @@ import { OrderDocument } from '/lib/collections/schemas';
 
 OrderDocument.extend({
   flaneurNotes: {
-    type: Array
+    type: Array,
+    optional: true
   },
   'flaneurNotes.$': Object,
   'flaneurNotes.$.userId': String,

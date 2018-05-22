@@ -11,6 +11,13 @@ const ContentEditor = Loadable({
   },
   loading: () => null
 });
+const SortableColorList = Loadable({
+  loader: async () => {
+    const component = await import ('./SortableColorList');
+    return component.default;
+  },
+  loading: () => null
+});
 
 export default class ColorHouseForm extends Component {
 
@@ -35,23 +42,6 @@ export default class ColorHouseForm extends Component {
 
   constructor (props) {
     super(props);
-
-    this.state = {
-      loaded: false,
-      SortableContainer: undefined,
-      SortableElement: undefined
-    };
-  }
-
-  async componentDidMount () {
-    const ReactSortable = await import('react-sortable-hoc');
-    const { SortableContainer, SortableElement, SortableHandle } = ReactSortable;
-    this.setState({
-      loaded: true,
-      SortableContainer,
-      SortableElement,
-      SortableHandle
-    });
   }
 
   render () {
@@ -72,45 +62,11 @@ export default class ColorHouseForm extends Component {
       onSortEnd
     } = this.props;
     const {
-      loaded,
-      SortableContainer,
-      SortableElement,
-      SortableHandle
-    } = this.state;
-    const {
       title,
       description,
       imageFileId,
       imageFileName
     } = formFields;
-
-    let SortableColor;
-    let SortableColorList;
-    if (loaded) {
-      const DragHandle = SortableHandle(() => <a href="javascript:void(0)" style={{ cursor: 'move' }}>Move</a>);
-
-      SortableColor = SortableElement(({ color }) => {
-        return (
-          <li key={color._id} className="list-group-item" style={{ zIndex: '2147483647' }}>
-            {color.name} -
-            &nbsp;<DragHandle />
-            <a href="javascript:void(0)" style={{ float: 'right' }} onClick={() => onColorRemove(color)}>Remove</a>
-          </li>
-        )
-      });
-
-      SortableColorList = SortableContainer(({ items }) => {
-        return (
-          <ul className="list-group">
-            {items.map((color, index) => {
-              return (
-                <SortableColor key={color._id} color={color} index={index} />
-              )
-            })}
-          </ul>
-        );
-      });
-    }
 
     return (
       <div>
@@ -140,9 +96,12 @@ export default class ColorHouseForm extends Component {
         />
         <div className="form-group">
           <label>Colors</label>
-          {loaded && (
-            <SortableColorList items={colors} onSortEnd={onSortEnd} useDragHandle={true} />
-          )}
+          <SortableColorList
+            items={colors}
+            onSortEnd={onSortEnd}
+            useDragHandle={true}
+            onColorRemove={onColorRemove}
+          />
           <Autocomplete
             labelKey="name"
             placeholder="Enter a color name to add..."

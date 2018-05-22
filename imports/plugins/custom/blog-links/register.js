@@ -19,16 +19,5 @@ Reaction.registerPackage({
     priority: 3,
     container: "core",
     template: "blogLinks"
-  }, {
-    route: "/dashboard/blog-links",
-    name: "dashboard/blog-links",
-    provides: ["shortcut"],
-    label: "Blog Links",
-    description: "Manage blog links",
-    icon: "fa fa-link",
-    priority: 4,
-    container: "dashboard",
-    template: "blogLinks",
-    audience: ["seller"]
   }]
 });

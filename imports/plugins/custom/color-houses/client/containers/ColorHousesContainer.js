@@ -6,18 +6,7 @@ import ColorHouseForm from '../components/ColorHouseForm';
 import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 import { Reaction, Logger } from "/client/api";
-
-const arrayMove = function (arr, previousIndex, newIndex) {
-  const array = arr.slice(0);
-  if (newIndex >= array.length) {
-    let k = newIndex - array.length;
-    while (k-- + 1) {
-      array.push(undefined);
-    }
-  }
-  array.splice(newIndex, 0, array.splice(previousIndex, 1)[0]);
-  return array;
-}
+import { arrayMove } from '/imports/plugins/custom/flaneur/lib/helpers';
 
 export default class ColorHousesContainer extends Component {
 

@@ -79,8 +79,8 @@ class OrderNotes extends Component {
               />
             </form>
           )}
-          {!!(flaneurNotes && flaneurNotes.length) && flaneurNotes.map(note => (
-            <div style={{ marginTop: 10, marginBottom: 10 }}>
+          {!!(flaneurNotes && flaneurNotes.length) && flaneurNotes.map((note, index) => (
+            <div key={index} style={{ marginTop: 10, marginBottom: 10 }}>
               <p><strong>{note.userName}</strong> on {moment(note.createdAt).format('MM/DD/YY')}</p>
               <p>{note.text}</p>
             </div>

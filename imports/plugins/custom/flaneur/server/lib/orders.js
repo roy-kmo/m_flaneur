@@ -8,6 +8,11 @@ import { SSR } from "meteor/meteorhacks:ssr";
 import { Reaction } from '/server/api';
 import { Orders, Shops } from '/lib/collections';
 
+/**
+ * Marks an order as acknowledged (set order.workflow.status).
+ *
+ * @param {String} id of order
+ */
 export function acknowledgeOrder (id) {
   const status = 'acknowledged'
   Orders.update(id, {
@@ -20,6 +25,11 @@ export function acknowledgeOrder (id) {
   });
 }
 
+/**
+ * Sends an email to customer that Flaneur has acknowledged their order.
+ *
+ * @param {Object} order
+ */
 export function sendOrderAcknowledgmentEmail (order) {
   const shop = Shops.findOne(order.shopId);
 
@@ -44,6 +54,14 @@ export function sendOrderAcknowledgmentEmail (order) {
   });
 }
 
+/**
+ * Toggles an order being in 'exception' status. If exception is being removed,
+ * sets order back to last non-exception status.
+ *
+ * @param {Object} order
+ * @param {String} order._id
+ * @param {Array} order.workflow
+ */
 export function toggleOrderException ({ _id, workflow }) {
   const { status } = workflow;
   const exceptionStatus = 'exception';
@@ -70,10 +88,23 @@ export function toggleOrderException ({ _id, workflow }) {
   });
 }
 
+/**
+ * Returns the given order's admin notes
+ *
+ * @param {Object} order
+ * @param {Array} order.flaneurNotes
+ */
 export function getOrderNotes ({ flaneurNotes }) {
   return flaneurNotes || [];
 }
 
+/**
+ * Adds a note to the admin-level order notes.
+ *
+ * @param {String} orderId
+ * @param {String} userId
+ * @param {STring} text
+ */
 export function addOrderNote (orderId, userId, text) {
   const user = Meteor.users.findOne(userId, { fields: { _id: 1, name: 1 }});
   const note = {
