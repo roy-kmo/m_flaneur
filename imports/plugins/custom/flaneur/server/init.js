@@ -7,6 +7,7 @@ import { Reaction, Hooks } from '/server/api';
 import { Packages } from "/lib/collections";
 import importColors from './lib/migrations/importColors';
 import configureStripe from './lib/config/configureStripe';
+import FlaneurProductLayout from '../lib/layouts/FlaneurProductLayout';
 
 const deleteThisPackage = function () {
   console.log('Refreshing flaneur package registry');
@@ -32,4 +33,15 @@ Reaction.registerTemplate({
   type: "email",
   template: Assets.getText('custom/email/orders/acknowledged.html'),
   subject: 'Flaneur has started to dye your beddings'
+});
+
+// Register custom product detail layout, based on default "simple" layout
+Reaction.registerTemplate({
+  name: "productDetailSimple",
+  title: "Product Detail Simple Layout",
+  type: 'react',
+  templateFor: ['pdp'],
+  permissions: ['admin', 'owner'],
+  audience: ['anonymous', 'guest'],
+  template: FlaneurProductLayout()
 });

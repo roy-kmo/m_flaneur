@@ -310,5 +310,22 @@ Meteor.methods({
     const order = validateOrder(id);
     check(text, String);
     return addOrderNote(order._id, this.userId, text);
+  },
+
+  'FlaneurProducts.getList' () {
+    return Products.find({
+      type: 'simple',
+      isVisible: true,
+      isDeleted: { $ne: true }
+    }, {
+      fields: {
+        title: 1,
+        handle: 1
+      }
+    }, {
+      sort: {
+        title: 1
+      }
+    }).fetch();
   }
 });
