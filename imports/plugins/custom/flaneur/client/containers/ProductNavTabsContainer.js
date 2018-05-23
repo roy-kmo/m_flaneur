@@ -52,7 +52,7 @@ export default class ProductNavTabsContainer extends Component {
           const { title, handle } = tabProduct;
           const isActive = handle === product.handle;
           return (
-            <li role="presentation" className={isActive && 'active' || ''}>
+            <li key={handle} role="presentation" className={isActive && 'active' || ''}>
               <a href={`/product/${handle}${pathColor}`} onClick={this.handleTabClick}>{title}</a>
             </li>
           );

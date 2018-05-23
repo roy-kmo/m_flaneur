@@ -17,6 +17,9 @@ Colors.schema = new SimpleSchema({
   hexCode: {
     type: String
   },
+  slug: {
+    type: String
+  },
   createdAt: {
     type: Date,
     optional: true

@@ -19,3 +19,19 @@ export function arrayMove (arr, previousIndex, newIndex) {
   array.splice(newIndex, 0, array.splice(previousIndex, 1)[0]);
   return array;
 }
+
+/**
+ * Slugify's the given string (that is, makes it URL compatible by removing spaces, etc)
+ *
+ * @param {String} text
+ *
+ * @returns {String}
+ */
+export function slugify (text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}

@@ -13,7 +13,7 @@ const ColorsTable = new Tabular.Table({
   collection: Colors,
   responsive: true,
   autoWidth: false,
-  extraFields: ['_id', 'description'],
+  extraFields: ['_id', 'description', 'slug'],
   order: [[0, "asc"]],
   columns: [
     {

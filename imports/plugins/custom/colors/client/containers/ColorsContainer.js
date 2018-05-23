@@ -17,7 +17,8 @@ export default class ColorsContainer extends Component {
       name: '',
       description: '',
       pantoneCode: '',
-      hexCode: ''
+      hexCode: '',
+      slug: ''
     };
 
     this.state = {
