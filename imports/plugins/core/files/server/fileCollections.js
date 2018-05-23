@@ -52,10 +52,11 @@ const { db } = MongoInternals.defaultRemoteCollectionDriver().mongo;
  * 3. `small` - 235px by 235px - crops to square - creates png version
  * 4. `thumbnail` - 100px by 100px - crops to square - creates png version
  */
+// Flaneur customization - use png for all image transformations
 const imgTransforms = [
-  { name: "image", transform: { size: 1600, mod: "max", format: "jpg", type: "image/jpeg" } },
-  { name: "large", transform: { size: 1000, mod: "max", format: "jpg", type: "image/jpeg" } },
-  { name: "medium", transform: { size: 600, mod: "max", format: "jpg", type: "image/jpeg" } },
+  { name: "image", transform: { size: 1600, mod: "max", format: "png", type: "image/png" } },
+  { name: "large", transform: { size: 1000, mod: "max", format: "png", type: "image/png" } },
+  { name: "medium", transform: { size: 600, mod: "max", format: "png", type: "image/png" } },
   { name: "small", transform: { size: 235, mod: "crop", format: "png", type: "image/png" } },
   { name: "thumbnail", transform: { size: 100, mod: "crop", format: "png", type: "image/png" } }
 ];

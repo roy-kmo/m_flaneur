@@ -37,7 +37,8 @@ export default class ColorForm extends Component {
       name,
       pantoneCode,
       hexCode,
-      description
+      description,
+      slug
     } = formFields;
 
     return (
@@ -76,6 +77,16 @@ export default class ColorForm extends Component {
             className="form-control"
             name="hexCode"
             value={hexCode}
+            onChange={onInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Slug</label>
+          <input
+            type="text"
+            className="form-control"
+            name="slug"
+            value={slug}
             onChange={onInputChange}
           />
         </div>

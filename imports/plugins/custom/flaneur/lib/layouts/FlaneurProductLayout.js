@@ -53,9 +53,7 @@ export default function blocks() {
 
         // Custom product nav tabs
         {
-          component: 'ProductNavTabsContainer',
-          permissions: ["admin"],
-          audience: ["guest", "anonymous"]
+          component: 'ProductNavTabsContainer'
         }
       ]
     },
@@ -202,8 +200,13 @@ export default function blocks() {
               paddingTop: 20
             }
           }
-        }
+        },
 
+        // Component that sets correct color to certain elements
+        // Last component on PDP so all other elements are available to add bg color
+        {
+          component: 'PDPColorSetter'
+        }
       ]
     }
   ];

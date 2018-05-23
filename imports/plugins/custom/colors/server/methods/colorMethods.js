@@ -7,12 +7,14 @@ const validateColor = function ({
   name,
   description,
   pantoneCode,
-  hexCode
+  hexCode,
+  slug
 }) {
   check(name, String);
   check(description, String);
   check(pantoneCode, String);
   check(hexCode, String);
+  check(slug, String);
 
   if (name === '') {
     throw new Meteor.Error(400, 'Name is required');
@@ -23,6 +25,9 @@ const validateColor = function ({
   if (hexCode === '') {
     throw new Meteor.Error(400, 'HEX Code is required');
   }
+  if (slug === '') {
+    throw new Meteor.Error(400, 'Slug is required');
+  }
 }
 
 Meteor.methods({
@@ -32,10 +37,11 @@ Meteor.methods({
       name,
       description,
       pantoneCode,
-      hexCode
+      hexCode,
+      slug
     } = fields;
 
-    validateColor({ name, description, pantoneCode, hexCode });
+    validateColor({ name, description, pantoneCode, hexCode, slug });
 
     if (!this.userId) {
       throw new Meteor.Error(401, 'Unauthorized');
@@ -57,12 +63,17 @@ Meteor.methods({
     if (existingByHex) {
       throw new Meteor.Error(400, 'A color with the HEX code you specified already exists');
     }
+    const existingBySlug = Colors.findOne({ slug }, { fields: { _id: 1 }});
+    if (existingBySlug) {
+      throw new Meteor.Error(400, 'A color with the slug you specified already exists');
+    }
 
     Colors.insert({
       name,
       description,
       pantoneCode,
       hexCode,
+      slug,
       createdAt: new Date()
     });
   },
@@ -74,10 +85,11 @@ Meteor.methods({
       name,
       description,
       pantoneCode,
-      hexCode
+      hexCode,
+      slug
     } = fields;
 
-    validateColor({ name, description, pantoneCode, hexCode });
+    validateColor({ name, description, pantoneCode, hexCode, slug });
 
     if (!this.userId) {
       throw new Meteor.Error(401, 'Unauthorized');
@@ -113,12 +125,17 @@ Meteor.methods({
     if (existingByHex) {
       throw new Meteor.Error(400, 'A color with the HEX code you specified already exists');
     }
+    const existingBySlug = Colors.findOne({ slug, ... idSelector }, { fields: { _id: 1 }});
+    if (existingBySlug) {
+      throw new Meteor.Error(400, 'A color with the slug you specified already exists');
+    }
 
     Colors.update(_id, {
       name,
       description,
       pantoneCode,
       hexCode,
+      existingBySlug,
       updatedAt: new Date()
     });
   },
@@ -166,5 +183,11 @@ Meteor.methods({
         name: 1
       }
     }).fetch();
+  },
+
+  'Colors.getHexBySlug' (slug) {
+    check(slug, String);
+    const color = Colors.findOne({ slug });
+    return color && color.hexCode || '';
   }
 });

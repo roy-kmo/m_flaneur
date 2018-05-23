@@ -166,10 +166,10 @@ class FlaneurNavBar extends Component {
     // Customization - split cart container into separate line
     return (
       <div>
-        <div className="rui navbar">
+        <div className="rui navbar cart-navbar">
           {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()}
         </div>
-        <div className="rui navbar">
+        <div className="rui navbar main-navbar">
           {this.props.visibility.hamburger && this.renderHamburgerButton()}
           {this.props.visibility.brand && this.renderBrand()}
           {this.props.visibility.tags && this.renderTagNav()}

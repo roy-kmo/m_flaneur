@@ -6,6 +6,7 @@
 import { Reaction, Hooks } from '/server/api';
 import { Packages } from "/lib/collections";
 import importColors from './lib/migrations/importColors';
+import setColorSlugs from './lib/migrations/setColorSlugs';
 import configureStripe from './lib/config/configureStripe';
 import FlaneurProductLayout from '../lib/layouts/FlaneurProductLayout';
 
@@ -23,6 +24,7 @@ const deleteThisPackage = function () {
 Hooks.Events.add('onCoreInit', function () {
   deleteThisPackage();
   importColors();
+  setColorSlugs();
   configureStripe();
 });
 
