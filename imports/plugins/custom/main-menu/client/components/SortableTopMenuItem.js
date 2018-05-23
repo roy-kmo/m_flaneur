@@ -33,7 +33,7 @@ const SortableTopMenuItem = SortableElement(({
     <li key={index} className="list-group-item" style={{ zIndex: '2147483647' }}>
       <SortHandle />
       {item.label} ({item.path})
-      <a href="javascript:void(0)" style={{ float: 'right' }} onClick={() => onItemRemove(item)}>Remove</a>
+      <a href="javascript:void(0)" style={{ float: 'right', marginTop: 8 }} onClick={() => onItemRemove(item)}>Remove</a>
       {item.children && (
         <SortableChildMenuList
           parent={item}

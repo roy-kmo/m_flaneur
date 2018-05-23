@@ -27,6 +27,8 @@ import './components/FlaneurProductAdmin';
 import './components/FlaneurCartDrawer';
 import './components/FlaneurOrderSummary';
 import './components/FlaneurOrderFilter';
+import './components/FlaneurNavBar';
+import './components/FlaneurCartIcon';
 
 Meteor.startup(function () {
   Blaze.render(Template.intercom, $('body')[0]);
