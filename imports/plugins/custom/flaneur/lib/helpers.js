@@ -35,3 +35,17 @@ export function slugify (text) {
     .replace(/^-+/, '')             // Trim - from start of text
     .replace(/-+$/, '');            // Trim - from end of text
 }
+
+/**
+ * Returns the color slug from the URL, on the PDP page, if present.
+ *
+ * @param {String} handle Current product's handle
+ *
+ * @returns {String}
+ */
+export function getPDPColorSlug (handle) {
+  const path = window.location.pathname;
+  const pathParts = path.split('/');
+  const lastPathArg = pathParts[pathParts.length - 1];
+  return lastPathArg !== handle && lastPathArg || '';
+}
