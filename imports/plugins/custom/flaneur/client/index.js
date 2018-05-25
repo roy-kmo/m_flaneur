@@ -33,6 +33,8 @@ import './components/PDPColorSetter';
 import './components/PDPColorTitle';
 import './components/PDPTitleInColor';
 import './components/PDPInfoTabs';
+import './components/FlaneurVariantList';
+import './components/FlaneurChildVariant';
 import './containers/ProductNavTabsContainer';
 
 Meteor.startup(function () {
