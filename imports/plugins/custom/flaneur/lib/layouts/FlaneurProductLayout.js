@@ -17,6 +17,15 @@ export default function blocks() {
       permissions: ["admin"], // Permissions for staff
       audience: ["guest", "anonymous"], // Permissions for customers
       children: [
+        {
+          component: 'PDPColorTitle'
+        },
+
+        // Custom product nav tabs
+        {
+          component: 'ProductNavTabsContainer'
+        },
+
         // Title
         {
           component: "ProductField",
@@ -50,11 +59,6 @@ export default function blocks() {
             }
           }
         },
-
-        // Custom product nav tabs
-        {
-          component: 'ProductNavTabsContainer'
-        }
       ]
     },
 
@@ -107,6 +111,11 @@ export default function blocks() {
         }
       },
       children: [
+        // Custom "product.title in color.name" component
+        {
+          component: "PDPTitleInColor"
+        },
+
         // Price /  Social Buttons split
         {
           axis: "horizontal",
@@ -161,18 +170,7 @@ export default function blocks() {
             }
           }
         },
-        {
-          component: "ProductField",
-          props: {
-            fieldName: "description",
-            fieldTitle: "Description",
-            multiline: true,
-            textFieldProps: {
-              i18nKeyPlaceholder: "productDetailEdit.description",
-              placeholder: "Description"
-            }
-          }
-        },
+        // Customization - removed default description component
 
         // Variant List
         {
@@ -206,6 +204,18 @@ export default function blocks() {
         // Last component on PDP so all other elements are available to add bg color
         {
           component: 'PDPColorSetter'
+        }
+      ]
+    },
+
+    {
+      type: "block",
+      columns: 12,
+      element: "div",
+      className: "pdp info-tabs",
+      children: [
+        {
+          component: 'PDPInfoTabs'
         }
       ]
     }

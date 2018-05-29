@@ -30,6 +30,9 @@ import './components/FlaneurOrderFilter';
 import './components/FlaneurNavBar';
 import './components/FlaneurCartIcon';
 import './components/PDPColorSetter';
+import './components/PDPColorTitle';
+import './components/PDPTitleInColor';
+import './components/PDPInfoTabs';
 import './containers/ProductNavTabsContainer';
 
 Meteor.startup(function () {
