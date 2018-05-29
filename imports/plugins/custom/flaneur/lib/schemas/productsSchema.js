@@ -12,6 +12,15 @@ const ExtendedProductSchema = Product.clone().extend(
     dimensions: {
       type: String,
       optional: true
+    },
+    pageContent: {
+      type: String,
+      optional: true
+    },
+    // Admin-defined color for PDP. If set, product is only displayed in that color
+    hexColor: {
+      type: String,
+      optional: true
     }
   }
 );

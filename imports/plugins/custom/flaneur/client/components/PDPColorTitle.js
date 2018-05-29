@@ -15,7 +15,9 @@ class PDPColorTitle extends Component {
   };
 
   componentDidMount () {
-    this.getColorName();
+    if (!this.props.product.hexColor) {
+      this.getColorName();
+    }
   }
 
   getColorName = () => {
@@ -33,7 +35,13 @@ class PDPColorTitle extends Component {
   };
 
   componentDidUpdate (prevProps) {
-    this.getColorName();
+    if (this.props.product._id !== prevProps.product._id) {
+      // Changed product
+      this.setState({ name: '', slug: '' });
+    }
+    if (!this.props.product.hexColor) {
+      this.getColorName();
+    }
   }
 
   render () {
