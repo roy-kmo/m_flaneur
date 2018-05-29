@@ -55,7 +55,7 @@ class PDPInfoTabs extends Component {
           })}
         </ul>
         <div className="tab-content">
-          <div role="tabpanel" class="tab-pane active" dangerouslySetInnerHTML={{ __html: content }} />
+          <div role="tabpanel" className="tab-pane active" dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       </div>
     );

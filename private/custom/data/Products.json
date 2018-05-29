@@ -1,0 +1,297 @@
+[{
+	"_id" : "Zdin79MHWcM4RsdiH",
+	"type" : "variant",
+	"ancestors" : [
+		"eZMW3xYvseTaXtgR8"
+	],
+	"price" : 0,
+	"inventoryQuantity" : 0,
+	"isDeleted" : false,
+	"compareAtPrice" : 0,
+	"weight" : 0,
+	"length" : 0,
+	"width" : 0,
+	"height" : 0,
+	"inventoryManagement" : true,
+	"inventoryPolicy" : false,
+	"lowInventoryWarningThreshold" : 0,
+	"isVisible" : true,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"taxable" : true,
+	"taxCode" : "0000",
+	"title" : "Size",
+	"optionTitle" : "Untitled Option",
+	"workflow" : {
+		"status" : "new"
+	},
+	"originCountry" : "US"
+},
+{
+	"_id" : "SegHb5BRqJ95jGgsG",
+	"ancestors" : [
+		"eZMW3xYvseTaXtgR8",
+		"Zdin79MHWcM4RsdiH"
+	],
+	"type" : "variant",
+	"title" : "Queen",
+	"price" : 360,
+	"inventoryQuantity" : 99,
+	"isDeleted" : false,
+	"compareAtPrice" : 0,
+	"weight" : 0,
+	"length" : 0,
+	"width" : 0,
+	"height" : 0,
+	"inventoryManagement" : true,
+	"inventoryPolicy" : false,
+	"lowInventoryWarningThreshold" : 0,
+	"isVisible" : true,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"taxable" : true,
+	"taxCode" : "0000",
+	"optionTitle" : "Queen",
+	"workflow" : {
+		"status" : "new"
+	},
+	"originCountry" : "US"
+},
+{
+	"_id" : "SJYGGHdzZTdy8GpHw",
+	"type" : "variant",
+	"ancestors" : [
+		"4upqEnfpCqp8yrWx6"
+	],
+	"price" : 0,
+	"inventoryQuantity" : 0,
+	"isDeleted" : false,
+	"compareAtPrice" : 0,
+	"weight" : 0,
+	"length" : 0,
+	"width" : 0,
+	"height" : 0,
+	"inventoryManagement" : true,
+	"inventoryPolicy" : false,
+	"lowInventoryWarningThreshold" : 0,
+	"isVisible" : true,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"taxable" : true,
+	"taxCode" : "0000",
+	"title" : "Size",
+	"optionTitle" : "Untitled Option",
+	"workflow" : {
+		"status" : "new"
+	},
+	"originCountry" : "US"
+},
+{
+	"_id" : "mvTmKCyjihkszqb5S",
+	"ancestors" : [
+		"4upqEnfpCqp8yrWx6",
+		"SJYGGHdzZTdy8GpHw"
+	],
+	"type" : "variant",
+	"title" : "Queen",
+	"price" : 400,
+	"inventoryQuantity" : 100,
+	"isDeleted" : false,
+	"compareAtPrice" : 0,
+	"weight" : 0,
+	"length" : 0,
+	"width" : 0,
+	"height" : 0,
+	"inventoryManagement" : true,
+	"inventoryPolicy" : false,
+	"lowInventoryWarningThreshold" : 0,
+	"isVisible" : true,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"taxable" : true,
+	"taxCode" : "0000",
+	"optionTitle" : "Queen",
+	"workflow" : {
+		"status" : "new"
+	},
+	"originCountry" : "US"
+},
+{
+	"_id" : "eZMW3xYvseTaXtgR8",
+	"type" : "simple",
+	"isVisible" : true,
+	"ancestors" : [ ],
+	"title" : "Duvet Covers",
+	"originCountry" : "US",
+	"requiresShipping" : true,
+	"handle" : "duvet-covers",
+	"isDeleted" : false,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"template" : "productDetailSimple",
+	"createdAt" : {
+    "$date": "2018-05-24T16:56:17.814Z"
+  },
+	"updatedAt" : {
+    "$date": "2018-05-25T13:02:30.471Z"
+  },
+	"workflow" : {
+		"status" : "new"
+	},
+	"isSoldOut" : false,
+	"isLowQuantity" : false,
+	"isBackorder" : true,
+	"price" : {
+		"range" : "360 - 400",
+		"min" : 360,
+		"max" : 400
+	},
+	"description" : "<p>\nGrey zipper. The understated way to get closure. Discover our Camus duvet cover, finished with this subtle-hued zipper. We headed to Switzerland for the world's finest zippers, the perfect (and only) pairing for our DNA-tested, ultra-soft, 100% Supima® cotton fabric. Explore a spectrum of custom colors, dyed one at a time, inspired by the beauty of nature itself and delivered to you in just 10 days. No shrinking. No pilling. All aaaaaaahs.</p>",
+	"careInstructions" : "<p>Machine wash cold. Tumble dry low. Wash dark colors separately. Do not bleach. Iron with medium heat if needed.</p>",
+	"dimensions" : "<p>\nQueen: 90\" x 92\"<br>\nKing: 106\" x 94\"<br>\nCal King: 102'' x 98''\n</p>"
+},
+{
+	"_id" : "4upqEnfpCqp8yrWx6",
+	"type" : "simple",
+	"isVisible" : true,
+	"ancestors" : [ ],
+	"title" : "Sateen Sheets",
+	"originCountry" : "US",
+	"requiresShipping" : true,
+	"handle" : "sateen-sheets",
+	"isDeleted" : false,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"template" : "productDetailSimple",
+	"createdAt" : {
+    "$date": "2018-05-24T16:57:54.833Z"
+  },
+	"updatedAt" : {
+    "$date": "2018-05-25T13:00:32.344Z"
+  },
+	"workflow" : {
+		"status" : "new"
+	},
+	"isSoldOut" : false,
+	"isLowQuantity" : false,
+	"isBackorder" : true,
+	"price" : {
+		"range" : "400 - 475",
+		"min" : 400,
+		"max" : 475
+	},
+	"hashtags" : [ ],
+	"description" : "<p>\nDyed and washed one piece at a time in a boutique dye house in Los Angeles, every piece has an incredibly soft hand feel and exclusively rich color that makes it unequivocally, unapologetically, Flaneur.Each sheet set includes a flat sheet, a fitted sheet and two pillowcases.</p>",
+	"careInstructions" : "<p>Machine wash cold. Tumble dry low. Wash dark colors separately. Do not bleach. Iron with medium heat if needed.</p>",
+	"dimensions" : "<p>\nQueen:<br>\nFlat Sheet: 96\" x 112\"<br>\nFitted Sheet: 60\" x 80\" + 16\"<br>\nPillowcases (2): 20\" x 32\"<br>\nKing:<br>\nFlat Sheet: 112\" x 112\"<br>\nFitted Sheet: 78\" x 80\" + 16\"<br>\nPillowcases (2): 20\" x 40\"<br>\nCal King:<br>\nFlat Sheet: 108'' x 116''<br>\nFitted Sheet: 72'' x 84'' + 16''<br>\nPillowcases (2): 20'' x 40''<br>\n</p>"
+},
+{
+	"_id" : "cffzhT2BgSfZbvjvn",
+	"ancestors" : [
+		"4upqEnfpCqp8yrWx6",
+		"SJYGGHdzZTdy8GpHw"
+	],
+	"type" : "variant",
+	"title" : "King",
+	"price" : 450,
+	"inventoryQuantity" : 100,
+	"isDeleted" : false,
+	"compareAtPrice" : 0,
+	"weight" : 0,
+	"length" : 0,
+	"width" : 0,
+	"height" : 0,
+	"inventoryManagement" : true,
+	"inventoryPolicy" : false,
+	"lowInventoryWarningThreshold" : 0,
+	"isVisible" : true,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"taxable" : true,
+	"taxCode" : "0000",
+	"optionTitle" : "King",
+	"workflow" : {
+		"status" : "new"
+	},
+	"originCountry" : "US"
+},
+{
+	"_id" : "F8nAYTDCMD3RuKwfZ",
+	"ancestors" : [
+		"4upqEnfpCqp8yrWx6",
+		"SJYGGHdzZTdy8GpHw"
+	],
+	"type" : "variant",
+	"title" : "CA King",
+	"price" : 475,
+	"inventoryQuantity" : 100,
+	"isDeleted" : false,
+	"compareAtPrice" : 0,
+	"weight" : 0,
+	"length" : 0,
+	"width" : 0,
+	"height" : 0,
+	"inventoryManagement" : true,
+	"inventoryPolicy" : false,
+	"lowInventoryWarningThreshold" : 0,
+	"isVisible" : true,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"taxable" : true,
+	"taxCode" : "0000",
+	"optionTitle" : "CA King",
+	"workflow" : {
+		"status" : "new"
+	},
+	"originCountry" : "US"
+},
+{
+	"_id" : "DHqzeqDdbLSHvL2Cn",
+	"ancestors" : [
+		"eZMW3xYvseTaXtgR8",
+		"Zdin79MHWcM4RsdiH"
+	],
+	"type" : "variant",
+	"title" : "King",
+	"price" : 390,
+	"inventoryQuantity" : 100,
+	"isDeleted" : false,
+	"compareAtPrice" : 0,
+	"weight" : 0,
+	"length" : 0,
+	"width" : 0,
+	"height" : 0,
+	"inventoryManagement" : true,
+	"inventoryPolicy" : false,
+	"lowInventoryWarningThreshold" : 0,
+	"isVisible" : true,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"taxable" : true,
+	"taxCode" : "0000",
+	"optionTitle" : "King",
+	"workflow" : {
+		"status" : "new"
+	},
+	"originCountry" : "US"
+},
+{
+	"_id" : "3x8LttJmRmN8vQmw3",
+	"ancestors" : [
+		"eZMW3xYvseTaXtgR8",
+		"Zdin79MHWcM4RsdiH"
+	],
+	"type" : "variant",
+	"title" : "CA King",
+	"price" : 400,
+	"inventoryQuantity" : 100,
+	"isDeleted" : false,
+	"compareAtPrice" : 0,
+	"weight" : 0,
+	"length" : 0,
+	"width" : 0,
+	"height" : 0,
+	"inventoryManagement" : true,
+	"inventoryPolicy" : false,
+	"lowInventoryWarningThreshold" : 0,
+	"isVisible" : true,
+	"shopId" : "J8Bhq3uTtdgwZx3rz",
+	"taxable" : true,
+	"taxCode" : "0000",
+	"optionTitle" : "CA King",
+	"workflow" : {
+		"status" : "new"
+	},
+	"originCountry" : "US"
+}]
