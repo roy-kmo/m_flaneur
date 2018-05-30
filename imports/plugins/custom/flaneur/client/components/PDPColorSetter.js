@@ -1,3 +1,8 @@
+/**
+ * @file
+ * React component that sets the color on the PDP
+ */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { registerComponent } from '@reactioncommerce/reaction-components';
@@ -10,7 +15,17 @@ class PDPColorSetter extends Component {
   };
 
   async componentDidMount () {
-    const { handle } = this.props.product;
+    const { product } = this.props;
+
+    // If product has a hexColor defined by admin, set that color.
+    if (product.hexColor) {
+      this.clearStyles();
+      this.setHexColor(product.hexColor);
+      return;
+    }
+
+    // Otherwise, set color based on URL
+    const { handle } = product;
     const slug = getPDPColorSlug(handle);
     if (slug) {
       // Viewing PDP in a certain color.
@@ -20,7 +35,14 @@ class PDPColorSetter extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { handle } = this.props.product;
+    const { product } = this.props;
+    if (product.hexColor) {
+      this.clearStyles();
+      this.setHexColor(product.hexColor);
+      return;
+    }
+
+    const { handle } = product;
     this.setPDPColor(getPDPColorSlug(handle));
   }
 
@@ -33,18 +55,7 @@ class PDPColorSetter extends Component {
       Meteor.call('Colors.getHexBySlug', slug, (err, hex) => {
         if (err) reject(err);
         this.clearStyles();
-        this.hex = hex;
-        const bgStyle = `background-color: #${hex} !important`;
-        const styles = document.createElement('style');
-        styles.type = 'text/css';
-        styles.className = 'pdp-color-styles';
-        styles.appendChild(document.createTextNode(`
-          .zoomed-image-container img { ${bgStyle} }
-          .main-navbar { ${bgStyle} }
-          .pdp.header { ${bgStyle} }
-          .media-gallery .gallery-image img { ${bgStyle} }
-        `));
-        document.head.appendChild(styles);
+        this.setHexColor(hex);
         resolve();
       });
     });
@@ -55,6 +66,21 @@ class PDPColorSetter extends Component {
     if (existingStyles) {
       existingStyles.parentNode.removeChild(existingStyles);
     }
+  };
+
+  setHexColor = hex => {
+    this.hex = hex;
+    const bgStyle = `background-color: #${hex} !important`;
+    const styles = document.createElement('style');
+    styles.type = 'text/css';
+    styles.className = 'pdp-color-styles';
+    styles.appendChild(document.createTextNode(`
+      .zoomed-image-container img { ${bgStyle} }
+      .main-navbar { ${bgStyle} }
+      .pdp.header { ${bgStyle} }
+      .media-gallery .gallery-image img { ${bgStyle} }
+    `));
+    document.head.appendChild(styles);
   };
 
   render () {

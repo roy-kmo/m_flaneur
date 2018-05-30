@@ -208,6 +208,7 @@ export default function blocks() {
       ]
     },
 
+    // Info tabs
     {
       type: "block",
       columns: 12,
@@ -216,6 +217,19 @@ export default function blocks() {
       children: [
         {
           component: 'PDPInfoTabs'
+        }
+      ]
+    },
+
+    // Custom page content
+    {
+      type: "block",
+      columns: 12,
+      element: "div",
+      className: "pdp page-content",
+      children: [
+        {
+          component: 'PDPPageContent'
         }
       ]
     }

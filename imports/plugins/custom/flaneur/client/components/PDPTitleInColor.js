@@ -10,22 +10,39 @@ class PDPTitleInColor extends Component {
   };
 
   state = {
-    name: ''
+    name: '',
+    slug: ''
   };
 
   componentDidMount () {
+    if (!this.props.product.hexColor) {
+      this.getColorName();
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.product._id !== prevProps.product._id) {
+      // Changed product
+      this.setState({ name: '', slug: '' });
+    }
+    if (!this.props.product.hexColor) {
+      this.getColorName();
+    }
+  }
+
+  getColorName = () => {
     const { handle } = this.props.product;
     const slug = getPDPColorSlug(handle);
-    if (slug) {
+    if (slug && slug !== this.state.slug) {
       Meteor.call('Colors.getNameBySlug', slug, (err, name) => {
         if (err) {
           alert(err.reason);
         } else {
-          this.setState({ name });
+          this.setState({ name, slug });
         }
       });
     }
-  }
+  };
 
   render () {
     const { title } = this.props.product

@@ -12,6 +12,8 @@ import "velocity-animate/velocity.ui";
 import { Components, replaceComponent } from "@reactioncommerce/reaction-components";
 import { Router } from "/client/api";
 import update from "immutability-helper";
+// Customization - load Tags collection for hexColor field
+import { Tags } from '/lib/collections';
 import Loadable from 'react-loadable';
 const ContentEditor = Loadable({
   loader: async () => {
@@ -231,7 +233,18 @@ class FlaneurProductAdmin extends Component {
   isExpanded = (groupName) => this.state.expandedCard === groupName
 
   render() {
-    // Customization - Added careInstructions & dimensions fields
+    // Customization - Added careInstructions, dimensions, pageContent fields
+    // Customization - Added pdpColor field that appears if product is tagged w/ "Capsule"
+    let isCapsule = false;
+    const allTags = Tags.find().fetch();
+    const capsuleTag = allTags.find(tag => tag.slug === 'capsule');
+    const productTagIds = this.product.hashtags || [];
+    capsuleTag && productTagIds.forEach(tagId => {
+      if (tagId === capsuleTag._id) {
+        isCapsule = true;
+      }
+    });
+
     return (
       <Components.CardGroup>
         <Components.Card
@@ -330,6 +343,28 @@ class FlaneurProductAdmin extends Component {
                 onBlur={(value) => this.handleFieldBlur(null, this.product.dimensions, 'dimensions')}
               />
             </div>
+            <div className="rui form-group">
+              <label><span>Page Content</span></label>
+              <ContentEditor
+                value={this.product.pageContent}
+                onChange={(value) => this.handleFieldChange(null, value, 'pageContent')}
+                onBlur={(value) => this.handleFieldBlur(null, this.product.pageContent, 'pageContent')}
+              />
+            </div>
+            {isCapsule && (
+              <Components.TextField
+                i18nKeyLabel="productDetailEdit.hexColor"
+                i18nKeyPlaceholder="productDetailEdit.hexColor"
+                label="Capsule Hex Color"
+                name="hexColor"
+                onBlur={this.handleFieldBlur}
+                onChange={this.handleFieldChange}
+                onReturnKeyDown={this.handleFieldBlur}
+                placeholder="Hex Color (without #)"
+                ref="hexColorInput"
+                value={this.product.hexColor || ''}
+              />
+            )}
             <Components.Select
               clearable={false}
               i18nKeyLabel="productDetailEdit.originCountry"
