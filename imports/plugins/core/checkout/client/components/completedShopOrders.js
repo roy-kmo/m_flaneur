@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { registerComponent } from "@reactioncommerce/reaction-components";
-import CompletedOrderItem from "./completedOrderItem";
+import { Components, registerComponent } from "@reactioncommerce/reaction-components";
 
 /**
  * @summary Displays the order breakdown for each Shop
@@ -29,7 +28,7 @@ const CompletedShopOrders = ({ shopName, items, shippingMethod, isProfilePage })
         </div>
       </div>
       <div className="order-details-info-box-topless">
-        {items.map((item) => <CompletedOrderItem item={item} key={item._id} />)}
+        {items.map((item) => <Components.CompletedOrderItem item={item} key={item._id} />)}
       </div>
 
       {/* This is the left side / main content */}

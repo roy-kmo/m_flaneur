@@ -1,9 +1,11 @@
 import { BrowserPolicy } from "meteor/browser-policy-common";
 
 import './methods/flaneurMethods';
+import './methods/coreMethods';
 import './init';
 import '../lib/schemas/productsSchema';
 import '../lib/schemas/ordersSchema';
+import '../lib/schemas/cartItemSchema';
 
 BrowserPolicy.content.allowOriginForAll("https://widget.intercom.io:*");
 BrowserPolicy.content.allowOriginForAll("https://js.intercomcdn.com:*");

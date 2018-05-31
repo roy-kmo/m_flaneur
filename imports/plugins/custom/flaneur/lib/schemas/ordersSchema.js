@@ -1,5 +1,20 @@
 import SimpleSchema from "simpl-schema";
-import { OrderDocument } from '/lib/collections/schemas';
+import { CartItem, OrderDocument, OrderItem } from '/lib/collections/schemas';
+
+const ExtendedOrderItem = OrderItem.clone().extend({
+  colorId: {
+    type: String,
+    optional: true
+  },
+  colorName: {
+    type: String,
+    optional: true
+  },
+  colorHexCode: {
+    type: String,
+    optional: true
+  }
+});
 
 OrderDocument.extend({
   flaneurNotes: {
@@ -10,5 +25,6 @@ OrderDocument.extend({
   'flaneurNotes.$.userId': String,
   'flaneurNotes.$.userName': String,
   'flaneurNotes.$.text': String,
-  'flaneurNotes.$.createdAt': String
+  'flaneurNotes.$.createdAt': String,
+  'items.$': CartItem.clone().extend(ExtendedOrderItem)
 });

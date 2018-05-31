@@ -3,6 +3,7 @@
  * React component that sets the color on the PDP
  */
 
+import { Session } from 'meteor/session'
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { registerComponent } from '@reactioncommerce/reaction-components';
@@ -52,10 +53,11 @@ class PDPColorSetter extends Component {
 
   setPDPColor = slug => {
     return new Promise((resolve, reject) => {
-      Meteor.call('Colors.getHexBySlug', slug, (err, hex) => {
+      Meteor.call('Colors.getBySlug', slug, (err, { _id, hexCode }) => {
         if (err) reject(err);
         this.clearStyles();
-        this.setHexColor(hex);
+        this.setHexColor(hexCode);
+        Session.set('PDPColorId', _id)
         resolve();
       });
     });
@@ -66,6 +68,8 @@ class PDPColorSetter extends Component {
     if (existingStyles) {
       existingStyles.parentNode.removeChild(existingStyles);
     }
+
+    Session.set('PDPColorId', undefined);
   };
 
   setHexColor = hex => {
