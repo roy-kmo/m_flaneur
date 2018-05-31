@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { formatPriceString } from "/client/api";
 import { Components, registerComponent, withMoment } from "@reactioncommerce/reaction-components";
-import LineItems from "./lineItems";
 import InvoiceActions from "./invoiceActions";
 
 /**
@@ -233,7 +232,7 @@ class Invoice extends Component {
             title="Invoice"
           />
           <Components.CardBody expandable={false}>
-            <LineItems {...this.props} />
+            <Components.LineItems {...this.props} />
 
             <div className="invoice-container">
               {this.renderInvoice()}

@@ -185,10 +185,10 @@ Meteor.methods({
     }).fetch();
   },
 
-  'Colors.getHexBySlug' (slug) {
+  'Colors.getBySlug' (slug) {
     check(slug, String);
     const color = Colors.findOne({ slug }, { fields: { hexCode: 1 }});
-    return color && color.hexCode || '';
+    return color || {};
   },
 
   'Colors.getNameBySlug' (slug) {

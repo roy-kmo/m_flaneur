@@ -20,5 +20,6 @@ import "./templates/orders.js";
 
 import "./components/orderSummary";
 import "./components/orderFilter";
+import "./components/lineItems";
 
 export { ProductImage } from "./components/productImage";

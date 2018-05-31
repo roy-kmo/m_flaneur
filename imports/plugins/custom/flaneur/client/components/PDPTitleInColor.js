@@ -45,7 +45,7 @@ class PDPTitleInColor extends Component {
   };
 
   render () {
-    const { title } = this.props.product
+    const { title } = this.props.product;
     const { name } = this.state;
     return (
       <div>

@@ -36,7 +36,11 @@ import './components/PDPColorTitle';
 import './components/PDPTitleInColor';
 import './components/PDPInfoTabs';
 import './components/PDPPageContent';
+import './components/FlaneurCompletedOrderItem';
+import './components/FlaneurCartItems';
+import './components/FlaneurLineItems';
 import './containers/ProductNavTabsContainer';
+import './containers/FlaneurProductDetailContainer';
 
 Meteor.startup(function () {
   Blaze.render(Template.intercom, $('body')[0]);
