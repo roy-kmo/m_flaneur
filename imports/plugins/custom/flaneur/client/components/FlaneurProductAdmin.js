@@ -448,6 +448,10 @@ class FlaneurProductAdmin extends Component {
             title="Tags"
           />
           <Components.CardBody expandable={true}>
+            <p>
+              Note: Products tagged with "Capsule" will only display in an admin-defined color.
+              Products tagged "Capsule", "Bundle", or "Swatchbox" will not display in the tabs on the PDP.
+            </p>
             <Components.TagList
               editable={this.props.editable}
               enableNewTagForm={true}
