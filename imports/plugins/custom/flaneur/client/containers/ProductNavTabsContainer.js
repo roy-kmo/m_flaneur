@@ -24,7 +24,7 @@ export default class ProductNavTabsContainer extends Component {
 
   getProductsList = () => {
     return new Promise((resolve, reject) => {
-      Meteor.call('FlaneurProducts.getList', (err, products) => {
+      Meteor.call('FlaneurProducts.getTabList', (err, products) => {
         if (err) {
           reject(err);
         } else {

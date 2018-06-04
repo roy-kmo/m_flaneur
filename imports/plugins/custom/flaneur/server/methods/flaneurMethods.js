@@ -8,6 +8,7 @@ import { Reaction } from '/server/api';
 import { getAsset, updateAsset } from '../lib/assets';
 import { Colors } from '../../../colors/lib/collections';
 import { generateCartLink, applyCartLink } from '../lib/cartLinks';
+import { getProductTabList } from '../lib/products';
 import {
   acknowledgeOrder,
   sendOrderAcknowledgmentEmail,
@@ -312,20 +313,7 @@ Meteor.methods({
     return addOrderNote(order._id, this.userId, text);
   },
 
-  'FlaneurProducts.getList' () {
-    return Products.find({
-      type: 'simple',
-      isVisible: true,
-      isDeleted: { $ne: true }
-    }, {
-      fields: {
-        title: 1,
-        handle: 1
-      }
-    }, {
-      sort: {
-        title: 1
-      }
-    }).fetch();
+  'FlaneurProducts.getTabList' () {
+    return getProductTabList();
   }
 });
