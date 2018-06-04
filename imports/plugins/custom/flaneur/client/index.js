@@ -21,6 +21,8 @@ import './templates/manageHomepageTopSellers';
 import './templates/intercom.html';
 import './templates/applyCartLink.html';
 import './templates/applyCartLink';
+import './templates/FlaneurAccountProfile.html';
+import './templates/FlaneurAccountProfile';
 import '../lib/schemas/productsSchema';
 import '../lib/schemas/ordersSchema';
 import './components/FlaneurProductAdmin';
