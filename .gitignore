@@ -44,3 +44,5 @@ private/plugins/*
 !private/plugins/.gitkeep
 
 .reaction/config.json
+
+coverage/*
