@@ -182,5 +182,25 @@ Meteor.methods({
 
     // Return colors in same order as colorIds
     return colorHouse.colorIds.map(colorId => colors.find(color => color._id === colorId));
+  },
+
+  'ColorHouses.get' () {
+    const colorHouses = ColorHouses.find({}, { sort: { createdAt: -1 }}).fetch();
+    const colorsById = {};
+
+    // Build colorHouse.colors array with color metadata
+    colorHouses.forEach(colorHouse => {
+      const { colorIds } = colorHouse;
+      colorHouse.colors = [];
+
+      colorIds.forEach(colorId => {
+        if (!colorsById[colorId]) {
+          colorsById[colorId] = Colors.findOne(colorId);
+        }
+        colorHouse.colors.push(colorsById[colorId]);
+      });
+    });
+
+    return colorHouses;
   }
 });
