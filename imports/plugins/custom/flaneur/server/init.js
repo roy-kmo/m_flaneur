@@ -22,12 +22,33 @@ const deleteThisPackage = function () {
   });
 };
 
+const replaceAccountProfileTemplate = function () {
+  console.log('Replacing account profile template');
+
+  const shopId = Reaction.getShopId();
+
+  Packages.update({
+    name: 'reaction-accounts',
+    shopId,
+    registry: {
+      $elemMatch: {
+        template: 'accountProfile'
+      }
+    }
+  }, {
+    $set: {
+      'registry.$.template': 'FlaneurAccountProfile'
+    }
+  });
+};
+
 Hooks.Events.add('onCoreInit', function () {
   deleteThisPackage();
   importColors();
   setColorSlugs();
   importProducts();
   configureStripe();
+  replaceAccountProfileTemplate();
 });
 
 // Register custom order acknowledgement email template
