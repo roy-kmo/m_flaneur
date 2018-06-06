@@ -14,6 +14,7 @@ import { Router } from "/client/api";
 import update from "immutability-helper";
 // Customization - load Tags collection for hexColor field
 import { Tags } from '/lib/collections';
+import { isProductCapsule } from '../../lib/products';
 import Loadable from 'react-loadable';
 const ContentEditor = Loadable({
   loader: async () => {
@@ -235,15 +236,7 @@ class FlaneurProductAdmin extends Component {
   render() {
     // Customization - Added careInstructions, dimensions, pageContent fields
     // Customization - Added pdpColor field that appears if product is tagged w/ "Capsule"
-    let isCapsule = false;
-    const allTags = Tags.find().fetch();
-    const capsuleTag = allTags.find(tag => tag.slug === 'capsule');
-    const productTagIds = this.product.hashtags || [];
-    capsuleTag && productTagIds.forEach(tagId => {
-      if (tagId === capsuleTag._id) {
-        isCapsule = true;
-      }
-    });
+    const isCapsule = isProductCapsule(this.product);
 
     return (
       <Components.CardGroup>

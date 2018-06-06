@@ -17,7 +17,7 @@
 	"lowInventoryWarningThreshold" : 0,
 	"isVisible" : true,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
-	"taxable" : true,
+	"isTaxable" : true,
 	"taxCode" : "0000",
 	"title" : "Size",
 	"optionTitle" : "Untitled Option",
@@ -47,7 +47,7 @@
 	"lowInventoryWarningThreshold" : 0,
 	"isVisible" : true,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
-	"taxable" : true,
+	"isTaxable" : true,
 	"taxCode" : "0000",
 	"optionTitle" : "Queen",
 	"workflow" : {
@@ -74,7 +74,7 @@
 	"lowInventoryWarningThreshold" : 0,
 	"isVisible" : true,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
-	"taxable" : true,
+	"isTaxable" : true,
 	"taxCode" : "0000",
 	"title" : "Size",
 	"optionTitle" : "Untitled Option",
@@ -104,7 +104,7 @@
 	"lowInventoryWarningThreshold" : 0,
 	"isVisible" : true,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
-	"taxable" : true,
+	"isTaxable" : true,
 	"taxCode" : "0000",
 	"optionTitle" : "Queen",
 	"workflow" : {
@@ -120,7 +120,7 @@
 	"title" : "Duvet Covers",
 	"originCountry" : "US",
 	"requiresShipping" : true,
-	"handle" : "duvet-covers",
+	"slug" : "duvet-covers",
 	"isDeleted" : false,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
 	"template" : "productDetailSimple",
@@ -153,7 +153,7 @@
 	"title" : "Sateen Sheets",
 	"originCountry" : "US",
 	"requiresShipping" : true,
-	"handle" : "sateen-sheets",
+	"slug" : "sateen-sheets",
 	"isDeleted" : false,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
 	"template" : "productDetailSimple",
@@ -174,7 +174,7 @@
 		"min" : 400,
 		"max" : 475
 	},
-	"hashtags" : [ ],
+	"tagIds" : [ ],
 	"description" : "<p>\nDyed and washed one piece at a time in a boutique dye house in Los Angeles, every piece has an incredibly soft hand feel and exclusively rich color that makes it unequivocally, unapologetically, Flaneur.Each sheet set includes a flat sheet, a fitted sheet and two pillowcases.</p>",
 	"careInstructions" : "<p>Machine wash cold. Tumble dry low. Wash dark colors separately. Do not bleach. Iron with medium heat if needed.</p>",
 	"dimensions" : "<p>\nQueen:<br>\nFlat Sheet: 96\" x 112\"<br>\nFitted Sheet: 60\" x 80\" + 16\"<br>\nPillowcases (2): 20\" x 32\"<br>\nKing:<br>\nFlat Sheet: 112\" x 112\"<br>\nFitted Sheet: 78\" x 80\" + 16\"<br>\nPillowcases (2): 20\" x 40\"<br>\nCal King:<br>\nFlat Sheet: 108'' x 116''<br>\nFitted Sheet: 72'' x 84'' + 16''<br>\nPillowcases (2): 20'' x 40''<br>\n</p>"
@@ -200,7 +200,7 @@
 	"lowInventoryWarningThreshold" : 0,
 	"isVisible" : true,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
-	"taxable" : true,
+	"isTaxable" : true,
 	"taxCode" : "0000",
 	"optionTitle" : "King",
 	"workflow" : {
@@ -229,7 +229,7 @@
 	"lowInventoryWarningThreshold" : 0,
 	"isVisible" : true,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
-	"taxable" : true,
+	"isTaxable" : true,
 	"taxCode" : "0000",
 	"optionTitle" : "CA King",
 	"workflow" : {
@@ -258,7 +258,7 @@
 	"lowInventoryWarningThreshold" : 0,
 	"isVisible" : true,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
-	"taxable" : true,
+	"isTaxable" : true,
 	"taxCode" : "0000",
 	"optionTitle" : "King",
 	"workflow" : {
@@ -287,7 +287,7 @@
 	"lowInventoryWarningThreshold" : 0,
 	"isVisible" : true,
 	"shopId" : "J8Bhq3uTtdgwZx3rz",
-	"taxable" : true,
+	"isTaxable" : true,
 	"taxCode" : "0000",
 	"optionTitle" : "CA King",
 	"workflow" : {

@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { registerComponent } from '@reactioncommerce/reaction-components';
 import { getPDPColorSlug } from '../../lib/helpers';
+import { isProductCapsule } from '../../lib/products';
 
 class PDPColorSetter extends Component {
 
@@ -19,7 +20,7 @@ class PDPColorSetter extends Component {
     const { product } = this.props;
 
     // If product has a hexColor defined by admin, set that color.
-    if (product.hexColor) {
+    if (isProductCapsule(product) && product.hexColor) {
       this.clearStyles();
       this.setHexColor(product.hexColor);
       return;

@@ -3,6 +3,7 @@
  * Customized core RC methods
  */
 
+import Random from "@reactioncommerce/random";
 import { Meteor } from "meteor/meteor";
 import { check, Match } from "meteor/check";
 import * as Collections from "/lib/collections";

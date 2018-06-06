@@ -6,7 +6,7 @@ import { compose } from "recompose";
 import { Components, replaceComponent, composeWithTracker } from "@reactioncommerce/reaction-components";
 import { $ } from "meteor/jquery";
 import { Meteor } from "meteor/meteor";
-import { ReactionProduct } from "/lib/api";
+import { Catalog, ReactionProduct } from "/lib/api";
 import { Reaction, i18next, Logger } from "/client/api";
 import { Tags, Cart } from "/lib/collections";
 import { ProductDetail } from "/imports/plugins/included/product-detail-simple/client/components";
@@ -134,6 +134,7 @@ const wrapComponent = (Comp) => (
           productId = currentProduct._id;
 
           if (productId) {
+            // Customization - Get active color and add to cart via customized method
             const colorId = Session.get('PDPColorId') || '';
             Meteor.call("flaneurCart/addToCart", productId, currentVariant._id, quantity, colorId, (error) => {
               if (error) {
@@ -353,7 +354,7 @@ function composer(props, onData) {
           priceRange = selectedVariant.price;
         } else {
           // otherwise we want to show child variants price range
-          priceRange = ReactionProduct.getVariantPriceRange();
+          priceRange = Catalog.getVariantPriceRange(ReactionProduct.selectedVariant()._id);
         }
       }
 
