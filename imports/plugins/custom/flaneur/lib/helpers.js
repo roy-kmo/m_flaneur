@@ -1,4 +1,11 @@
 /**
+ * @file
+ * Various utility/helper functions
+ */
+
+import { Meteor } from 'meteor/meteor';
+
+/**
  * Moves an item at a given index, to a new position in the given array,
  * and returns the array.
  *
@@ -48,4 +55,16 @@ export function getPDPColorSlug (handle) {
   const pathParts = path.split('/');
   const lastPathArg = pathParts[pathParts.length - 1];
   return lastPathArg !== handle && lastPathArg || '';
+}
+
+/**
+ * Returns the URL for a given image file
+ *
+ * @param {String} fileId
+ * @param {String} fileName
+ *
+ * @returns {String} URL
+ */
+export function getImageURL (fileId, fileName) {
+  return Meteor.absoluteUrl() + `assets/files/Media/${fileId}/image/${fileName}`;
 }

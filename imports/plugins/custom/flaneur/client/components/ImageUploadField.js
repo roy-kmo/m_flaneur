@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Reaction } from '/client/api';
 import { FileRecord } from "@reactioncommerce/file-collections";
+import { getImageURL } from '../../lib/helpers';
 
 export default class ImageUploadField extends Component {
 
@@ -65,7 +66,7 @@ export default class ImageUploadField extends Component {
       onRemove
     } = this.props;
     const { isUploading } = this.state;
-    const fileUrl = Meteor.absoluteUrl() + `assets/files/Media/${fileId}/image/${fileName}`;
+    const fileUrl = getImageURL(fileId, fileName);
     return (
       <div className="form-group">
         <label>{label}</label>

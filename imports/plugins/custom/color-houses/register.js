@@ -12,12 +12,15 @@ Reaction.registerPackage({
     route: "/dashboard/color-houses",
     provides: ["dashboard"],
     workflow: "coreWorkflow",
-    name: "colorHouses",
+    name: "manageColorHouses",
     label: "Color Houses",
     description: "Manage color houses",
     icon: "fa fa-home",
     priority: 5,
     container: "core",
-    template: "colorHouses"
+    template: "manageColorHouses"
+  }, {
+    route: '/color-houses',
+    template: 'colorHouses'
   }]
 });
