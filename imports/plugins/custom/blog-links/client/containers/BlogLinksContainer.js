@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import TabularTable from '/imports/plugins/custom/flaneur/client/components/TabularTable';
 import { BlogLinksTable } from '../../lib/tables';
 import BlogLinkForm from '../components/BlogLinkForm';
-import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 import { Reaction, Logger } from "/client/api";
 import { Media } from "/imports/plugins/core/files/client";
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default class BlogLinksContainer extends Component {
+class BlogLinksContainer extends Component {
+
+  static propTypes = {
+    editBlogLink: PropTypes.object,
+    deleteBlogLinkId: PropTypes.string
+  };
 
   constructor (props) {
     super(props);
@@ -28,46 +33,38 @@ export default class BlogLinksContainer extends Component {
     };
   }
 
-  componentDidMount () {
-    setTimeout(this.initTrackers, 0);
+  componentDidUpdate (prevProps) {
+    // Bring user to edit form when set
+    const { editBlogLink } = this.props;
+    const prevEditBlogLink = prevProps.editBlogLink;
+    if (editBlogLink._id && (!prevEditBlogLink._id || prevEditBlogLink._id !== editBlogLink._id)) {
+      this.setState({
+        view: 'edit',
+        formFields: editBlogLink
+      });
+    }
+
+    // Handle color deletion
+    const { deleteBlogLinkId } = this.props;
+    if (deleteBlogLinkId) {
+      this.handleDeleteBlogLink(deleteBlogLinkId);
+    }
   }
 
-  initTrackers = () => {
-    // Watch for edit button click
-    this.editTracker = Tracker.autorun(() => {
-      const blogLink = Session.get('BlogLinks.editBlogLink');
-      if (blogLink) {
-        this.setState({
-          view: 'edit',
-          formFields: blogLink
-        });
-      }
-    });
-
-    // Watch for delete button click
-    this.deleteTracker = Tracker.autorun(() => {
-      const _id = Session.get('BlogLinks.deleteId');
-      if (_id) {
-        Session.set('BlogLinks.deleteId', undefined);
-        if (confirm('Are you sure you want to delete this blog post link?')) {
-          Meteor.call('BlogLinks.delete', _id, (err) => {
-            if (err) {
-              alert(err.reason);
-            } else {
-              this.setState({
-                view: 'list'
-              });
-            }
+  handleDeleteBlogLink = _id => {
+    Session.set('BlogLinks.deleteId', undefined);
+    if (confirm('Are you sure you want to delete this blog post link?')) {
+      Meteor.call('BlogLinks.delete', _id, (err) => {
+        if (err) {
+          alert(err.reason);
+        } else {
+          this.setState({
+            view: 'list'
           });
         }
-      }
-    });
+      });
+    }
   };
-
-  componentWillUnmount () {
-    this.editTracker.stop();
-    this.deleteTracker.stop();
-  }
 
   handleAddClick = e => {
     this.setState({
@@ -164,3 +161,10 @@ export default class BlogLinksContainer extends Component {
     );
   }
 }
+
+export default withTracker(props => {
+  return {
+    editBlogLink: Session.get('BlogLinks.editBlogLink') || {},
+    deleteBlogLinkId: Session.get('BlogLinks.deleteId') || ''
+  };
+})(BlogLinksContainer);

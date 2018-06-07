@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import TabularTable from '/imports/plugins/custom/flaneur/client/components/TabularTable';
 import { ColorsTable } from '../../lib/tables';
 import ColorForm from '../components/ColorForm';
-import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Reaction, Logger } from "/client/api";
 
-export default class ColorsContainer extends Component {
+class ColorsContainer extends Component {
+
+  static propTypes = {
+    editColor: PropTypes.object,
+    deleteColorId: PropTypes.string
+  };
 
   constructor (props) {
     super(props);
@@ -27,46 +32,38 @@ export default class ColorsContainer extends Component {
     };
   }
 
-  componentDidMount () {
-    setTimeout(this.initTrackers, 0);
+  componentDidUpdate (prevProps) {
+    // Bring user to edit form when set
+    const { editColor } = this.props;
+    const prevEditColor = prevProps.editColor;
+    if (editColor._id && (!prevEditColor._id || prevEditColor._id !== editColor._id)) {
+      this.setState({
+        view: 'edit',
+        formFields: editColor
+      });
+    }
+
+    // Handle color deletion
+    const { deleteColorId } = this.props;
+    if (deleteColorId) {
+      this.handleDeleteColor(deleteColorId);
+    }
   }
 
-  initTrackers = () => {
-    // Watch for edit button click
-    this.editTracker = Tracker.autorun(() => {
-      const color = Session.get('Colors.editColor');
-      if (color) {
-        this.setState({
-          view: 'edit',
-          formFields: color
-        });
-      }
-    });
-
-    // Watch for delete button click
-    this.deleteTracker = Tracker.autorun(() => {
-      const _id = Session.get('Colors.deleteId');
-      if (_id) {
-        Session.set('Colors.deleteId', undefined);
-        if (confirm('Are you sure you want to delete this color?')) {
-          Meteor.call('Colors.delete', _id, (err) => {
-            if (err) {
-              alert(err.reason);
-            } else {
-              this.setState({
-                view: 'list'
-              });
-            }
-          })
+  handleDeleteColor = _id => {
+    Session.set('Colors.deleteId', undefined);
+    if (confirm('Are you sure you want to delete this color?')) {
+      Meteor.call('Colors.delete', _id, (err) => {
+        if (err) {
+          alert(err.reason);
+        } else {
+          this.setState({
+            view: 'list'
+          });
         }
-      }
-    });
+      })
+    }
   };
-
-  componentWillUnmount () {
-    this.editTracker.stop();
-    this.deleteTracker.stop();
-  }
 
   handleAddClick = e => {
     this.setState({
@@ -147,3 +144,10 @@ export default class ColorsContainer extends Component {
     );
   }
 }
+
+export default withTracker(props => {
+  return {
+    editColor: Session.get('Colors.editColor') || {},
+    deleteColorId: Session.get('Colors.deleteId') || ''
+  };
+})(ColorsContainer);

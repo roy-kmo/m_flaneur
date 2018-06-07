@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import TabularTable from '/imports/plugins/custom/flaneur/client/components/TabularTable';
 import { ColorHousesTable } from '../../lib/tables';
 import ColorHouseForm from '../components/ColorHouseForm';
-import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 import { Reaction, Logger } from "/client/api";
 import { arrayMove } from '/imports/plugins/custom/flaneur/lib/helpers';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default class ManageColorHousesContainer extends Component {
+class ManageColorHousesContainer extends Component {
+
+  static propTypes = {
+    editColorHouse: PropTypes.object,
+    deleteColorHouseId: PropTypes.string
+  };
 
   constructor (props) {
     super(props);
@@ -43,48 +48,38 @@ export default class ManageColorHousesContainer extends Component {
     } else if (isEditView) {
       this.getHouseColors(this.state.formFields._id);
     }
+
+    // Bring user to edit form when set
+    const { editColorHouse } = this.props;
+    const prevEditColorHouse = prevProps.editColorHouse;
+    if (editColorHouse._id && (!prevEditColorHouse._id || prevEditColorHouse._id !== editColorHouse._id)) {
+      this.setState({
+        view: 'edit',
+        formFields: editColorHouse
+      });
+    }
+
+    // Handle color deletion
+    const { deleteColorHouseId } = this.props;
+    if (deleteColorHouseId) {
+      this.handleDeleteColorHouse(deleteColorHouseId);
+    }
   }
 
-  componentDidMount () {
-    setTimeout(this.initTrackers, 0);
-  }
-
-  initTrackers = () => {
-    // Watch for edit button click
-    this.editTracker = Tracker.autorun(() => {
-      const color = Session.get('ColorHouses.editColorHouse');
-      if (color) {
-        this.setState({
-          view: 'edit',
-          formFields: color
-        });
-      }
-    });
-
-    // Watch for delete button click
-    this.deleteTracker = Tracker.autorun(() => {
-      const _id = Session.get('ColorHouses.deleteId');
-      if (_id) {
-        Session.set('ColorHouses.deleteId', undefined);
-        if (confirm('Are you sure you want to delete this color house?')) {
-          Meteor.call('ColorHouses.delete', _id, (err) => {
-            if (err) {
-              alert(err.reason);
-            } else {
-              this.setState({
-                view: 'list'
-              });
-            }
-          })
+  handleDeleteColorHouse = _id => {
+    Session.set('ColorHouses.deleteId', undefined);
+    if (confirm('Are you sure you want to delete this color house?')) {
+      Meteor.call('ColorHouses.delete', _id, (err) => {
+        if (err) {
+          alert(err.reason);
+        } else {
+          this.setState({
+            view: 'list'
+          });
         }
-      }
-    });
+      })
+    }
   };
-
-  componentWillUnmount () {
-    this.editTracker.stop();
-    this.deleteTracker.stop();
-  }
 
   handleAddClick = e => {
     this.setState({
@@ -235,3 +230,10 @@ export default class ManageColorHousesContainer extends Component {
     );
   }
 }
+
+export default withTracker(props => {
+  return {
+    editColorHouse: Session.get('ColorHouses.editColorHouse') || {},
+    deleteColorHouseId: Session.get('ColorHouses.deleteId') || ''
+  };
+})(ManageColorHousesContainer);
