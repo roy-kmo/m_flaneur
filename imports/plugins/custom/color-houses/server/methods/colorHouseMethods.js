@@ -3,6 +3,7 @@ import { check } from 'meteor/check';
 import { Reaction } from '/server/api';
 import { ColorHouses } from '../../lib/collections';
 import { Colors } from '/imports/plugins/custom/colors/lib/collections';
+import { getProductTabList } from '/imports/plugins/custom/flaneur/server/lib/products.js';
 
 const validateColorHouse = function ({
   title,
@@ -187,6 +188,9 @@ Meteor.methods({
   'ColorHouses.get' () {
     const colorHouses = ColorHouses.find({}, { sort: { createdAt: -1 }}).fetch();
     const colorsById = {};
+    const firstProduct = getProductTabList(1)[0];
+    const { handle } = firstProduct;
+    const firstProductURL = `/product/${handle}`;
 
     // Build colorHouse.colors array with color metadata
     colorHouses.forEach(colorHouse => {
@@ -195,7 +199,9 @@ Meteor.methods({
 
       colorIds.forEach(colorId => {
         if (!colorsById[colorId]) {
-          colorsById[colorId] = Colors.findOne(colorId);
+          const color = Colors.findOne(colorId);
+          color.pdpURL = `${firstProductURL}/${color.slug}`;
+          colorsById[colorId] = color;
         }
         colorHouse.colors.push(colorsById[colorId]);
       });
