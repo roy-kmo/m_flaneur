@@ -10,7 +10,9 @@ export default class BeddingBuilder extends Component {
     onUploadClick: PropTypes.func.isRequired,
     onEnterPantoneClick: PropTypes.func.isRequired,
     onColorHousesClick: PropTypes.func.isRequired,
-    onBackClick: PropTypes.func.isRequired
+    onBackClick: PropTypes.func.isRequired,
+    onColorTipsClick: PropTypes.func.isRequired,
+    onCapsulesClick: PropTypes.func.isRequired
   };
 
   renderBackLink = () => {
@@ -22,6 +24,15 @@ export default class BeddingBuilder extends Component {
     );
   };
 
+  renderColorHousesOption = () => {
+    const { onColorHousesClick } = this.props;
+    return (
+      <div className="option color-houses" onClick={onColorHousesClick}>
+        <h3>See Color Houses</h3>
+      </div>
+    );
+  };
+
   render () {
     const {
       view,
@@ -29,7 +40,9 @@ export default class BeddingBuilder extends Component {
       onHelpClick,
       onUploadClick,
       onEnterPantoneClick,
-      onColorHousesClick
+      onColorHousesClick,
+      onColorTipsClick,
+      onCapsulesClick
     } = this.props;
 
     return (
@@ -43,7 +56,7 @@ export default class BeddingBuilder extends Component {
                 <h3>I have a color in mind</h3>
               </div>
               <div className="option need-help" onClick={onHelpClick}>
-                <h3>I need help choosing a color</h3>
+                <h3>I need help finding a color</h3>
               </div>
             </div>
           </div>
@@ -59,21 +72,23 @@ export default class BeddingBuilder extends Component {
               <div className="option enter-pantone" onClick={onEnterPantoneClick}>
                 <h3>Enter Pantone Code</h3>
               </div>
-              <div className="option color-houses" onClick={onColorHousesClick}>
-                <h3>See Color Houses</h3>
-              </div>
+              {this.renderColorHousesOption()}
             </div>
             {this.renderBackLink()}
           </div>
         )}
         {view === 'help' && (
           <div className="view">
-            <h1>I need help choosing a color.</h1>
+            <h1>I need inspiration.</h1>
             <p className="title-desc">Select one.</p>
             <div className="options-container">
-              <div className="option todo">
-                <h3>TODO</h3>
+              <div className="option color-tips" onClick={onColorTipsClick}>
+                <h3>Get Color Tips</h3>
               </div>
+              <div className="option capsules" onClick={onCapsulesClick}>
+                <h3>See Designer Capsules</h3>
+              </div>
+              {this.renderColorHousesOption()}
             </div>
             {this.renderBackLink()}
           </div>

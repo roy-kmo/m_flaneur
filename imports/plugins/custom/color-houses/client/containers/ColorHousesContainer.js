@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import ColorHouses from '../components/ColorHouses';
+import { setMeta } from '/imports/plugins/custom/flaneur/client/lib/seo';
 
 export default class ColorHousesContainer extends Component {
 
@@ -14,6 +15,9 @@ export default class ColorHousesContainer extends Component {
         alert(err.reason);
       } else {
         this.setState({ colorHouses });
+        setMeta('Color Houses');
+        // Tell prerender.io that our page is ready
+        window.prerenderReady = true;
       }
     });
   }

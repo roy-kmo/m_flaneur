@@ -5,7 +5,7 @@ import { getImageURL } from '../../../flaneur/lib/helpers';
 export default class ColorHouses extends Component {
 
   static propTypes = {
-    colorHouses: PropTypes.object,
+    colorHouses: PropTypes.array,
     onColorClick: PropTypes.func.isRequired
   };
 
@@ -25,7 +25,7 @@ export default class ColorHouses extends Component {
           const imageURL = getImageURL(imageFileId, imageFileName);
 
           return (
-            <div className="color-container">
+            <div className="color-container" key={colorHouse._id}>
               <h3>{title}</h3>
               <img src={imageURL} alt={title} />
               <div className="description" dangerouslySetInnerHTML={{__html: description}} />
@@ -33,6 +33,7 @@ export default class ColorHouses extends Component {
                 const { name, hexCode, slug, pantoneCode, pdpURL } = color;
                 return (
                   <a
+                    key={color._id}
                     className="color"
                     href={pdpURL}
                     onClick={(e) => onColorClick(e, pdpURL)}>
