@@ -1,7 +1,7 @@
 {
   "name": "reaction",
   "description": "Reaction is a modern reactive, real-time event driven ecommerce platform.",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "main": "main.js",
   "directories": {
     "test": "tests"
@@ -210,7 +210,8 @@
     "docs": "jsdoc . --configure .reaction/jsdoc/jsdoc.json --readme .reaction/jsdoc/templates/static/README.md",
     "deploy-dev": "rm -r -f node_modules/sharp/vendor && TOOL_NODE_FLAGS='--max-old-space-size=2048' DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy flaneurdev.meteorapp.com --settings settings/dev.json --owner flaneur",
     "deploy-stg": "rm -r -f node_modules/sharp/vendor && TOOL_NODE_FLAGS='--max-old-space-size=2048' DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy flaneurstg.meteorapp.com --settings settings/stg.json --owner flaneur",
-    "local": "rm -r -f node_modules/sharp && meteor npm install && TOOL_NODE_FLAGS='--max-old-space-size=2048' METEOR_DISABLE_OPTIMISTIC_CACHING=1 reaction --settings settings/local.json"
+    "local": "rm -r -f node_modules/sharp && meteor npm install && TOOL_NODE_FLAGS='--max-old-space-size=2048' METEOR_DISABLE_OPTIMISTIC_CACHING=1 reaction --settings settings/local.json",
+    "visualizer": "TOOL_NODE_FLAGS='--max-old-space-size=2048' METEOR_DISABLE_OPTIMISTIC_CACHING=1 meteor run --production --extra-packages bundle-visualizer"
   },
   "babel": {
     "plugins": [

@@ -16,9 +16,11 @@ const pdpTabsExcludedTags = [
  * Returns a list of products to display in the PDP navigation tabs.
  * Excludes products tagged with pdpTabsExcludedTags defined above.
  *
+ * @param {Number} limit Defaults to 0 (unlimited)
+ *
  * @returns {Array} of product docs
  */
-export function getProductTabList () {
+export function getProductTabList (limit = 0) {
   const excludedTags = Tags.find({
     slug: {
       $in: pdpTabsExcludedTags
@@ -37,10 +39,10 @@ export function getProductTabList () {
     fields: {
       title: 1,
       handle: 1
-    }
-  }, {
+    },
     sort: {
       title: 1
-    }
+    },
+    limit
   }).fetch();
 }

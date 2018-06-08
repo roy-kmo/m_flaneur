@@ -135,7 +135,7 @@ Meteor.methods({
       description,
       pantoneCode,
       hexCode,
-      existingBySlug,
+      slug,
       updatedAt: new Date()
     });
   },

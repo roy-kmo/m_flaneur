@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import TabularTable from '/imports/plugins/custom/flaneur/client/components/TabularTable';
 import { PagesTable } from '../../lib/tables';
 import { PagesForm } from '../components';
-import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default class PagesContainer extends Component {
+class PagesContainer extends Component {
+
+  static propTypes = {
+    editPage: PropTypes.object,
+    deletePageId: PropTypes.string
+  };
 
   constructor (props) {
     super(props);
@@ -26,46 +31,38 @@ export default class PagesContainer extends Component {
     };
   }
 
-  componentDidMount () {
-    setTimeout(this.initTrackers, 0);
+  componentDidUpdate (prevProps) {
+    // Bring user to edit form when set
+    const { editPage } = this.props;
+    const prevEditPage = prevProps.editPage;
+    if (editPage._id && (!prevEditPage._id || prevEditPage._id !== editPage._id)) {
+      this.setState({
+        view: 'edit',
+        formFields: editPage
+      });
+    }
+
+    // Handle page deletion
+    const { deletePageId } = this.props;
+    if (deletePageId) {
+      this.handleDeletePage(deletePageId);
+    }
   }
 
-  initTrackers = () => {
-    // Watch for edit button click
-    this.editTracker = Tracker.autorun(() => {
-      const page = Session.get('Pages.editPage');
-      if (page) {
-        this.setState({
-          view: 'edit',
-          formFields: page
-        });
-      }
-    });
-
-    // Watch for delete button click
-    this.deleteTracker = Tracker.autorun(() => {
-      const _id = Session.get('Pages.deleteId');
-      if (_id) {
-        Session.set('Pages.deleteId', undefined);
-        if (confirm('Are you sure you want to delete this page?')) {
-          Meteor.call('Pages.delete', _id, (err) => {
-            if (err) {
-              alert(err.reason);
-            } else {
-              this.setState({
-                view: 'list'
-              });
-            }
+  handleDeletePage = _id => {
+    Session.set('Pages.deleteId', undefined);
+    if (confirm('Are you sure you want to delete this page?')) {
+      Meteor.call('Pages.delete', _id, (err) => {
+        if (err) {
+          alert(err.reason);
+        } else {
+          this.setState({
+            view: 'list'
           });
         }
-      }
-    });
+      });
+    }
   };
-
-  componentWillUnmount () {
-    this.editTracker.stop();
-    this.deleteTracker.stop();
-  }
 
   handleAddClick = e => {
     this.setState({
@@ -153,3 +150,10 @@ export default class PagesContainer extends Component {
     );
   }
 }
+
+export default withTracker(props => {
+  return {
+    editPage: Session.get('Pages.editPage') || {},
+    deletePageId: Session.get('Pages.deleteId') || ''
+  };
+})(PagesContainer);
