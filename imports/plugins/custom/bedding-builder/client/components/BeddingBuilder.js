@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { initImageColorPicker } from '../lib/ImageColorPicker';
+import ColorLink from '/imports/plugins/custom/colors/client/components/ColorLink';
 
 export default class BeddingBuilder extends Component {
 
   static propTypes = {
     view: PropTypes.string.isRequired,
     image: PropTypes.string,
+    imageColors: PropTypes.array,
     onHaveClick: PropTypes.func.isRequired,
     onHelpClick: PropTypes.func.isRequired,
     onUploadClick: PropTypes.func.isRequired,
@@ -15,8 +18,16 @@ export default class BeddingBuilder extends Component {
     onColorTipsClick: PropTypes.func.isRequired,
     onCapsulesClick: PropTypes.func.isRequired,
     onImageChange: PropTypes.func.isRequired,
-    onReplaceImageClick: PropTypes.func.isRequired
+    onReplaceImageClick: PropTypes.func.isRequired,
+    onColorPick: PropTypes.func.isRequired
   };
+
+  componentDidUpdate (prevProps) {
+    const { view, onColorPick } = this.props;
+    if (view === 'pickImageColor' && prevProps.view !== 'pickImageColor') {
+      initImageColorPicker('#picker-image', '#image-canvas', onColorPick);
+    }
+  }
 
   renderBackLink = () => {
     const { onBackClick } = this.props;
@@ -40,6 +51,7 @@ export default class BeddingBuilder extends Component {
     const {
       view,
       image,
+      imageColors,
       onHaveClick,
       onHelpClick,
       onUploadClick,
@@ -118,7 +130,24 @@ export default class BeddingBuilder extends Component {
               <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
             </div>
             <div className="uploaded-image">
-              <img src={image} style={{cursor: 'crosshair'}} />
+              <img src={image} id="picker-image" style={{cursor: 'crosshair'}} />
+              <canvas id="image-canvas" style={{display: 'none'}}></canvas>
+            </div>
+            <div className="image-colors">
+              {imageColors.map(color => {
+                const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
+                return (
+                  <ColorLink
+                    key={_id}
+                    _id={_id}
+                    name={name}
+                    hexCode={hexCode}
+                    slug={slug}
+                    pantoneCode={pantoneCode}
+                    pdpURL={pdpURL}
+                  />
+                );
+              })}
             </div>
           </div>
         )}

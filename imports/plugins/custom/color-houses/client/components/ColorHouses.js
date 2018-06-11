@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getImageURL } from '../../../flaneur/lib/helpers';
+import ColorLink from '/imports/plugins/custom/colors/client/components/ColorLink';
 
 export default class ColorHouses extends Component {
 
   static propTypes = {
-    colorHouses: PropTypes.array,
-    onColorClick: PropTypes.func.isRequired
+    colorHouses: PropTypes.array
   };
 
   render () {
@@ -30,19 +30,18 @@ export default class ColorHouses extends Component {
               <img src={imageURL} alt={title} />
               <div className="description" dangerouslySetInnerHTML={{__html: description}} />
               {colors.map(color => {
-                const { name, hexCode, slug, pantoneCode, pdpURL } = color;
+                const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
                 return (
-                  <a
-                    key={color._id}
-                    className="color"
-                    href={pdpURL}
-                    onClick={(e) => onColorClick(e, pdpURL)}>
-                    <div className="color-sample" style={{backgroundColor: `#${hexCode}`}}>
-                      {pantoneCode}
-                    </div>
-                    <span className="color-name">{name}</span>
-                  </a>
-                )
+                  <ColorLink
+                    key={_id}
+                    _id={_id}
+                    name={name}
+                    hexCode={hexCode}
+                    slug={slug}
+                    pantoneCode={pantoneCode}
+                    pdpURL={pdpURL}
+                  />
+                );
               })}
             </div>
           );

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import BeddingBuilder from '../components/BeddingBuilder';
 import { setMeta } from '/imports/plugins/custom/flaneur/client/lib/seo';
+import { hexToPantone } from '../lib/hexToPantone';
 
 export default class BeddingBuilderContainer extends Component {
 
   state = {
     view: 'index', // or 'have', 'help', 'uploadImage', 'pickImageColor'
-    image: '' // User uploaded image, for color picker
+    image: '', // User uploaded image, for color picker
+    imageColors: [] // Closest Pantone colors when color is picked from image
   };
 
   componentDidMount () {
@@ -64,17 +66,31 @@ export default class BeddingBuilderContainer extends Component {
   handleReplaceImageClick = e => {
     this.setState({
       image: '',
-      view: 'uploadImage'
+      view: 'uploadImage',
+      imageColors: []
+    });
+  };
+
+  handleColorPick = hexCode => {
+    const matches = new hexToPantone(hexCode, 3);
+    const pantoneCodes = matches.map(match => `${match} TCX`);
+    Meteor.call('Colors.getByPantoneCodes', pantoneCodes, (err, imageColors) => {
+      if (err) {
+        alert(err.reason);
+      } else {
+        this.setState({ imageColors });
+      }
     });
   };
 
   render () {
-    const { view, image } = this.state;
+    const { view, image, imageColors } = this.state;
 
     return (
       <BeddingBuilder
         view={view}
         image={image}
+        imageColors={imageColors}
         onHaveClick={this.handleHaveClick}
         onHelpClick={this.handleHelpClick}
         onUploadClick={this.handleUploadClick}
@@ -85,6 +101,7 @@ export default class BeddingBuilderContainer extends Component {
         onCapsulesClick={this.handleCapsulesClick}
         onImageChange={this.handleImageChange}
         onReplaceImageClick={this.handleReplaceImageClick}
+        onColorPick={this.handleColorPick}
       />
     );
   }

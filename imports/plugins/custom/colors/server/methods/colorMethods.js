@@ -1,7 +1,9 @@
+import _ from 'lodash';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Reaction } from '/server/api';
 import { Colors } from '../../lib/collections';
+import { getProductTabList } from '/imports/plugins/custom/flaneur/server/lib/products';
 
 const validateColor = function ({
   name,
@@ -195,5 +197,35 @@ Meteor.methods({
     check(slug, String);
     const color = Colors.findOne({ slug }, { fields: { name: 1 }});
     return color && color.name || '';
+  },
+
+  'Colors.getByPantoneCodes' (pantoneCodes) {
+    check(pantoneCodes, [String]);
+    const firstProduct = getProductTabList(1)[0];
+    const { handle } = firstProduct;
+    const firstProductURL = `/product/${handle}`;
+
+    const colors = Colors.find({
+      pantoneCode: {
+        $in: pantoneCodes
+      }
+    }, {
+      fields: {
+        name: 1,
+        pantoneCode: 1,
+        hexCode: 1,
+        slug: 1
+      }
+    }).fetch().map(color => {
+      color.pdpURL = `${firstProductURL}/${color.slug}`;
+      return color;
+    });
+
+    const orderedColors = pantoneCodes.map(pantoneCode => {
+      const color = colors.find(color => color.pantoneCode === pantoneCode);
+      return color;
+    });
+
+    return _.uniq(orderedColors);
   }
 });
