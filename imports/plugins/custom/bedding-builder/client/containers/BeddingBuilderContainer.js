@@ -5,7 +5,8 @@ import { setMeta } from '/imports/plugins/custom/flaneur/client/lib/seo';
 export default class BeddingBuilderContainer extends Component {
 
   state = {
-    view: 'index', // or 'have', 'help'
+    view: 'index', // or 'have', 'help', 'uploadImage', 'pickImageColor'
+    image: '' // User uploaded image, for color picker
   };
 
   componentDidMount () {
@@ -22,8 +23,8 @@ export default class BeddingBuilderContainer extends Component {
   };
 
   handleUploadClick = () => {
-    console.log('Upload clicked');
-  }
+    this.setState({ view: 'uploadImage' });
+  };
 
   handleEnterPantoneClick = () => {
     console.log('Enter Pantone clicked');
@@ -45,12 +46,35 @@ export default class BeddingBuilderContainer extends Component {
     alert('TBD, go to first Capsule PDP by alphabetical order?');
   };
 
+  handleImageChange = e => {
+    const files = e.target.files;
+    if (files[0]) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.setState({
+          image: reader.result,
+          view: 'pickImageColor'
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  handleReplaceImageClick = e => {
+    this.setState({
+      image: '',
+      view: 'uploadImage'
+    });
+  };
+
   render () {
-    const { view } = this.state;
+    const { view, image } = this.state;
 
     return (
       <BeddingBuilder
         view={view}
+        image={image}
         onHaveClick={this.handleHaveClick}
         onHelpClick={this.handleHelpClick}
         onUploadClick={this.handleUploadClick}
@@ -59,6 +83,8 @@ export default class BeddingBuilderContainer extends Component {
         onBackClick={this.handleBackClick}
         onColorTipsClick={this.handleColorTipsClick}
         onCapsulesClick={this.handleCapsulesClick}
+        onImageChange={this.handleImageChange}
+        onReplaceImageClick={this.handleReplaceImageClick}
       />
     );
   }
