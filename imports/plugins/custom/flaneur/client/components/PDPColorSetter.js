@@ -21,9 +21,7 @@ class PDPColorSetter extends Component {
 
     // If product has a hexColor defined by admin, set that color.
     if (isProductCapsule(product) && product.hexColor) {
-      this.clearStyles();
-      this.setHexColor(product.hexColor);
-      return;
+      return this.handleCapsule(product);
     }
 
     // Otherwise, set color based on URL
@@ -36,12 +34,24 @@ class PDPColorSetter extends Component {
     }
   }
 
+  handleCapsule = product => {
+    this.clearStyles();
+
+    // Clear slug if set
+    const slug = getPDPColorSlug(product.handle);
+    if (slug) {
+      ReactionRouter.go(window.location.pathname.replace('/' + slug, ''));
+    }
+
+    this.setHexColor(product.hexColor);
+  }
+
   componentDidUpdate (prevProps) {
     const { product } = this.props;
-    if (product.hexColor) {
-      this.clearStyles();
-      this.setHexColor(product.hexColor);
-      return;
+
+    // If product has a hexColor defined by admin, set that color.
+    if (isProductCapsule(product) && product.hexColor) {
+      return this.handleCapsule(product);
     }
 
     const { handle } = product;

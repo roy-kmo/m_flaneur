@@ -8,6 +8,7 @@ import { Packages } from "/lib/collections";
 import importColors from './lib/migrations/importColors';
 import setColorSlugs from './lib/migrations/setColorSlugs';
 import importProducts from './lib/migrations/importProducts';
+import addMenuLinks from './lib/migrations/addMenuLinks';
 import configureStripe from './lib/config/configureStripe';
 import FlaneurProductLayout from '../lib/layouts/FlaneurProductLayout';
 
@@ -47,6 +48,7 @@ Hooks.Events.add('onCoreInit', function () {
   importColors();
   setColorSlugs();
   importProducts();
+  addMenuLinks();
   configureStripe();
   replaceAccountProfileTemplate();
 });
