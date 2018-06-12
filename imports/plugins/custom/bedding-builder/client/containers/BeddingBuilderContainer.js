@@ -83,6 +83,21 @@ export default class BeddingBuilderContainer extends Component {
     });
   };
 
+  handlePantoneCodeEnter = e => {
+    if (e.key === 'Enter') {
+      const { value } = e.target;
+      Meteor.call('Colors.getByPantoneCodes', [value], (err, colors) => {
+        if (err) {
+          alert(err.reason);
+        } else if (!colors[0]) {
+          alert(`We were unable find a Pantone with the code: ${value}`);
+        } else {
+          ReactionRouter.go(colors[0].pdpURL);
+        }
+      });
+    }
+  };
+
   render () {
     const { view, image, imageColors } = this.state;
 
@@ -102,6 +117,7 @@ export default class BeddingBuilderContainer extends Component {
         onImageChange={this.handleImageChange}
         onReplaceImageClick={this.handleReplaceImageClick}
         onColorPick={this.handleColorPick}
+        onPantoneCodeEnter={this.handlePantoneCodeEnter}
       />
     );
   }

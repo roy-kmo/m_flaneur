@@ -62,14 +62,22 @@ Meteor.methods({
    *  @param {String} productId - productId to add to Cart
    *  @param {String} variantId - product variant _id
    *  @param {Number} [itemQty] - qty to add to cart
-   *  @param {String} colorId - Customization - _id of color user is ordering product in, if applicable
+   *  @param {Object} additionalOptions
+   *  @param {String} additionalOptions.colorId - Customization - _id of color
+   *    user is ordering product in, if applicable
+   *  @param {String} additionalOptions.hexColor - Define if product is
+   *    Capsule product in admin-defined color
    *  @return {Number|Object} Mongo insert response
    */
-  "flaneurCart/addToCart" (productId, variantId, itemQty, colorId = '') {
+  "flaneurCart/addToCart" (productId, variantId, itemQty, additionalOptions = {}) {
     check(productId, String);
     check(variantId, String);
     check(itemQty, Match.Optional(Number));
+
+    check(additionalOptions, Object);
+    const { colorId, hexColor } = additionalOptions;
     check(colorId, Match.Optional(String));
+    check(hexColor, Match.Optional(String));
 
     const options = {
       overwriteExistingMetafields: false, // Allows updating of metafields on quantity change
@@ -231,7 +239,8 @@ Meteor.methods({
     const newItemId = Random.id();
 
     try {
-      // Customization - include colorId and colorName if applicable
+      // Customization - include colorId and colorName if applicable,
+      // Or Capsule product's admin-defined hex code if applicable
       const newCartItem = {
         _id: newItemId,
         shopId: product.shopId,
@@ -251,6 +260,10 @@ Meteor.methods({
           colorName: color.name,
           colorHexCode: color.hexCode
         });
+      }
+
+      if (hexColor) {
+        Object.assign(newCartItem, { hexColor });
       }
 
       updateResult = Collections.Cart.update({

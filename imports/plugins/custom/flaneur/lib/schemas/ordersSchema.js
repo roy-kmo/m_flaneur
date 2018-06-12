@@ -13,6 +13,10 @@ const ExtendedOrderItem = OrderItem.clone().extend({
   colorHexCode: {
     type: String,
     optional: true
+  },
+  hexColor: {
+    type: String,
+    optional: true
   }
 });
 

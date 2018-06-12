@@ -14,5 +14,9 @@ CartItem.extend({
   colorHexCode: {
     type: String,
     optional: true
+  },
+  hexColor: {
+    type: String,
+    optional: true
   }
 });

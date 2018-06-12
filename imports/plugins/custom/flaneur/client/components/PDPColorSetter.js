@@ -43,6 +43,8 @@ class PDPColorSetter extends Component {
       ReactionRouter.go(window.location.pathname.replace('/' + slug, ''));
     }
 
+    Session.set('PDPHexColor', product.hexColor);
+
     this.setHexColor(product.hexColor);
   }
 
@@ -81,6 +83,7 @@ class PDPColorSetter extends Component {
     }
 
     Session.set('PDPColorId', undefined);
+    Session.set('PDPHexColor', undefined);
   };
 
   setHexColor = hex => {
