@@ -45,7 +45,7 @@ class FlaneurCartItems extends Component {
     const mediaUrl = handleImage(item);
 
     // Customization - include colorName and hexCode bg if applicable
-    const productImageStyle = {//TODO DAN
+    const productImageStyle = {
       backgroundImage: `url('${mediaUrl || ''}')`
     };
     if (item.colorHexCode) {
