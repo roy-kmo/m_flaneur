@@ -1,16 +1,49 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+import { withTracker } from 'meteor/react-meteor-data';
 import { registerComponent } from '@reactioncommerce/reaction-components';
 
 class PDPInfoTabs extends Component {
 
   static propTypes = {
-    product: PropTypes.object.isRequired
+    product: PropTypes.object.isRequired,
+    colorId: PropTypes.string
   };
 
   state = {
-    activeTab: 'description'
+    activeTab: 'description',
+    colorDescription: '',
+  };
+
+  componentDidMount () {
+    this.loadColorDescription();
+  }
+
+  componentDidUpdate (prevProps) {
+    const { product, colorId } = this.props;
+    const hasProductChanged = product._id !== prevProps.product._id;
+    const hasColorIdChanged = colorId !== prevProps.colorId;
+    if (hasProductChanged || hasColorIdChanged) {
+      this.loadColorDescription();
+    }
+  }
+
+  loadColorDescription = () => {
+    const { colorId } = this.props;
+    if (!colorId) {
+      return;
+    }
+
+    Meteor.call('Colors.getDescription', colorId, (err, colorDescription) => {
+      if (err) {
+        alert(err.reason);
+      } else {
+        this.setState({ colorDescription });
+      }
+    });
   };
 
   handleTabClick = (e, activeTab) => {
@@ -21,6 +54,7 @@ class PDPInfoTabs extends Component {
   render () {
     const { product } = this.props;
     const { description, dimensions, careInstructions } = product;
+    const { activeTab, colorDescription } = this.state;
 
     const tabs = [{
       field: 'description',
@@ -39,7 +73,12 @@ class PDPInfoTabs extends Component {
       });
     }
 
-    const content = product[this.state.activeTab];
+    let content = product[this.state.activeTab];
+
+    // Add color description if on description tab & product is in color
+    if (activeTab === 'description' && colorDescription) {
+      content += colorDescription;
+    }
 
     return (
       <div>
@@ -62,6 +101,11 @@ class PDPInfoTabs extends Component {
   }
 }
 
-registerComponent('PDPInfoTabs', PDPInfoTabs);
-
-export default PDPInfoTabs;
+registerComponent('PDPInfoTabs',
+  withTracker(props => {
+    const colorId = Session.get('PDPColorId');
+    return {
+      colorId
+    }
+  })(PDPInfoTabs)
+);
