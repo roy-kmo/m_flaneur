@@ -76,8 +76,10 @@ class FlaneurLineItems extends Component {
 
   renderLineItem(uniqueItem) {
     // Customization - color
-    const productImageStyle = uniqueItem.colorHexCode && {
-      backgroundColor: `#${uniqueItem.colorHexCode}`
+    const { colorHexCode, hexColor } = uniqueItem;
+    const hexCode = colorHexCode || hexColor;
+    const productImageStyle = hexCode && {
+      backgroundColor: `#${hexCode}`
     } || {};
     return (
       <div className="order-items invoice-item">

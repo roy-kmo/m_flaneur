@@ -193,6 +193,12 @@ Meteor.methods({
     return color || {};
   },
 
+  'Colors.getDescription' (_id) {
+    check(_id, String);
+    const color = Colors.findOne(_id);
+    return color && color.description || '';
+  },
+
   'Colors.getNameBySlug' (slug) {
     check(slug, String);
     const color = Colors.findOne({ slug }, { fields: { name: 1 }});

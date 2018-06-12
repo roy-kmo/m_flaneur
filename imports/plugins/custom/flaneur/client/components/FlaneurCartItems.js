@@ -6,6 +6,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components, replaceComponent } from "@reactioncommerce/reaction-components";
+import { isProductCapsule } from '../../lib/products';
 
 class FlaneurCartItems extends Component {
   static propTypes = {
@@ -44,11 +45,14 @@ class FlaneurCartItems extends Component {
     const mediaUrl = handleImage(item);
 
     // Customization - include colorName and hexCode bg if applicable
-    const productImageStyle = {
+    const productImageStyle = {//TODO DAN
       backgroundImage: `url('${mediaUrl || ''}')`
     };
     if (item.colorHexCode) {
       productImageStyle.backgroundColor = `#${item.colorHexCode}`;
+    }
+    if (item.hexColor) {
+      productImageStyle.backgroundColor = `#${item.hexColor}`;
     }
 
     return (

@@ -136,7 +136,12 @@ const wrapComponent = (Comp) => (
           if (productId) {
             // Customization - Get active color and add to cart via customized method
             const colorId = Session.get('PDPColorId') || '';
-            Meteor.call("flaneurCart/addToCart", productId, currentVariant._id, quantity, colorId, (error) => {
+            const hexColor = Session.get('PDPHexColor') || '';
+            const additionalOptions = {
+              colorId,
+              hexColor
+            };
+            Meteor.call("flaneurCart/addToCart", productId, currentVariant._id, quantity, additionalOptions, (error) => {
               if (error) {
                 Logger.error(error, "Failed to add to cart.");
                 return error;

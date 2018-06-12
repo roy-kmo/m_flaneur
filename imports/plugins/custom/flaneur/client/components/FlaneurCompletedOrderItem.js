@@ -17,8 +17,10 @@ import { Components, registerComponent } from "@reactioncommerce/reaction-compon
  */
 const FlaneurCompletedOrderItem = ({ item }) => {
   // Customization - color
-  const productImageStyle = item.colorHexCode && {
-    backgroundColor: `#${item.colorHexCode}`
+  const { colorHexCode, hexColor } = item;
+  const hexCode = colorHexCode || hexColor;
+  const productImageStyle = hexCode && {
+    backgroundColor: `#${hexCode}`
   } || {};
   return (
     <div className="row order-details-line">

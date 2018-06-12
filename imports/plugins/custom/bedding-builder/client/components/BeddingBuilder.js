@@ -19,7 +19,8 @@ export default class BeddingBuilder extends Component {
     onCapsulesClick: PropTypes.func.isRequired,
     onImageChange: PropTypes.func.isRequired,
     onReplaceImageClick: PropTypes.func.isRequired,
-    onColorPick: PropTypes.func.isRequired
+    onColorPick: PropTypes.func.isRequired,
+    onPantoneCodeEnter: PropTypes.func.isRequired
   };
 
   componentDidUpdate (prevProps) {
@@ -61,7 +62,8 @@ export default class BeddingBuilder extends Component {
       onCapsulesClick,
       onImageChange,
       onBackClick,
-      onReplaceImageClick
+      onReplaceImageClick,
+      onPantoneCodeEnter
     } = this.props;
 
     return (
@@ -85,10 +87,20 @@ export default class BeddingBuilder extends Component {
             <h1>I have a color in mind.</h1>
             <p className="title-desc">Select one.</p>
             <div className="options-container">
-              <div className="option upload-image" onClick={onUploadClick}>
+              <div className="option upload-image">
+                <div className="image-uploader">
+                  <input type="file" onChange={onImageChange} />
+                </div>
                 <h3>Upload an Image</h3>
               </div>
               <div className="option enter-pantone" onClick={onEnterPantoneClick}>
+                <div className="pantone-input">
+                  <input
+                    type="text"
+                    placeholder="12-3456 TCX"
+                    onKeyPress={onPantoneCodeEnter}
+                  />
+                </div>
                 <h3>Enter Pantone Code</h3>
               </div>
               {this.renderColorHousesOption()}
@@ -110,15 +122,6 @@ export default class BeddingBuilder extends Component {
               {this.renderColorHousesOption()}
             </div>
             {this.renderBackLink()}
-          </div>
-        )}
-        {view === 'uploadImage' && (
-          <div className="view">
-            <h1>Upload an Image</h1>
-            <p className="title-desc">You can refine it on the next page.</p>
-            <div className="image-uploader">
-              <input type="file" onChange={onImageChange} />
-            </div>
           </div>
         )}
         {view === 'pickImageColor' && (
