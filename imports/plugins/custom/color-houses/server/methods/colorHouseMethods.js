@@ -3,7 +3,7 @@ import { check } from 'meteor/check';
 import { Reaction } from '/server/api';
 import { ColorHouses } from '../../lib/collections';
 import { Colors } from '/imports/plugins/custom/colors/lib/collections';
-import { getProductTabList } from '/imports/plugins/custom/flaneur/server/lib/products.js';
+import { getProductTabList } from '/imports/plugins/custom/flaneur/server/lib/products';
 
 const validateColorHouse = function ({
   title,

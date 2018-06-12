@@ -22,18 +22,10 @@ export default class ColorHousesContainer extends Component {
     });
   }
 
-  handleColorClick = (e, pdpURL) => {
-    e.preventDefault();
-    ReactionRouter.go(pdpURL);
-  };
-
   render () {
     const { colorHouses } = this.state;
     return (
-      <ColorHouses
-        colorHouses={colorHouses}
-        onColorClick={this.handleColorClick}
-      />
+      <ColorHouses colorHouses={colorHouses} />
     );
   }
 }
