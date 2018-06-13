@@ -1,9 +1,16 @@
+/**
+ * @file
+ * Customized version of coreLayout component
+ * Added custom Footer component
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { getComponent, replaceComponent } from "@reactioncommerce/reaction-components";
 import Blaze from "meteor/gadicc:blaze-react-component";
 import { Template } from "meteor/templating";
+// Customization - include custom footer component
 import Footer from './Footer';
 
 class FlaneurCoreLayout extends React.Component {
