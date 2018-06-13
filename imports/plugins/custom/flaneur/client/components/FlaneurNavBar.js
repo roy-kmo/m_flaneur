@@ -36,16 +36,26 @@ class FlaneurNavBar extends Component {
     navBarVisible: false,
     searchModalOpen: false,
     // Customization
-    mainMenu: []
+    mainMenu: [],
+    featureLine: {}
   }
 
-  // Customization - load and set main menu
   componentDidMount () {
+    // Customization - load and set main menu
     Meteor.call('MainMenu.get', (err, mainMenu) => {
       if (err) {
         alert(err.reason);
       } else {
         this.setState({ mainMenu });
+      }
+    });
+
+    // Customization - load and set feature line
+    Meteor.call('Flaneur.getFeatureLine', (err, featureLine) => {
+      if (err) {
+        alert(err.reason);
+      } else {
+        this.setState({ featureLine });
       }
     });
   }
@@ -163,7 +173,8 @@ class FlaneurNavBar extends Component {
   }
 
   render() {
-    // Customization - split cart container into separate line
+    // Customization - split cart container into separate line + include header feature line
+    const { featureLine } = this.state;
     return (
       <div>
         <div className="rui navbar cart-navbar">
@@ -179,6 +190,9 @@ class FlaneurNavBar extends Component {
           {this.props.visibility.currency && this.renderCurrency()}
           {this.props.visibility.mainDropdown && this.renderMainDropdown()}
         </div>
+        {featureLine.isEnabled && (
+          <div className="rui navbar feature-line" dangerouslySetInnerHTML={{__html: featureLine.content}} />
+        )}
       </div>
     );
   }

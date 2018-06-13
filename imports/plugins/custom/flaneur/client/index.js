@@ -23,6 +23,8 @@ import './templates/applyCartLink.html';
 import './templates/applyCartLink';
 import './templates/FlaneurAccountProfile.html';
 import './templates/FlaneurAccountProfile';
+import './templates/home.html';
+import './templates/home';
 import '../lib/schemas/productsSchema';
 import '../lib/schemas/ordersSchema';
 import './components/FlaneurProductAdmin';
