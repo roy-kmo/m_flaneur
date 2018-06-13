@@ -41,6 +41,7 @@ import './components/PDPPageContent';
 import './components/FlaneurCompletedOrderItem';
 import './components/FlaneurCartItems';
 import './components/FlaneurLineItems';
+import './components/FlaneurCoreLayout';
 import './containers/ProductNavTabsContainer';
 import './containers/FlaneurProductDetailContainer';
 
