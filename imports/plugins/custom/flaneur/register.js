@@ -55,5 +55,8 @@ Reaction.registerPackage({
   }, {
     route: '/cart-link/:id',
     template: 'applyCartLink'
+  }, {
+    route: '/',
+    template: 'home'
   }]
 });
