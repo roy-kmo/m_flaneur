@@ -66,7 +66,7 @@ export default class BeddingBuilderContainer extends Component {
   handleReplaceImageClick = e => {
     this.setState({
       image: '',
-      view: 'uploadImage',
+      view: 'have',
       imageColors: []
     });
   };
