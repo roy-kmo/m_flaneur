@@ -5,22 +5,31 @@ import BackLink from './BackLink';
 export default class EnterPantoneView extends Component {
 
   static propTypes = {
-    onPantoneCodeEnter: PropTypes.func.isRequired
+    onPantoneCodeChange: PropTypes.func.isRequired,
+    onPantoneCodeFormSubmit: PropTypes.func.isRequired
   }
 
   render () {
-    const { onPantoneCodeEnter } = this.props;
+    const {
+      pantoneCode,
+      onPantoneCodeChange,
+      onPantoneCodeFormSubmit
+    } = this.props;
 
     return (
       <div className="view">
         <h1>Enter a Pantone Code</h1>
         <p className="title-desc">Enter any TCX Pantone code to view our products in that color.</p>
         <div className="pantone-input">
-          <input
-            type="text"
-            placeholder="12-3456 TCX"
-            onKeyPress={onPantoneCodeEnter}
-          />
+          <form onSubmit={onPantoneCodeFormSubmit}>
+            <input
+              type="text"
+              placeholder="12-3456 TCX"
+              onChange={onPantoneCodeChange}
+              value={pantoneCode}
+            />
+            <input type="submit" className="btn btn-primary" value="Submit" />
+          </form>
         </div>
         <BackLink {...this.props} />
       </div>

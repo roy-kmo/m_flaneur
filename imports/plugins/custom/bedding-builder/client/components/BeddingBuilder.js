@@ -14,6 +14,7 @@ export default class BeddingBuilder extends Component {
     view: PropTypes.string.isRequired,
     image: PropTypes.string,
     imageColors: PropTypes.array,
+    pantoneCode: PropTypes.string,
     onHaveClick: PropTypes.func.isRequired,
     onHelpClick: PropTypes.func.isRequired,
     onUploadClick: PropTypes.func.isRequired,
@@ -25,7 +26,8 @@ export default class BeddingBuilder extends Component {
     onImageChange: PropTypes.func.isRequired,
     onReplaceImageClick: PropTypes.func.isRequired,
     onColorPick: PropTypes.func.isRequired,
-    onPantoneCodeEnter: PropTypes.func.isRequired
+    onPantoneCodeChange: PropTypes.func.isRequired,
+    onPantoneCodeFormSubmit: PropTypes.func.isRequired
   };
 
   componentDidUpdate (prevProps) {
@@ -36,23 +38,7 @@ export default class BeddingBuilder extends Component {
   }
 
   render () {
-    const {
-      view,
-      image,
-      imageColors,
-      onHaveClick,
-      onHelpClick,
-      onUploadClick,
-      onEnterPantoneClick,
-      onColorHousesClick,
-      onColorTipsClick,
-      onCapsulesClick,
-      onImageChange,
-      onBackClick,
-      onReplaceImageClick,
-      onPantoneCodeEnter
-    } = this.props;
-
+    const { view } = this.props;
     return (
       <div id="bedding-builder-container">
         {view === 'index' && <IndexView {...this.props} />}
