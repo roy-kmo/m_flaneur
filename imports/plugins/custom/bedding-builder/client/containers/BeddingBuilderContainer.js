@@ -6,7 +6,7 @@ import { hexToPantone } from '../lib/hexToPantone';
 export default class BeddingBuilderContainer extends Component {
 
   state = {
-    view: 'index', // or 'have', 'help', 'uploadImage', 'pickImageColor'
+    view: 'index', // or 'have', 'help', 'uploadImage', 'pickImageColor', 'enterPantone'
     image: '', // User uploaded image, for color picker
     imageColors: [] // Closest Pantone colors when color is picked from image
   };
@@ -29,7 +29,7 @@ export default class BeddingBuilderContainer extends Component {
   };
 
   handleEnterPantoneClick = () => {
-    console.log('Enter Pantone clicked');
+    this.setState({ view: 'enterPantone' });
   };
 
   handleColorHousesClick = () => {

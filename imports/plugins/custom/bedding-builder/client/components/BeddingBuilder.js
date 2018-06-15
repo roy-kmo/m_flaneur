@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { initImageColorPicker } from '../lib/ImageColorPicker';
-import ColorLink from '/imports/plugins/custom/colors/client/components/ColorLink';
+import IndexView from './IndexView';
+import HaveView from './HaveView';
+import EnterPantoneView from './EnterPantoneView';
+import UploadImageView from './UploadImageView';
+import PickImageColorView from './PickImageColorView';
+import HelpView from './HelpView';
 
 export default class BeddingBuilder extends Component {
 
@@ -30,24 +35,6 @@ export default class BeddingBuilder extends Component {
     }
   }
 
-  renderBackLink = () => {
-    const { onBackClick } = this.props;
-    return (
-      <p className="back-link">
-        <a href="javascript:void(0)" onClick={onBackClick}>Go Back</a>
-      </p>
-    );
-  };
-
-  renderColorHousesOption = () => {
-    const { onColorHousesClick } = this.props;
-    return (
-      <div className="option color-houses" onClick={onColorHousesClick}>
-        <h3>See Color Houses</h3>
-      </div>
-    );
-  };
-
   render () {
     const {
       view,
@@ -68,92 +55,12 @@ export default class BeddingBuilder extends Component {
 
     return (
       <div id="bedding-builder-container">
-        {view === 'index' && (
-          <div className="view">
-            <h1>Bedding Builder</h1>
-            <p className="title-desc">Select one.</p>
-            <div className="options-container">
-              <div className="option have-color" onClick={onHaveClick}>
-                <h3>I have a color in mind</h3>
-              </div>
-              <div className="option need-help" onClick={onHelpClick}>
-                <h3>I need help finding a color</h3>
-              </div>
-            </div>
-          </div>
-        )}
-        {view === 'have' && (
-          <div className="view">
-            <h1>I have a color in mind.</h1>
-            <p className="title-desc">Select one.</p>
-            <div className="options-container">
-              <div className="option upload-image">
-                <div className="image-uploader">
-                  <input type="file" onChange={onImageChange} />
-                </div>
-                <h3>Upload an Image</h3>
-              </div>
-              <div className="option enter-pantone" onClick={onEnterPantoneClick}>
-                <div className="pantone-input">
-                  <input
-                    type="text"
-                    placeholder="12-3456 TCX"
-                    onKeyPress={onPantoneCodeEnter}
-                  />
-                </div>
-                <h3>Enter Pantone Code</h3>
-              </div>
-              {this.renderColorHousesOption()}
-            </div>
-            {this.renderBackLink()}
-          </div>
-        )}
-        {view === 'help' && (
-          <div className="view">
-            <h1>I need inspiration.</h1>
-            <p className="title-desc">Select one.</p>
-            <div className="options-container">
-              <div className="option color-tips" onClick={onColorTipsClick}>
-                <h3>Get Color Tips</h3>
-              </div>
-              <div className="option capsules" onClick={onCapsulesClick}>
-                <h3>See Designer Capsules</h3>
-              </div>
-              {this.renderColorHousesOption()}
-            </div>
-            {this.renderBackLink()}
-          </div>
-        )}
-        {view === 'pickImageColor' && (
-          <div className="view">
-            <h1>Pick a Color</h1>
-            <p className="title-desc">Use your cursor to pick a color from the image.</p>
-            <div className="btn-group image-buttons">
-              <button className="btn btn-default" onClick={onReplaceImageClick}>Replace Image</button>
-              <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
-            </div>
-            <div className="uploaded-image">
-              <img src={image} id="picker-image" style={{cursor: 'crosshair'}} />
-              <canvas id="image-canvas" style={{display: 'none'}}></canvas>
-            </div>
-            <div className="image-colors">
-              {imageColors.map(color => {
-                const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
-                return (
-                  <ColorLink
-                    key={_id}
-                    _id={_id}
-                    name={name}
-                    hexCode={hexCode}
-                    slug={slug}
-                    pantoneCode={pantoneCode}
-                    pdpURL={pdpURL}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        )}
+        {view === 'index' && <IndexView {...this.props} />}
+        {view === 'have' && <HaveView {...this.props} />}
+        {view === 'enterPantone' && <EnterPantoneView {...this.props} />}
+        {view === 'uploadImage' && <UploadImageView {...this.props} />}
+        {view === 'pickImageColor' && <PickImageColorView {...this.props} />}
+        {view === 'help' && <HelpView {...this.props} />}
       </div>
     )
   }
