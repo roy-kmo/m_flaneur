@@ -6,9 +6,10 @@ import { hexToPantone } from '../lib/hexToPantone';
 export default class BeddingBuilderContainer extends Component {
 
   state = {
-    view: 'index', // or 'have', 'help', 'uploadImage', 'pickImageColor'
+    view: 'index', // or 'have', 'help', 'uploadImage', 'pickImageColor', 'enterPantone'
     image: '', // User uploaded image, for color picker
-    imageColors: [] // Closest Pantone colors when color is picked from image
+    imageColors: [], // Closest Pantone colors when color is picked from image
+    pantoneCode: '' // User-entered Pantone code
   };
 
   componentDidMount () {
@@ -29,7 +30,7 @@ export default class BeddingBuilderContainer extends Component {
   };
 
   handleEnterPantoneClick = () => {
-    console.log('Enter Pantone clicked');
+    this.setState({ view: 'enterPantone' });
   };
 
   handleColorHousesClick = () => {
@@ -66,8 +67,10 @@ export default class BeddingBuilderContainer extends Component {
   handleReplaceImageClick = e => {
     this.setState({
       image: '',
-      view: 'have',
+      view: 'uploadImage',
       imageColors: []
+    }, () => {
+      $('.image-uploader input').click();
     });
   };
 
@@ -83,23 +86,29 @@ export default class BeddingBuilderContainer extends Component {
     });
   };
 
-  handlePantoneCodeEnter = e => {
-    if (e.key === 'Enter') {
-      const { value } = e.target;
-      Meteor.call('Colors.getByPantoneCodes', [value], (err, colors) => {
-        if (err) {
-          alert(err.reason);
-        } else if (!colors[0]) {
-          alert(`We were unable find a Pantone with the code: ${value}`);
-        } else {
-          ReactionRouter.go(colors[0].pdpURL);
-        }
-      });
+  handlePantoneCodeChange = e => {
+    this.setState({ pantoneCode: e.target.value });
+  };
+
+  handlePantoneCodeFormSubmit = e => {
+    e.preventDefault();
+    const { pantoneCode } = this.state;
+    if (!pantoneCode) {
+      return alert('Enter a Pantone code to continue.');
     }
+    Meteor.call('Colors.getByPantoneCodes', [this.state.pantoneCode], (err, colors) => {
+      if (err) {
+        alert(err.reason);
+      } else if (!colors[0]) {
+        alert(`We were unable find a Pantone with the code: ${this.state.pantoneCode}`);
+      } else {
+        ReactionRouter.go(colors[0].pdpURL);
+      }
+    });
   };
 
   render () {
-    const { view, image, imageColors } = this.state;
+    const { view, image, imageColors, pantoneCode } = this.state;
 
     return (
       <BeddingBuilder
@@ -117,7 +126,9 @@ export default class BeddingBuilderContainer extends Component {
         onImageChange={this.handleImageChange}
         onReplaceImageClick={this.handleReplaceImageClick}
         onColorPick={this.handleColorPick}
-        onPantoneCodeEnter={this.handlePantoneCodeEnter}
+        pantoneCode={pantoneCode}
+        onPantoneCodeChange={this.handlePantoneCodeChange}
+        onPantoneCodeFormSubmit={this.handlePantoneCodeFormSubmit}
       />
     );
   }
