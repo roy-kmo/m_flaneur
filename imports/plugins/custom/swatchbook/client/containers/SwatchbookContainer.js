@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import ColorLink from '/imports/plugins/custom/colors/client/components/ColorLink';
+import handleSwatchbookRemoveClick from '/imports/plugins/custom/swatchbook/client/lib/handleSwatchbookRemoveClick';
 
 class SwatchbookContainer extends Component {
   static propTypes = {
@@ -40,22 +41,14 @@ class SwatchbookContainer extends Component {
     ReactionRouter.go('/design-your-bedding');
   };
 
-  handleRemoveClick = (e, _id) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    Meteor.call('swatchbook.removeColor', _id, (err) => {
-      if (err) {
-        alert(err.reason);
-      }
-    });
-  };
-
   render () {
     const { colors } = this.state;
     return (
       <div className="swatchbook-drawer-container" ref={ref => this.container = ref}>
-        <div className="swatchbook-drawer" style={{minHeight: 200}}>
+        <div className="swatchbook-drawer">
+          {!colors.length && (
+            <p className="no-colors-message">There are no colors in your swatchbook.</p>
+          )}
           {colors.map(color => {
             const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
             return (
@@ -68,14 +61,13 @@ class SwatchbookContainer extends Component {
                 pantoneCode={pantoneCode}
                 pdpURL={pdpURL}
                 isInSwatchbook={true}
-                onSwatchbookRemoveClick={(e) => this.handleRemoveClick(e, _id)}
+                onSwatchbookRemoveClick={handleSwatchbookRemoveClick}
               />
             );
           })}
           <button
             className="rui btn btn-default flat button swatchbook-add-button"
-            onClick={this.handleAddClick}
-            alt="Remove from Swatchbook">
+            onClick={this.handleAddClick}>
             <i className="rui font-icon fa fa-plus fa-3x"></i>
           </button>
         </div>

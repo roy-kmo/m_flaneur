@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import Velocity from 'velocity-animate';
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export default class SwatchbookLinkContainer extends Component {
+class SwatchbookLinkContainer extends Component {
+
+  static propTypes = {
+    colorCount: PropTypes.number.isRequired
+  }
 
   state = {
     isOpen: false
@@ -22,15 +27,28 @@ export default class SwatchbookLinkContainer extends Component {
   };
 
   render () {
+    const { colorCount } = this.props;
     return (
       <Fragment>
         &nbsp;
         <a
           href="javascript:void(0)"
           className="swatchbook-link"
-          onClick={this.handleClick}>Swatchbook (3)</a>
+          onClick={this.handleClick}>Swatchbook ({colorCount})</a>
       </Fragment>
 
     );
   }
 }
+
+export default withTracker(props => {
+  const user = Meteor.user();
+  let { swatchbookColorIds } = user.profile;
+  if (!swatchbookColorIds) {
+    swatchbookColorIds = [];
+  }
+
+  return {
+    colorCount: swatchbookColorIds.length
+  };
+})(SwatchbookLinkContainer);

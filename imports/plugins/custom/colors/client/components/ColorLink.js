@@ -11,7 +11,8 @@ export default class ColorLink extends Component {
     pantoneCode: PropTypes.string.isRequired,
     pdpURL: PropTypes.string.isRequired,
     isInSwatchbook: PropTypes.bool,
-    onSwatchbookRemoveClick: PropTypes.func
+    onSwatchbookRemoveClick: PropTypes.func,
+    onSwatchbookAddClick: PropTypes.func
   };
 
   handleColorClick = (e, pdpURL) => {
@@ -28,7 +29,8 @@ export default class ColorLink extends Component {
       pantoneCode,
       pdpURL,
       isInSwatchbook,
-      onSwatchbookRemoveClick
+      onSwatchbookRemoveClick,
+      onSwatchbookAddClick
     } = this.props;
 
     return (
@@ -39,9 +41,16 @@ export default class ColorLink extends Component {
         onClick={(e) => this.handleColorClick(e, pdpURL)}>
         {isInSwatchbook && (
           <button
-            class="rui btn btn-default flat button swatchbook-remove-button"
-            onClick={onSwatchbookRemoveClick}>
-            <i class="rui font-icon fa fa-times fa-lg"></i>
+            className="rui btn btn-default flat button swatchbook-remove-button"
+            onClick={e => onSwatchbookRemoveClick(e, _id)}>
+            <i className="rui font-icon fa fa-times fa-lg"></i>
+          </button>
+        )}
+        {!isInSwatchbook && (
+          <button
+            className="rui btn btn-default flat button swatchbook-add-button"
+            onClick={e => onSwatchbookAddClick(e, _id)}>
+            <i className="rui font-icon fa fa-bookmark fa-lg"></i>
           </button>
         )}
         <div className="color-sample" style={{backgroundColor: `#${hexCode}`}}>

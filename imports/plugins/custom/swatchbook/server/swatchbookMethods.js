@@ -56,6 +56,8 @@ Meteor.methods({
         'profile.swatchbookColorIds': swatchbookColorIds
       }
     });
+
+    return color.name;
   },
 
   'swatchbook.removeColor' (colorId) {
@@ -79,5 +81,7 @@ Meteor.methods({
         'profile.swatchbookColorIds': swatchbookColorIds
       }
     });
+
+    return color.name;
   }
 });
