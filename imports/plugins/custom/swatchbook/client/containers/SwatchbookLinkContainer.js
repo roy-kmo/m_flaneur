@@ -25,7 +25,10 @@ export default class SwatchbookLinkContainer extends Component {
     return (
       <Fragment>
         &nbsp;
-        <a href="javascript:void(0)" onClick={this.handleClick}>Swatchbook (3)</a>
+        <a
+          href="javascript:void(0)"
+          className="swatchbook-link"
+          onClick={this.handleClick}>Swatchbook (3)</a>
       </Fragment>
 
     );

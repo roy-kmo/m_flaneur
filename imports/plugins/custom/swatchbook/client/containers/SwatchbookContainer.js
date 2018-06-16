@@ -35,6 +35,11 @@ class SwatchbookContainer extends Component {
     });
   };
 
+  handleAddClick = e => {
+    e.preventDefault();
+    ReactionRouter.go('/design-your-bedding');
+  };
+
   render () {
     const { colors } = this.state;
     return (
@@ -54,7 +59,9 @@ class SwatchbookContainer extends Component {
               />
             );
           })}
-          <button className="rui btn btn-default flat button swatchbook-add-button">
+          <button
+            className="rui btn btn-default flat button swatchbook-add-button"
+            onClick={this.handleAddClick}>
             <i className="rui font-icon fa fa-plus fa-3x"></i>
           </button>
         </div>
