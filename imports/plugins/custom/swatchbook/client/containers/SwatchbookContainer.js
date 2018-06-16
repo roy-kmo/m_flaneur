@@ -40,6 +40,17 @@ class SwatchbookContainer extends Component {
     ReactionRouter.go('/design-your-bedding');
   };
 
+  handleRemoveClick = (e, _id) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    Meteor.call('swatchbook.removeColor', _id, (err) => {
+      if (err) {
+        alert(err.reason);
+      }
+    });
+  };
+
   render () {
     const { colors } = this.state;
     return (
@@ -56,12 +67,15 @@ class SwatchbookContainer extends Component {
                 slug={slug}
                 pantoneCode={pantoneCode}
                 pdpURL={pdpURL}
+                isInSwatchbook={true}
+                onSwatchbookRemoveClick={(e) => this.handleRemoveClick(e, _id)}
               />
             );
           })}
           <button
             className="rui btn btn-default flat button swatchbook-add-button"
-            onClick={this.handleAddClick}>
+            onClick={this.handleAddClick}
+            alt="Remove from Swatchbook">
             <i className="rui font-icon fa fa-plus fa-3x"></i>
           </button>
         </div>

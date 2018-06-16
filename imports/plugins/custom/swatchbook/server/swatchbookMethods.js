@@ -12,7 +12,7 @@ const validateUser = function (methodInstance) {
   }
 
   const user = Meteor.users.findOne(methodInstance.userId);
-  if (user) {
+  if (!user) {
     throw new Meteor.Error(404, 'User not found');
   }
 
@@ -37,9 +37,13 @@ const validateColor = function (id) {
 
 Meteor.methods({
   'swatchbook.addColor' (colorId) {
+    check(colorId, String);
     const user = validateUser(this);
-    const color = validateColor(this);
-    const { swatchbookColorIds } = user.profile.swatchbookColorIds || [];
+    const color = validateColor(colorId);
+    let { swatchbookColorIds } = user.profile;
+    if (!swatchbookColorIds) {
+      swatchbookColorIds = [];
+    }
 
     if (swatchbookColorIds.includes(colorId)) {
       throw new Meteor.Error(400, 'This color already exists in your swatchbook.');
@@ -55,9 +59,13 @@ Meteor.methods({
   },
 
   'swatchbook.removeColor' (colorId) {
+    check(colorId, String);
     const user = validateUser(this);
-    const color = validateColor(this);
-    const { swatchbookColorIds } = user.profile.swatchbookColorIds || [];
+    const color = validateColor(colorId);
+    let { swatchbookColorIds } = user.profile;
+    if (!swatchbookColorIds) {
+      swatchbookColorIds = [];
+    }
     const colorIndex = swatchbookColorIds.indexOf(colorId);
 
     if (colorIndex === -1) {
