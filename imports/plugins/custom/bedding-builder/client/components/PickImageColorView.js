@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
 import BackLink from './BackLink';
 import ColorLink from '/imports/plugins/custom/colors/client/components/ColorLink';
+import handleSwatchbookAddClick from '/imports/plugins/custom/swatchbook/client/lib/handleSwatchbookAddClick';
+import handleSwatchbookRemoveClick from '/imports/plugins/custom/swatchbook/client/lib/handleSwatchbookRemoveClick';
 
-export default class PickImageColorView extends Component {
+class PickImageColorView extends Component {
 
   static propTypes = {
     image: PropTypes.string,
     imageColors: PropTypes.array,
     onReplaceImageClick: PropTypes.func.isRequired,
-    onBackClick: PropTypes.func.isRequired
+    onBackClick: PropTypes.func.isRequired,
+    swatchbookColorIds: PropTypes.array.isRequired
   }
 
   render () {
-    const { image, imageColors, onReplaceImageClick, onBackClick } = this.props;
+    const {
+      image,
+      imageColors,
+      onReplaceImageClick,
+      onBackClick,
+      swatchbookColorIds
+    } = this.props;
 
     return (
       <div className="view">
@@ -39,6 +49,9 @@ export default class PickImageColorView extends Component {
                 slug={slug}
                 pantoneCode={pantoneCode}
                 pdpURL={pdpURL}
+                isInSwatchbook={swatchbookColorIds.includes(_id)}
+                onSwatchbookAddClick={handleSwatchbookAddClick}
+                onSwatchbookRemoveClick={handleSwatchbookRemoveClick}
               />
             );
           })}
@@ -47,3 +60,11 @@ export default class PickImageColorView extends Component {
     );
   }
 }
+
+export default withTracker(props => {
+  const user = Meteor.user();
+  const { swatchbookColorIds } = user.profile;
+  return {
+    swatchbookColorIds: swatchbookColorIds || []
+  };
+})(PickImageColorView);

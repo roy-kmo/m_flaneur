@@ -6,11 +6,20 @@ import ColorLink from '/imports/plugins/custom/colors/client/components/ColorLin
 export default class ColorHouses extends Component {
 
   static propTypes = {
-    colorHouses: PropTypes.array
+    colorHouses: PropTypes.array,
+    swatchbookColorIds: PropTypes.array.isRequired,
+    onSwatchbookAddClick: PropTypes.func.isRequired,
+    onSwatchbookRemoveClick: PropTypes.func.isRequired
   };
 
   render () {
-    const { colorHouses, onColorClick } = this.props;
+    const {
+      colorHouses,
+      onColorClick,
+      swatchbookColorIds,
+      onSwatchbookRemoveClick,
+      onSwatchbookAddClick
+    } = this.props;
     return (
       <div id="color-houses-container">
         <h1>Color Houses</h1>
@@ -40,12 +49,15 @@ export default class ColorHouses extends Component {
                     slug={slug}
                     pantoneCode={pantoneCode}
                     pdpURL={pdpURL}
+                    isInSwatchbook={swatchbookColorIds.includes(_id)}
+                    onSwatchbookRemoveClick={onSwatchbookRemoveClick}
+                    onSwatchbookAddClick={onSwatchbookAddClick}
                   />
                 );
               })}
             </div>
           );
-        })}
+        }) || null}
       </div>
     );
   }
