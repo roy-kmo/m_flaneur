@@ -37,7 +37,34 @@ const validateColor = function ({
   if (slug === '') {
     throw new Meteor.Error(400, 'Slug is required');
   }
-}
+};
+
+const getByPantoneCodes = (pantoneCodes) => {
+  const pdpURL = getPDPURL();
+
+  const colors = Colors.find({
+    pantoneCode: {
+      $in: pantoneCodes
+    }
+  }, {
+    fields: {
+      name: 1,
+      pantoneCode: 1,
+      hexCode: 1,
+      slug: 1
+    }
+  }).fetch().map(color => {
+    color.pdpURL = `${pdpURL}/${color.slug}`;
+    return color;
+  });
+
+  const orderedColors = pantoneCodes.map(pantoneCode => {
+    const color = colors.find(color => color.pantoneCode === pantoneCode);
+    return color;
+  });
+
+  return _.uniq(orderedColors);
+};
 
 Meteor.methods({
   'Colors.create' (fields) {
@@ -212,32 +239,14 @@ Meteor.methods({
     return color && color.name || '';
   },
 
+  'Colors.getByPantoneCodesList' (pantoneCodesList) {
+    check(pantoneCodesList, [[String]]);
+    return pantoneCodesList.map((pantoneCodes) => getByPantoneCodes(pantoneCodes));
+  },
+
   'Colors.getByPantoneCodes' (pantoneCodes) {
     check(pantoneCodes, [String]);
-    const pdpURL = getPDPURL();
-
-    const colors = Colors.find({
-      pantoneCode: {
-        $in: pantoneCodes
-      }
-    }, {
-      fields: {
-        name: 1,
-        pantoneCode: 1,
-        hexCode: 1,
-        slug: 1
-      }
-    }).fetch().map(color => {
-      color.pdpURL = `${pdpURL}/${color.slug}`;
-      return color;
-    });
-
-    const orderedColors = pantoneCodes.map(pantoneCode => {
-      const color = colors.find(color => color.pantoneCode === pantoneCode);
-      return color;
-    });
-
-    return _.uniq(orderedColors);
+    return getByPantoneCodes(pantoneCodes);
   },
 
   'Colors.getByIds' (ids) {
