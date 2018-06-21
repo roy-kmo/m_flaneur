@@ -178,6 +178,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-promise": "3.8.0",
     "eslint-plugin-react": "7.8.2",
+    "file-loader": "^1.1.11",
     "find-free-port": "^1.2.0",
     "graphql.js": "^0.4.20",
     "jest": "^22.4.2",
@@ -187,7 +188,8 @@
     "mongodb-memory-server": "^1.7.3",
     "nodemon": "^1.17.2",
     "react-addons-test-utils": "15.6.2",
-    "snyk": "^1.78.0"
+    "snyk": "^1.78.0",
+    "url-loader": "^1.0.1"
   },
   "postcss": {
     "plugins": {

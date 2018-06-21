@@ -16,6 +16,7 @@ const FlaneurCartDrawer = ({ productItems, pdpPath, handleRemoveItem, handleChec
       <div className="cart-drawer-swiper-wrapper">
         <div className="cart-drawer-swiper-slide">
           <Components.CartSubTotal />
+          <div className="cart-items"><ShareCartLink /></div>
         </div>
         {productItems.map((item) => (
           <div className="cart-drawer-swiper-slide" key={item._id}>
@@ -29,9 +30,7 @@ const FlaneurCartDrawer = ({ productItems, pdpPath, handleRemoveItem, handleChec
             />
           </div>
         ))}
-        <div className="cart-drawer-swiper-slide">
-          <ShareCartLink />
-        </div>
+
       </div>
     </div>
     <div className="cart-drawer-pagination" />

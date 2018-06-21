@@ -82,7 +82,7 @@ class PDPInfoTabs extends Component {
 
     return (
       <div>
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs-info">
           {tabs.map(tab => {
             const { field, label } = tab;
             const isActive = field === this.state.activeTab;

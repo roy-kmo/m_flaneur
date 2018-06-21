@@ -8,6 +8,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components, replaceComponent } from "@reactioncommerce/reaction-components";
 import MainMenu from '/imports/plugins/custom/flaneur/client/components/MainMenu';
+import SwatchbookContainer from '/imports/plugins/custom/swatchbook/client/containers/SwatchbookContainer';
+import SwatchbookLinkContainer from '/imports/plugins/custom/swatchbook/client/containers/SwatchbookLinkContainer';
 
 class FlaneurNavBar extends Component {
   static propTypes = {
@@ -136,10 +138,12 @@ class FlaneurNavBar extends Component {
   }
 
   renderCartContainerAndPanel() {
+    // Customization - Added SwatchbookLinkContainer
     return (
       <div className="cart-container">
         <div className="cart">
           <Components.CartIcon />
+          <SwatchbookLinkContainer />
         </div>
         <div className="cart-alert">
           <Components.CartPanel />
@@ -173,27 +177,33 @@ class FlaneurNavBar extends Component {
   }
 
   render() {
-    // Customization - split cart container into separate line + include header feature line
+    // Customizations:
+    //- split cart container into separate line + include header feature line
+    //- Added SwatchbookContainer
     const { featureLine } = this.state;
     return (
-      <div>
-        <div className="rui navbar cart-navbar">
-          {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()}
+        <div>
+          <div className="nav-container w-container">
+          <div className="rui navbar cart-navbar">
+            {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()}
+            {this.props.visibility.search && this.renderSearchButton()}
+            {this.props.visibility.notifications && this.renderNotificationIcon()}
+
+            {this.props.visibility.currency && this.renderCurrency()}
+          </div>
+
+
+          <div className="nav-div w-clearfix">
+
+
+            {this.props.visibility.tags && this.renderTagNav()}
+
+        {this.props.visibility.mainDropdown && this.renderMainDropdown()}</div></div>
+          {featureLine.isEnabled && (
+            <div className="rui navbar feature-line" dangerouslySetInnerHTML={{__html: featureLine.content}} />
+          )}
+		   <SwatchbookContainer />
         </div>
-        <div className="rui navbar main-navbar">
-          {this.props.visibility.hamburger && this.renderHamburgerButton()}
-          {this.props.visibility.brand && this.renderBrand()}
-          {this.props.visibility.tags && this.renderTagNav()}
-          {this.props.visibility.search && this.renderSearchButton()}
-          {this.props.visibility.notifications && this.renderNotificationIcon()}
-          {this.props.visibility.languages && this.renderLanguage()}
-          {this.props.visibility.currency && this.renderCurrency()}
-          {this.props.visibility.mainDropdown && this.renderMainDropdown()}
-        </div>
-        {featureLine.isEnabled && (
-          <div className="rui navbar feature-line" dangerouslySetInnerHTML={{__html: featureLine.content}} />
-        )}
-      </div>
     );
   }
 }

@@ -5,6 +5,13 @@ import { Reaction } from '/server/api';
 import { Colors } from '../../lib/collections';
 import { getProductTabList } from '/imports/plugins/custom/flaneur/server/lib/products';
 
+const getPDPURL = function () {
+  const firstProduct = getProductTabList(1)[0];
+  const { handle } = firstProduct;
+  const firstProductURL = `/product/${handle}`;
+  return firstProductURL;
+};
+
 const validateColor = function ({
   name,
   description,
@@ -207,9 +214,7 @@ Meteor.methods({
 
   'Colors.getByPantoneCodes' (pantoneCodes) {
     check(pantoneCodes, [String]);
-    const firstProduct = getProductTabList(1)[0];
-    const { handle } = firstProduct;
-    const firstProductURL = `/product/${handle}`;
+    const pdpURL = getPDPURL();
 
     const colors = Colors.find({
       pantoneCode: {
@@ -223,12 +228,40 @@ Meteor.methods({
         slug: 1
       }
     }).fetch().map(color => {
-      color.pdpURL = `${firstProductURL}/${color.slug}`;
+      color.pdpURL = `${pdpURL}/${color.slug}`;
       return color;
     });
 
     const orderedColors = pantoneCodes.map(pantoneCode => {
       const color = colors.find(color => color.pantoneCode === pantoneCode);
+      return color;
+    });
+
+    return _.uniq(orderedColors);
+  },
+
+  'Colors.getByIds' (ids) {
+    check(ids, [String]);
+    const pdpURL = getPDPURL();
+
+    const colors = Colors.find({
+      _id: {
+        $in: ids
+      }
+    }, {
+      fields: {
+        name: 1,
+        pantoneCode: 1,
+        hexCode: 1,
+        slug: 1
+      }
+    }).fetch().map(color => {
+      color.pdpURL = `${pdpURL}/${color.slug}`;
+      return color;
+    });
+
+    const orderedColors = ids.map(_id => {
+      const color = colors.find(color => color._id === _id);
       return color;
     });
 

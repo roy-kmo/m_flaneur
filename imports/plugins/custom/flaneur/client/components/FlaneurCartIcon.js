@@ -14,7 +14,7 @@ const FlaneurCartIcon = ({ handleClick, cart }) => (
     id="header-cart-link"
     onClick={handleClick}
   >
-    Cart ({cart ? cart.getCount() : 0})
+    Shopping Bag ({cart ? cart.getCount() : 0})
   </a>
 );
 

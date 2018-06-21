@@ -8,65 +8,84 @@
 export default function blocks() {
   return [
 
-    // Header block (Full Width)
+  // Header block (Full Width)
     {
       type: "block",
       columns: 12,
-      element: "header",
-      className: "pdp header",
+      element: "div",
+      className: "pdp-color-block-fullwidth-container",
       permissions: ["admin"], // Permissions for staff
       audience: ["guest", "anonymous"], // Permissions for customers
       children: [
         {
-          component: 'PDPColorTitle'
-        },
-
-        // Custom product nav tabs
+      type: "block",
+      columns: 12,
+      element: "header",
+      className: "container-main-pdp-container",
+      permissions: ["admin"], // Permissions for staff
+      audience: ["guest", "anonymous"], // Permissions for customers
+      children: [
         {
-          component: 'ProductNavTabsContainer'
-        },
+             component: 'PDPColorTitle'
+           },
 
-        // Title
-        {
-          component: "ProductField",
-          // Example, you can set permissions components that are children of a block
-          permissions: ["admin"],
-          audience: ["guest", "anonymous"],
-          props: {
-            fieldName: "title",
-            fieldTitle: "Title",
-            element: "h1",
-            textFieldProps: {
-              i18nKeyPlaceholder: "productDetailEdit.title",
-              placeholder: "Title"
-            }
+           // Custom product nav tabs
+           {
+             component: 'ProductNavTabsContainer'
+           },
+
+           // Title
+           {
+             component: "ProductField",
+             // Example, you can set permissions components that are children of a block
+             permissions: ["admin"],
+             audience: ["admin"],
+             props: {
+               fieldName: "title",
+               fieldTitle: "Title",
+               element: "h1",
+               textFieldProps: {
+                 i18nKeyPlaceholder: "productDetailEdit.title",
+                 placeholder: "Title"
+               }
+             }
+           },
+
+           // PageTitle
+           {
+             component: "ProductField",
+             permissions: ["admin"],
+             audience: ["admin"],
+             props: {
+               // editable: this.editable,
+               fieldName: "pageTitle",
+               fieldTitle: "SubTitle",
+               element: "h2",
+               textFieldProps: {
+                 i18nKeyPlaceholder: "productDetailEdit.pageTitle",
+                 placeholder: "Subtitle"
+               }
           }
-        },
-
-        // PageTitle
-        {
-          component: "ProductField",
-          permissions: ["admin"],
-          audience: ["guest", "anonymous"],
-          props: {
-            // editable: this.editable,
-            fieldName: "pageTitle",
-            fieldTitle: "SubTitle",
-            element: "h2",
-            textFieldProps: {
-              i18nKeyPlaceholder: "productDetailEdit.pageTitle",
-              placeholder: "Subtitle"
-            }
-          }
-        },
+        }
       ]
-    },
-
+    }
+  ]
+},
+  
     // Media block
     // Contains
     // - Medai Gallery
     // - Tags
     // - Details
+    {
+      type: "block",
+      columns: 12,
+      size: "full",
+      element: "div",
+      className: "product-container-whole",
+      permissions: ["admin"],
+      audience: ["guest", "anonymous"],
+      children: [
     {
       type: "block",
       columns: 6,
@@ -199,6 +218,17 @@ export default function blocks() {
             }
           }
         },
+	    {
+	      type: "block",
+	      columns: 6,
+	      element: "div",
+	      className: "pdp info-tabs",
+	      children: [
+	        {
+	          component: 'PDPInfoTabs'
+	        }
+	      ]
+	    },
 
         // Component that sets correct color to certain elements
         // Last component on PDP so all other elements are available to add bg color
@@ -206,21 +236,9 @@ export default function blocks() {
           component: 'PDPColorSetter'
         }
       ]
-    },
-
-    // Info tabs
-    {
-      type: "block",
-      columns: 12,
-      element: "div",
-      className: "pdp info-tabs",
-      children: [
-        {
-          component: 'PDPInfoTabs'
-        }
-      ]
-    },
-
+    }
+  ]
+},
     // Custom page content
     {
       type: "block",

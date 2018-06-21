@@ -20,7 +20,7 @@ export default class ShareCartLink extends Component {
     return (
       <a
         href="javascript:void(0)"
-        className="share-cart-link"
+        className="share-cart-link button rui btn btn-primary solid btn-block"
         onClick={this.handleShareClick}
       >Share this cart</a>
     );
