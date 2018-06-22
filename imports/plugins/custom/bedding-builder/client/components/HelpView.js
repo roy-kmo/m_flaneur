@@ -29,9 +29,9 @@ export default class HelpView extends Component {
             <div className="div-block-40">
               <div className="row-11 w-row">
                 <div className="w-col w-col-1"></div>
-                <div className="column-center-2 w-col w-col-3 option color-tips" onClick={onColorTipsClick}><a href="#" className="link-2">Get Color Tips</a><img src="/images/question-mark_1question-mark.png" width="19" className="question-centered"/></div>
-                <div data-w-id="38f658d3-bdab-30c1-6a3d-777d0556dc52" className="column-center-2 w-col w-col-4 option capsules" onClick={onCapsulesClick}><a href="#" className="link-2 column_center_link">See Designer Capsules</a><img src="/images/question-mark_1question-mark.png" width="19" className="question-centered"/></div>
-                <div className="column-right-3 w-col w-col-3"><a href="/color-houses" className="link-2">See Color Houses</a><img src="/images/question-mark_1question-mark.png" width="19" className="question-centered"/></div>
+                <div className="column-center-2 w-col w-col-3 option color-tips" onClick={onColorTipsClick}><a href="#" className="link-2">Get Color Tips</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+                <div data-w-id="38f658d3-bdab-30c1-6a3d-777d0556dc52" className="column-center-2 w-col w-col-4 option capsules" onClick={onCapsulesClick}><a href="#" className="link-2 column_center_link">See Designer Capsules</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+                <div className="column-right-3 w-col w-col-3"><a href="/color-houses" className="link-2">See Color Houses</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
                 <div className="w-col w-col-1"></div>
               </div>
             </div>
