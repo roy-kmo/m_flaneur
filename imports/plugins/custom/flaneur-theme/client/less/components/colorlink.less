@@ -1,0 +1,35 @@
+a.color {
+  float: left;
+  margin: 20px;
+  width: 100px;
+  position: relative;
+  .color-sample {
+    width: 100%;
+    height: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    // Hide Pantone code display for now
+    line-height: 300px;
+    overflow: hidden;
+  }
+  .color-name {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    margin-top: 5px;
+  }
+  .swatchbook-remove-button, .swatchbook-add-button {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    padding: 0;
+    display: none;
+  }
+
+  &:hover {
+    .swatchbook-remove-button, .swatchbook-add-button {
+      display: block;
+    }
+  }
+}
