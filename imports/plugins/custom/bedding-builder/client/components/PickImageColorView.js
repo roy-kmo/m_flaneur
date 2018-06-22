@@ -7,6 +7,7 @@ import ColorLink from '/imports/plugins/custom/colors/client/components/ColorLin
 import handleSwatchbookAddClick from '/imports/plugins/custom/swatchbook/client/lib/handleSwatchbookAddClick';
 import handleSwatchbookRemoveClick from '/imports/plugins/custom/swatchbook/client/lib/handleSwatchbookRemoveClick';
 import { hexToPantone } from '../lib/hexToPantone';
+import './PickImageColorView.less';
 
 const PREVIEW_SIZE = 30;
 
@@ -27,13 +28,14 @@ class PickImageColorView extends Component {
     this.onPixelSelect = this.onPixelSelect.bind(this);
     this.showPixelColor = this.showPixelColor.bind(this);
     this.selectColorPicker = this.selectColorPicker.bind(this);
+    this.getPantoneCodes = this.getPantoneCodes.bind(this);
 
     this.state = {
       imageWidth: 0,
       imageHeight: 0,
       paletteMap: {},
-      selectedPickerColor: 'transparent',
-      selectedPickerKey: null,
+      pickerColorMap: {},
+      pickerKey: null,
     };
   }
 
@@ -72,10 +74,10 @@ class PickImageColorView extends Component {
 
   onPixelSelect(e) {
     e.preventDefault();
-    this.showPixelColor(e);
+    this.showPixelColor(e, true);
   }
 
-  showPixelColor(e) {
+  showPixelColor(e, clearPickerKey = false) {
     e.preventDefault();
 
     const imageElem = ReactDOM.findDOMNode(this.imageElem);
@@ -84,8 +86,33 @@ class PickImageColorView extends Component {
     const context = canvas.getContext('2d');
     const pixelData = context.getImageData(e.clientX - bound.left, e.clientY - bound.top, 1, 1).data;
 
-    this.setState({
-      selectedPickerColor: `#${pixelData[0].toString(16)}${pixelData[1].toString(16)}${pixelData[2].toString(16)}`,
+    const { pickerColorMap, pickerKey } = this.state;
+    pickerColorMap[`${pickerKey}`] = this.rgbToHex(pixelData[0], pixelData[1], pixelData[2]);
+
+    const updateState = {
+      pickerColorMap,
+    };
+    if (clearPickerKey) {
+      updateState.pickerKey = null;
+    }
+    this.setState(updateState);
+  }
+
+  rgbToHex(r, g, b) {
+    return `#${this.padZero(r.toString(16), 2)}${this.padZero(g.toString(16), 2)}${this.padZero(b.toString(16), 2)}`;
+  }
+
+  getPantoneCodes(rgbList, callback) {
+    const pantoneCodesList = rgbList.map((rgb) => {
+      const matches = new hexToPantone(rgb, 1);
+      return matches.map(match => `${match} TCX`);
+    });
+    Meteor.call('Colors.getByPantoneCodesList', pantoneCodesList, (err, imageColorsList) => {
+      if (err) {
+        alert(err.reason);
+      } else {
+        callback(imageColorsList);
+      }
     });
   }
 
@@ -133,31 +160,25 @@ class PickImageColorView extends Component {
           delete tmpPaletteMap[key];
           matchCount++;
           if (matchCount >= 5) {
-            const pantoneCodesList = [];
+            const rgbList = [];
             for (let k of Object.keys(paletteMap)) {
-              const rgb = paletteMap[k];
-              const matches = new hexToPantone(rgb, 3);
-              const pantoneCodes = matches.map(match => `${match} TCX`);
-              pantoneCodesList.push(pantoneCodes);
+              rgbList.push(paletteMap[k]);
             }
-            Meteor.call('Colors.getByPantoneCodesList', pantoneCodesList, (err, imageColorsList) => {
-              if (err) {
-                alert(err.reason);
-              } else {
-                let mapIndex = 1;
-                imageColorsList.forEach((imageColors) => {
-                  paletteMap[`${mapIndex}`].delta = delta;
-                  paletteMap[`${mapIndex}`].pantone = imageColors;
-                  mapIndex++;
-                });
-                this.setState({
-                  imageWidth: imageElem.offsetWidth,
-                  imageHeight: imageElem.offsetHeight,
-                  paletteMap,
-                });
-              }
+            this.getPantoneCodes(rgbList, (imageColorsList) => {
+              let mapIndex = 1;
+              imageColorsList.forEach((imageColors) => {
+                paletteMap[`${mapIndex}`].delta = delta;
+                if (imageColors && imageColors.length) {
+                  paletteMap[`${mapIndex}`].pantone = imageColors[0];
+                }
+                mapIndex++;
+              });
+              this.setState({
+                imageWidth: imageElem.offsetWidth,
+                imageHeight: imageElem.offsetHeight,
+                paletteMap,
+              });
             });
-            return;
           }
         }
       }
@@ -173,7 +194,7 @@ class PickImageColorView extends Component {
       hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
     }
     if (hex.length !== 6) {
-      throw new Error('Invalid HEX color.');
+      hex =  this.padZero(hex, 6);
     }
     const r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16);
     const g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16);
@@ -193,7 +214,7 @@ class PickImageColorView extends Component {
     const cursors = [];
     for (let key of Object.keys(paletteMap)) {
       const item = paletteMap[key];
-      const color = `#${this.padZero(item.r.toString(16), 2)}${this.padZero(item.g.toString(16), 2)}${this.padZero(item.b.toString(16), 2)}`;
+      const color = this.rgbToHex(item.r, item.g, item.b);
       const invertedColor = this.invertColor(color);
 
       cursors.push(
@@ -233,26 +254,34 @@ class PickImageColorView extends Component {
   }
 
   selectColorPicker(key, color) {
-    const { selectedPickerKey } = this.state;
-    if (selectedPickerKey === key) {
-      this.setState({ selectedPickerKey: null, selectedPickerColor: 'transparent' });
+    const { pickerKey, pickerColorMap } = this.state;
+    if (pickerKey === key) {
+      this.setState({ pickerKey: null });
     } else {
-      this.setState({ selectedPickerKey: key, selectedPickerColor: color });
+      this.getPantoneCodes([color], (imageColorsList) => {
+        if (imageColorsList && imageColorsList[0] &&  imageColorsList[0][0]) {
+          const pantoneColor = imageColorsList[0][0];
+          pickerColorMap[`${key}`] = `#${this.padZero(pantoneColor.hexCode, 6)}`;
+        } else {
+          pickerColorMap[`${key}`] = color;
+        }
+        this.setState({ pickerKey: key, pickerColorMap });
+      });
     }
   }
 
   colorPickers() {
-    const { paletteMap, selectedPickerKey, selectedPickerColor } = this.state;
+    const { imageWidth, paletteMap, pickerKey, pickerColorMap } = this.state;
 
     const pickers = [];
     for (let key of Object.keys(paletteMap)) {
       const item = paletteMap[key];
-      const pantone = item.pantone && item.pantone.length && item.pantone[0];
+      const pantone = item.pantone;
       let color;
-      if (selectedPickerKey === key && selectedPickerColor !== 'transparent') {
-        color = selectedPickerColor;
+      if (pickerColorMap[`${key}`]) {
+        color = pickerColorMap[`${key}`];
       } else {
-        color = pantone ? `#${pantone.hexCode}` : `#${this.padZero(item.r.toString(16), 2)}${this.padZero(item.g.toString(16), 2)}${this.padZero(item.b.toString(16), 2)}`;
+        color = pantone ? `#${this.padZero(pantone.hexCode, 6)}` : this.rgbToHex(item.r, item.g, item.b);
       }
 
       const style = {
@@ -260,18 +289,24 @@ class PickImageColorView extends Component {
         height: '30px',
         marginLeft: '20px',
         marginBottom: '10px',
-        backgroundColor: color,
       };
 
-      if (key === selectedPickerKey) {
+      if (color) {
+        style.backgroundColor = color;
+      } else {
+        color = '#ffffff';
+      }
+
+      if (key === pickerKey) {
         const invertedColor = this.invertColor(color);
-        style.border = `1px solid ${invertedColor}`;
+        style.border = `1px dotted ${invertedColor}`;
       }
 
       pickers.push(
         <div
           key={`picker_${key}`}
           style={style}
+          className={color ? '' : 'color-transition'}
           onClick={() => this.selectColorPicker(key, color)}
         />
       );
@@ -293,7 +328,7 @@ class PickImageColorView extends Component {
       swatchbookColorIds
     } = this.props;
 
-    const { imageWidth, imageHeight, selectedPickerKey, selectedPickerColor } = this.state;
+    const { imageWidth, imageHeight, pickerKey, pickerColorMap } = this.state;
 
     return (
       <div className="view">
@@ -330,7 +365,7 @@ class PickImageColorView extends Component {
               />
               <canvas ref={elem => this.imageCanvas = elem} id="image-canvas" style={{ display: 'none' }}></canvas>
               {
-                selectedPickerKey && (
+                pickerKey && (
                   <div
                     style={{
                       position: 'absolute',
@@ -338,7 +373,7 @@ class PickImageColorView extends Component {
                       right: 0,
                       width: `${PREVIEW_SIZE}px`,
                       height: `${PREVIEW_SIZE}px`,
-                      backgroundColor: selectedPickerColor,
+                      backgroundColor: pickerColorMap[`${pickerKey}`],
                       border: '1px dotted lightgray',
                       zIndex: 3,
                     }}
