@@ -61,7 +61,7 @@ const wrapComponent = (Comp) =>
           const options = ReactionProduct.getVariants(currentVariant._id);
 
           if (options.length > 0) {
-            Alerts.inline("Please choose options before adding to cart", "warning", {
+            Alerts.inline("Please select a size", "warning", {
               placement: "productDetail",
               i18nKey: "productDetail.chooseOptions",
               autoHide: 10000
@@ -71,7 +71,7 @@ const wrapComponent = (Comp) =>
         }
 
         if (currentVariant.inventoryPolicy && currentVariant.inventoryQuantity < 1) {
-          Alerts.inline("Sorry, this item is out of stock!", "warning", {
+          Alerts.inline("Item unavailable.", "warning", {
             placement: "productDetail",
             i18nKey: "productDetail.outOfStock",
             autoHide: 10000
@@ -121,7 +121,7 @@ const wrapComponent = (Comp) =>
         }
 
         if (currentVariant.inventoryPolicy && totalQuantity > maxQuantity) {
-          Alerts.inline("Sorry, this item is out of stock!", "error", {
+          Alerts.inline("Item unavailable.", "error", {
             placement: "productDetail",
             i18nKey: "productDetail.outOfStock",
             autoHide: 10000
@@ -202,7 +202,7 @@ const wrapComponent = (Comp) =>
           }
         }
       } else {
-        Alerts.inline("Select an option before adding to cart", "warning", {
+        Alerts.inline("Please select a size", "warning", {
           placement: "productDetail",
           i18nKey: "productDetail.selectOption",
           autoHide: 8000
