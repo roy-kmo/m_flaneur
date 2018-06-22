@@ -23,6 +23,7 @@ export default class HomepageInfo extends Component {
       imageUrl = getImageURL(imageFileId, imageFileName);
     }
     return (
+
       <div id="home-info">
       <div className="content-section landing">
     <div className="container-8 w-container">
