@@ -13,12 +13,12 @@ const getPDPURL = function () {
 };
 
 const validateColor = function ({
-  name,
-  description,
-  pantoneCode,
-  hexCode,
-  slug
-}) {
+                                  name,
+                                  description,
+                                  pantoneCode,
+                                  hexCode,
+                                  slug
+                                }) {
   check(name, String);
   check(description, String);
   check(pantoneCode, String);
@@ -246,30 +246,7 @@ Meteor.methods({
 
   'Colors.getByPantoneCodes' (pantoneCodes) {
     check(pantoneCodes, [String]);
-    const pdpURL = getPDPURL();
-
-    const colors = Colors.find({
-      _id: {
-        $in: ids
-      }
-    }, {
-      fields: {
-        name: 1,
-        pantoneCode: 1,
-        hexCode: 1,
-        slug: 1
-      }
-    }).fetch().map(color => {
-      color.pdpURL = `${pdpURL}/${color.slug}`;
-      return color;
-    });
-
-    const orderedColors = ids.map(_id => {
-      const color = colors.find(color => color._id === _id);
-      return color;
-    });
-
-    return _.uniq(orderedColors);
+    return getByPantoneCodes(pantoneCodes);
   },
 
   'Colors.getByIds' (ids) {
