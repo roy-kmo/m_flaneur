@@ -34,7 +34,13 @@ class PickImageColorView extends Component {
       imageWidth: 0,
       imageHeight: 0,
       paletteMap: {},
-      pickerColorMap: {},
+      pickerMap: {
+        '1': {},
+        '2': {},
+        '3': {},
+        '4': {},
+        '5': {},
+      },
       pickerKey: null,
     };
   }
@@ -84,13 +90,20 @@ class PickImageColorView extends Component {
     const bound = imageElem.getBoundingClientRect();
     const canvas = ReactDOM.findDOMNode(this.imageCanvas);
     const context = canvas.getContext('2d');
-    const pixelData = context.getImageData(e.clientX - bound.left, e.clientY - bound.top, 1, 1).data;
+    const x = e.clientX - bound.left;
+    const y = e.clientY - bound.top;
+    const pixelData = context.getImageData(x, y, 1, 1).data;
 
-    const { pickerColorMap, pickerKey } = this.state;
-    pickerColorMap[`${pickerKey}`] = this.rgbToHex(pixelData[0], pixelData[1], pixelData[2]);
+    const { pickerMap, pickerKey } = this.state;
+    if (!pickerMap[`${pickerKey}`]) {
+      pickerMap[`${pickerKey}`] = {};
+    }
+    pickerMap[`${pickerKey}`].color = this.rgbToHex(pixelData[0], pixelData[1], pixelData[2]);
+    pickerMap[`${pickerKey}`].x = x;
+    pickerMap[`${pickerKey}`].y = y;
 
     const updateState = {
-      pickerColorMap,
+      pickerMap,
     };
     if (clearPickerKey) {
       updateState.pickerKey = null;
@@ -209,14 +222,17 @@ class PickImageColorView extends Component {
   }
 
   dominantCursors() {
-    const { paletteMap } = this.state;
+    const { paletteMap, pickerMap } = this.state;
 
     const cursors = [];
     for (let key of Object.keys(paletteMap)) {
       const item = paletteMap[key];
-      const color = this.rgbToHex(item.r, item.g, item.b);
-      const invertedColor = this.invertColor(color);
 
+      const picker = pickerMap[`${key}`];
+      const color = (picker && picker.color) || this.rgbToHex(item.r, item.g, item.b);
+      const invertedColor = this.invertColor(color);
+      const x = (picker && picker.x) || item.x;
+      const y = (picker && picker.y) || item.y;
       cursors.push(
         <div
           key={`cursor_${key}`}
@@ -224,8 +240,8 @@ class PickImageColorView extends Component {
           style={{
             position: 'absolute',
             cursor: 'crosshair',
-            left: item.x,
-            top: item.y,
+            left: x - 7,
+            top: y - 9,
             zIndex: 3,
           }}
         >
@@ -254,32 +270,33 @@ class PickImageColorView extends Component {
   }
 
   selectColorPicker(key, color) {
-    const { pickerKey, pickerColorMap } = this.state;
+    const { pickerKey, pickerMap } = this.state;
     if (pickerKey === key) {
       this.setState({ pickerKey: null });
     } else {
       this.getPantoneCodes([color], (imageColorsList) => {
         if (imageColorsList && imageColorsList[0] &&  imageColorsList[0][0]) {
           const pantoneColor = imageColorsList[0][0];
-          pickerColorMap[`${key}`] = `#${this.padZero(pantoneColor.hexCode, 6)}`;
+          pickerMap[`${key}`].color = `#${this.padZero(pantoneColor.hexCode, 6)}`;
         } else {
-          pickerColorMap[`${key}`] = color;
+          pickerMap[`${key}`].color = color;
         }
-        this.setState({ pickerKey: key, pickerColorMap });
+        this.setState({ pickerKey: key, pickerMap });
       });
     }
   }
 
   colorPickers() {
-    const { imageWidth, paletteMap, pickerKey, pickerColorMap } = this.state;
+    const { imageWidth, paletteMap, pickerKey, pickerMap } = this.state;
 
     const pickers = [];
     for (let key of Object.keys(paletteMap)) {
       const item = paletteMap[key];
       const pantone = item.pantone;
+      const picker = pickerMap[`${key}`];
       let color;
-      if (pickerColorMap[`${key}`]) {
-        color = pickerColorMap[`${key}`];
+      if (picker && picker.color) {
+        color = picker.color;
       } else {
         color = pantone ? `#${this.padZero(pantone.hexCode, 6)}` : this.rgbToHex(item.r, item.g, item.b);
       }
@@ -299,7 +316,7 @@ class PickImageColorView extends Component {
 
       if (key === pickerKey) {
         const invertedColor = this.invertColor(color);
-        style.border = `1px dotted ${invertedColor}`;
+        style.border = `2px dotted ${invertedColor}`;
       }
 
       pickers.push(
@@ -328,8 +345,9 @@ class PickImageColorView extends Component {
       swatchbookColorIds
     } = this.props;
 
-    const { imageWidth, imageHeight, pickerKey, pickerColorMap } = this.state;
+    const { imageWidth, imageHeight, pickerKey, pickerMap } = this.state;
 
+    const picker = pickerMap[`${pickerKey}`];
     return (
       <div className="view">
         <h1>Pick a Color</h1>
@@ -373,7 +391,7 @@ class PickImageColorView extends Component {
                       right: 0,
                       width: `${PREVIEW_SIZE}px`,
                       height: `${PREVIEW_SIZE}px`,
-                      backgroundColor: pickerColorMap[`${pickerKey}`],
+                      backgroundColor: picker.color,
                       border: '1px dotted lightgray',
                       zIndex: 3,
                     }}
