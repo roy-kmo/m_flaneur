@@ -40,7 +40,7 @@ export default class EnterPantoneView extends Component {
           <div className="container-2 w-container">
             <div>
               <div className="div-block-17 w-clearfix">
-                <h1 className="heading-4">Pick a Pantone</h1><img src="images/question-mark_1question-mark.png" width="19" className="image-7"></div>
+                <h1 className="heading-4">Pick a Pantone</h1><img src="/images/question-mark_1question-mark.png" width="19" className="image-7"/></div>
               <div className="div-block-19">
                 <div className="text-block-15">Enter a TXC code.</div>
               </div>

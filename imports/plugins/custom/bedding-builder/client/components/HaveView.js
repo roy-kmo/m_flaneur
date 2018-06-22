@@ -48,7 +48,7 @@ export default class HaveView extends Component {
                 <div className="w-col w-col-1"></div>
                 <div className="column-center-2 w-col w-col-3 option upload-image" onClick={onUploadClick}><a href="#" className="link-2">Upload an Image</a>
                   <div data-hover="1" data-delay="0" className="dropdown-10 w-dropdown">
-                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="images/question-mark_1question-mark.png" width="19" className="question-centered"></div>
+                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="/images/question-mark_1question-mark.png" width="19" className="question-centered"/></div>
                     <nav className="dropdown-list-10 w-dropdown-list">
                       <div className="text-block-41">Already have an image in mind? Upload and start with that.</div>
                     </nav>
@@ -56,7 +56,7 @@ export default class HaveView extends Component {
                 </div>
                 <div data-w-id="752a8a1c-d23e-4816-c8bd-fce5379942c9" className="column-center-2 w-col w-col-4 option enter-pantone" onClick={onEnterPantoneClick}><a href="#" className="link-2 column_center_link">Enter Pantone Code</a>
                   <div data-hover="1" data-delay="0" className="dropdown-10 w-dropdown">
-                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="images/question-mark_1question-mark.png" width="19" className="question-centered"></div>
+                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="/images/question-mark_1question-mark.png" width="19" className="question-centered"/></div>
                     <nav className="dropdown-list-10 w-dropdown-list">
                       <div className="text-block-41">The standard has already been set. Add the Pantone number here.</div>
                     </nav>
@@ -64,7 +64,7 @@ export default class HaveView extends Component {
                 </div>
                 <div className="column-right-3 w-col w-col-3"><a href="/color-houses" className="link-2">See Color Houses</a>
                   <div data-hover="1" data-delay="0" className="dropdown-10 w-dropdown">
-                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="images/question-mark_1question-mark.png" width="19" className="question-centered"></div>
+                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="/images/question-mark_1question-mark.png" width="19" className="question-centered"/></div>
                     <nav className="dropdown-list-10 w-dropdown-list">
                       <div className="text-block-41">The stories of our color palettes live here. Get inspired.</div>
                     </nav>
