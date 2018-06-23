@@ -46,8 +46,7 @@ class SwatchbookContainer extends Component {
     return (
 
       <div className="swatchbook-drawer-container" ref={ref => this.container = ref}>
-      <div className="cart-drawer-swiper-container">
-        <div className="cart-drawer-swiper-wrapper">
+    
           <div className="cart-drawer-swiper-slide swatch">
 
           {!colors.length && (
@@ -76,8 +75,7 @@ class SwatchbookContainer extends Component {
             <i className="rui font-icon fa fa-plus fa-3x"></i>
           </button>
 
-      </div>
-      </div>
+      
       </div>
       </div>
     );
