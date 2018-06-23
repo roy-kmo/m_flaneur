@@ -16,6 +16,18 @@ const FlaneurCartDrawer = ({ productItems, pdpPath, handleRemoveItem, handleChec
       <div className="cart-drawer-swiper-wrapper">
         <div className="cart-drawer-swiper-slide">
           <Components.CartSubTotal />
+            <div className="cart-items"><Components.Button
+            bezelStyle="solid"
+            className={{
+              "btn-primary": true,
+              "btn-block": true
+            }}
+            status="cta"
+            id="btn-checkout"
+            label="Checkout"
+            i18nKeyLabel="cartDrawer.checkout"
+            onClick={handleCheckout}
+          /><ShareCartLink /></div>
         </div>
         {productItems.map((item) => (
           <div className="cart-drawer-swiper-slide" key={item._id}>
@@ -29,9 +41,7 @@ const FlaneurCartDrawer = ({ productItems, pdpPath, handleRemoveItem, handleChec
             />
           </div>
         ))}
-        <div className="cart-drawer-swiper-slide">
-          <ShareCartLink />
-        </div>
+
       </div>
     </div>
     <div className="cart-drawer-pagination" />

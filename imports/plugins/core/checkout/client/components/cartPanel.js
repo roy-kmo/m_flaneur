@@ -1,3 +1,5 @@
+//language change, link 19 
+
 import React from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
@@ -16,7 +18,7 @@ const CartPanel = (props) => (
         bezelStyle="solid"
         className="btn-lg btn-block"
         i18nKeyLabel="cartDrawer.checkout"
-        label="Checkout now"
+        label="Checkout"
         onClick={props.onClick || props.checkout}
         status="success"
       />

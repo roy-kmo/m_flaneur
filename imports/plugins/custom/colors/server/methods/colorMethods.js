@@ -13,12 +13,12 @@ const getPDPURL = function () {
 };
 
 const validateColor = function ({
-  name,
-  description,
-  pantoneCode,
-  hexCode,
-  slug
-}) {
+                                  name,
+                                  description,
+                                  pantoneCode,
+                                  hexCode,
+                                  slug
+                                }) {
   check(name, String);
   check(description, String);
   check(pantoneCode, String);

@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+import { Components, replaceComponent } from "@reactioncommerce/reaction-components";
 import PropTypes from 'prop-types';
 
 export default class MainMenu extends Component {
   static propTypes = {
     mainMenu: PropTypes.array,
-    onMenuItemClick: PropTypes.func.isRequired
-  };
+    onMenuItemClick: PropTypes.func.isRequired};
 
   render () {
     const { mainMenu, onMenuItemClick } = this.props;
     return (
+
+
+
       <header className="menu" role="banner">
-        <ul className="nav navbar-nav" id="main-menu">
+        <ul className="nav navbar-nav" id="main-menu"><li>  <a href="/" className="w-inline-block w-clearfix">
+          <img src="/images/Flaneur-logo-blue.png" width="127" className="image-50"/></a></li></ul>
+          <div className="sign-in-block">
+
+        <ul className="nav navbar-nav menu" id="main-menu">
           {mainMenu.map((menuItem, index) => {
             const { label, path, children } = menuItem;
             if (children && children.length) {
@@ -22,7 +29,7 @@ export default class MainMenu extends Component {
                     onClick={(e) => onMenuItemClick(e, path)}
                     href={path}
                   >
-                    {label} <span className="caret"></span>
+                    {label}
                   </a>
                   <ul className="dropdown-menu">
                     {children.map((child, childIndex) => {
@@ -53,8 +60,13 @@ export default class MainMenu extends Component {
               );
             }
           })}
+
         </ul>
+        </div>
       </header>
+
+
+
     );
   }
 }

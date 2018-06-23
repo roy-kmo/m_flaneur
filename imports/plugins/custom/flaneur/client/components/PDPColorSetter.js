@@ -96,6 +96,7 @@ class PDPColorSetter extends Component {
       .zoomed-image-container img { ${bgStyle} }
       .main-navbar { ${bgStyle} }
       .pdp.header { ${bgStyle} }
+	  .pdp-color-block-fullwidth-container { ${bgStyle} }
       .media-gallery .gallery-image img { ${bgStyle} }
     `));
     document.head.appendChild(styles);
