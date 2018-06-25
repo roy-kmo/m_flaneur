@@ -29,35 +29,35 @@ export default class HomepageInfo extends Component {
     <div className="container-8 w-container">
       <div className="div-landing w-clearfix">
         <div className="landing-drops">
-          <div className="div-block-81 w-clearfix">
-            <div data-delay="0" data-w-id="4dc170f4-d696-303e-964f-fbc40f1b6d28" className="landing-dropdown w-dropdown">
-              <div className="static-dropdown-a1 w-dropdown-toggle">
-                <div className="heading-2-nav">Design</div>
-              </div>
-              <nav className="dropdown-list-2 w-clearfix w-dropdown-list"><a href="#" className="landing-link">Start a Color Journey</a></nav>
-            </div>
-            <div data-delay="0" className="landing-dropdown w-dropdown">
-              <div className="static-dropdown-a1 w-dropdown-toggle">
-                <div className="heading-2-nav">Capsule</div>
-              </div>
-              <nav className="dropdown-list-2 w-clearfix w-dropdown-list">
-                <div className="w-clearfix"><a href="#" className="landing-link">Estee Stanley</a>
-                  <div className="text-block-38">New</div>
-                </div><a href="#" className="landing-link">View All Capsules</a></nav>
-            </div>
-            <div data-delay="0" className="landing-dropdown w-dropdown">
-              <div className="static-dropdown-a1 w-dropdown-toggle">
-                <div className="heading-2-nav">Explore</div>
-              </div>
-              <nav className="dropdown-list-2 w-clearfix w-dropdown-list"><a href="#" className="landing-link">Supply Chain</a><a href="#" className="landing-link">Press Coverage</a><a href="#" className="landing-link">FAQ</a><a href="#" className="landing-link"><em>Salon</em></a></nav>
-            </div>
-          </div>
+        <ul className="landing">
+<li>
+  <input type="checkbox" id="list-item-1"/>
+  <label for="list-item-1" className="heading-2-nav">Design</label>
+  <ul>
+    <a href="/design-your-bedding"><li>Design Your Bedding</li></a>
+  </ul>
+</li>
+<li>
+  <input type="checkbox" id="list-item-2"/>
+  <label for="list-item-2" className="heading-2-nav">Capsule</label>
+  <ul>
+    <a href="/product/sasha-bikoff"><li>Sasha Bikoff</li></a>
+    <a href="/product/estee-stanley"><li>Estee Stanley</li></a>
+     <a href="/product/sophie-donelson"><li>Sophie Donelson</li></a>
+  </ul>
+</li>
+<li>
+  <input type="checkbox" id="list-item-3"/>
+  <label for="list-item-3" className="heading-2-nav">Explore</label>
+  <ul>
+    <a href="/supply-chain"><li>Supply Chain</li></a>
+    <a href="/using-color"><li>Using Color</li></a>
+    <a href="/FAQ"><li>FAQ</li></a>
+  </ul>
+</li>
+</ul>
         </div>
-        <div className="div-block-84">
-          <div className="text-c"><a href="#" className="link-4">Snow White</a></div>
-          <div className="text-e"><a href="#" className="link-4">Rover Yellow</a></div>
-          <div className="text-d"><a href="#" className="link-4">High Risk Red</a></div>
-        </div>
+
       </div>
       </div>
   </div>
