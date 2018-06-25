@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { registerComponent } from '@reactioncommerce/reaction-components';
 import { getPDPColorSlug } from '../../lib/helpers';
+import { isProductCapsule } from '../../lib/products';
 
 class PDPTitleInColor extends Component {
 
@@ -15,7 +16,7 @@ class PDPTitleInColor extends Component {
   };
 
   componentDidMount () {
-    if (!this.props.product.hexColor) {
+    if (!isProductCapsule(this.props.product)) {
       this.getColorName();
     }
   }
@@ -25,7 +26,7 @@ class PDPTitleInColor extends Component {
       // Changed product
       this.setState({ name: '', slug: '' });
     }
-    if (!this.props.product.hexColor) {
+    if (!isProductCapsule(this.props.product)) {
       this.getColorName();
     }
   }
