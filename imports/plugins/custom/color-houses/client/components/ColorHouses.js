@@ -47,7 +47,7 @@ export default class ColorHouses extends Component {
         </div>
       </div>
       <div className="row-29 w-row">
-        <div className="w-col w-col-3">
+        <div className="w-col w-col-15">
         {colors.map(color => {
           const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
           return (
