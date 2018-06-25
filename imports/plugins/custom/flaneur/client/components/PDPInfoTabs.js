@@ -53,7 +53,7 @@ class PDPInfoTabs extends Component {
 
   render () {
     const { product } = this.props;
-    const { description, dimensions, careInstructions } = product;
+    const { description, dimensions, careInstructions, craftsmanship } = product;
     const { activeTab, colorDescription } = this.state;
 
     const tabs = [{
@@ -72,6 +72,12 @@ class PDPInfoTabs extends Component {
         label: 'Care Instructions'
       });
     }
+    if (craftsmanship) {
+      tabs.push({
+        field: 'Craftsmanship',
+        label: 'Craftsmanship'
+      });
+    }
 
     let content = product[this.state.activeTab];
 
@@ -82,7 +88,7 @@ class PDPInfoTabs extends Component {
 
     return (
       <div>
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs-info">
           {tabs.map(tab => {
             const { field, label } = tab;
             const isActive = field === this.state.activeTab;

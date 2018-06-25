@@ -5,7 +5,7 @@ import IndexView from './IndexView';
 import HaveView from './HaveView';
 import EnterPantoneView from './EnterPantoneView';
 import UploadImageView from './UploadImageView';
-import PickImageColorView from './PickImageColorView.js';
+import PickImageColorView from './PickImageColorView';
 import HelpView from './HelpView';
 
 export default class BeddingBuilder extends Component {

@@ -83,7 +83,7 @@ class PickImageColorView extends Component {
     this.showPixelColor(e, true);
   }
 
-  showPixelColor(e, clearPickerKey = false) {
+  showPixelColor(e, pixelSelected = false) {
     e.preventDefault();
 
     const imageElem = ReactDOM.findDOMNode(this.imageElem);
@@ -94,21 +94,30 @@ class PickImageColorView extends Component {
     const y = e.clientY - bound.top;
     const pixelData = context.getImageData(x, y, 1, 1).data;
 
-    const { pickerMap, pickerKey } = this.state;
+    const { paletteMap, pickerMap, pickerKey } = this.state;
     if (!pickerMap[`${pickerKey}`]) {
       pickerMap[`${pickerKey}`] = {};
     }
-    pickerMap[`${pickerKey}`].color = this.rgbToHex(pixelData[0], pixelData[1], pixelData[2]);
+    const color = this.rgbToHex(pixelData[0], pixelData[1], pixelData[2]);
+    pickerMap[`${pickerKey}`].color = color;
     pickerMap[`${pickerKey}`].x = x;
     pickerMap[`${pickerKey}`].y = y;
 
     const updateState = {
       pickerMap,
     };
-    if (clearPickerKey) {
+    if (pixelSelected) {
       updateState.pickerKey = null;
+      this.getPantoneCodes([color], (imageColorsList) => {
+        if (imageColorsList && imageColorsList.length && imageColorsList[0] && imageColorsList[0][0]) {
+          paletteMap[pickerKey].pantone = imageColorsList[0][0];
+          updateState.paletteMap = paletteMap;
+          this.setState(updateState);
+        }
+      });
+    } else {
+      this.setState(updateState);
     }
-    this.setState(updateState);
   }
 
   rgbToHex(r, g, b) {
@@ -252,14 +261,14 @@ class PickImageColorView extends Component {
     return (
       <div
         style={{
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        left: 0,
-        bottom: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 3,
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          left: 0,
+          bottom: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 3,
         }}
         onMouseMove={(e) => this.showPixelColor(e)}
         onClick={(e) => this.onPixelSelect(e)}
@@ -293,12 +302,13 @@ class PickImageColorView extends Component {
     for (let key of Object.keys(paletteMap)) {
       const item = paletteMap[key];
       const pantone = item.pantone;
+
       const picker = pickerMap[`${key}`];
       let color;
       if (picker && picker.color) {
         color = picker.color;
       } else {
-        color = pantone ? `#${this.padZero(pantone.hexCode, 6)}` : this.rgbToHex(item.r, item.g, item.b);
+        color = this.rgbToHex(item.r, item.g, item.b);
       }
 
       const style = {
@@ -319,13 +329,35 @@ class PickImageColorView extends Component {
         style.border = `2px dotted ${invertedColor}`;
       }
 
+      const swatchbookColorIds = Meteor.user().profile.swatchbookColorIds || [];
       pickers.push(
         <div
-          key={`picker_${key}`}
-          style={style}
-          className={color ? '' : 'color-transition'}
-          onClick={() => this.selectColorPicker(key, color)}
-        />
+          key={`cp_${key}`}
+          style={{ clear: 'both' }}
+        >
+          <div
+            key={`picker_${key}`}
+            style={style}
+            className={color ? '' : 'color-transition'}
+            onClick={() => this.selectColorPicker(key, color)}
+          />
+          {
+            pantone && (
+              <ColorLink
+                key={pantone._id}
+                _id={pantone._id}
+                name={pantone.name}
+                hexCode={pantone.hexCode}
+                slug={pantone.slug}
+                pantoneCode={pantone.pantoneCode}
+                pdpURL={pantone.pdpURL}
+                isInSwatchbook={swatchbookColorIds.includes(pantone._id)}
+                onSwatchbookAddClick={handleSwatchbookAddClick}
+                onSwatchbookRemoveClick={handleSwatchbookRemoveClick}
+              />
+            )
+          }
+        </div>
       );
     }
 
@@ -377,7 +409,8 @@ class PickImageColorView extends Component {
                   display: 'block',
                   cursor: 'crosshair',
                   zIndex: 2,
-                  margin: imageWidth ? 'inherit' : '0 auto'
+                  margin: imageWidth ? 'inherit' : '0 auto',
+                  maxWidth: '100%',
                 }}
                 onLoad={this.onImageLoad}
               />
@@ -404,25 +437,6 @@ class PickImageColorView extends Component {
         </div>
         <div style={{ display: 'table-cell', width: '50%', }}>
           {this.colorPickers()}
-        </div>
-        <div className="image-colors">
-          {imageColors.map(color => {
-            const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
-            return (
-              <ColorLink
-                key={_id}
-                _id={_id}
-                name={name}
-                hexCode={hexCode}
-                slug={slug}
-                pantoneCode={pantoneCode}
-                pdpURL={pdpURL}
-                isInSwatchbook={swatchbookColorIds.includes(_id)}
-                onSwatchbookAddClick={handleSwatchbookAddClick}
-                onSwatchbookRemoveClick={handleSwatchbookRemoveClick}
-              />
-            );
-          })}
         </div>
       </div>
     );

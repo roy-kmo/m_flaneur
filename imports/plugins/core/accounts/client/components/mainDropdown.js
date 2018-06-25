@@ -86,10 +86,10 @@ class MainDropdown extends Component {
     return (
       <div className="accounts-dropdown">
         <div className="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000">
-          <span>
-            <Components.Icon icon="fa fa-user" />
+          <span className="signin">
+            Sign In
           </span>
-          <b className="caret" />
+
         </div>
         <div
           className="accounts-dialog accounts-layout dropdown-menu pull-right"

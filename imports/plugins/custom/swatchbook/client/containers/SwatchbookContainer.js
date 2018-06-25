@@ -44,15 +44,19 @@ class SwatchbookContainer extends Component {
   render () {
     const { colors } = this.state;
     return (
+
       <div className="swatchbook-drawer-container" ref={ref => this.container = ref}>
-        <div className="swatchbook-drawer">
+    
+          <div className="cart-drawer-swiper-slide swatch">
+
           {!colors.length && (
             <p className="no-colors-message">There are no colors in your swatchbook.</p>
           )}
           {colors.map(color => {
             const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
             return (
-              <ColorLink
+                <div className="cart-items swatch">
+                <ColorLink
                 key={_id}
                 _id={_id}
                 name={name}
@@ -62,7 +66,7 @@ class SwatchbookContainer extends Component {
                 pdpURL={pdpURL}
                 isInSwatchbook={true}
                 onSwatchbookRemoveClick={handleSwatchbookRemoveClick}
-              />
+              /></div>
             );
           })}
           <button
@@ -70,7 +74,9 @@ class SwatchbookContainer extends Component {
             onClick={this.handleAddClick}>
             <i className="rui font-icon fa fa-plus fa-3x"></i>
           </button>
-        </div>
+
+      
+      </div>
       </div>
     );
   }

@@ -182,25 +182,28 @@ class FlaneurNavBar extends Component {
     //- Added SwatchbookContainer
     const { featureLine } = this.state;
     return (
-      <div>
-        <div className="rui navbar cart-navbar">
-          {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()}
+        <div>
+          <div className="nav-container w-container">
+          <div className="rui navbar cart-navbar">
+            {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()}
+            {this.props.visibility.search && this.renderSearchButton()}
+            {this.props.visibility.notifications && this.renderNotificationIcon()}
+
+            {this.props.visibility.currency && this.renderCurrency()}
+          </div>
+
+
+          <div className="nav-div w-clearfix">
+
+
+            {this.props.visibility.tags && this.renderTagNav()}
+
+        {this.props.visibility.mainDropdown && this.renderMainDropdown()}</div></div>
+          {featureLine.isEnabled && (
+            <div className="rui navbar feature-line" dangerouslySetInnerHTML={{__html: featureLine.content}} />
+          )}
+		   <SwatchbookContainer />
         </div>
-        <div className="rui navbar main-navbar">
-          {this.props.visibility.hamburger && this.renderHamburgerButton()}
-          {this.props.visibility.brand && this.renderBrand()}
-          {this.props.visibility.tags && this.renderTagNav()}
-          {this.props.visibility.search && this.renderSearchButton()}
-          {this.props.visibility.notifications && this.renderNotificationIcon()}
-          {this.props.visibility.languages && this.renderLanguage()}
-          {this.props.visibility.currency && this.renderCurrency()}
-          {this.props.visibility.mainDropdown && this.renderMainDropdown()}
-        </div>
-        {featureLine.isEnabled && (
-          <div className="rui navbar feature-line" dangerouslySetInnerHTML={{__html: featureLine.content}} />
-        )}
-        <SwatchbookContainer />
-      </div>
     );
   }
 }

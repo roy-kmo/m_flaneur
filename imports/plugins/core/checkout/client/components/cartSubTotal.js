@@ -74,11 +74,11 @@ class CartSubTotal extends Component {
           { isLoading && <Components.Loading/> }
           <table className={tableClass}>
             <thead>
-              <tr><th><Components.Translation defaultValue="Your cart" i18nKey="cartSubTotals.head" /></th></tr>
+              <tr><th><Components.Translation defaultValue="Your Bag" i18nKey="cartSubTotals.head" /></th></tr>
             </thead>
             <tbody>
               <tr>
-                <td><Components.Translation defaultValue="Items in cart" i18nKey="cartSubTotals.items" /></td>
+                <td><Components.Translation defaultValue="Items in bag" i18nKey="cartSubTotals.items" /></td>
                 <td>{this.source.cartCount}</td>
               </tr>
               <tr>
