@@ -404,20 +404,20 @@ class PickImageColorView extends Component {
           <div className="container-2 w-container">
             <div>
               <div className="div-block-17 w-clearfix">
-                  <h1 className="heading-3-no-tooltip-2">Upload an Image</h1>
+                  <h1 className="heading-3-no-tooltip-2">Refine Your Image</h1>
 
               </div>
               <div className="div-block-19">
-                <div className="text-block-15">You can refine it on the next page</div>
+                <div className="text-block-15">Select the colors to view product colors</div>
               </div>
             </div>
             <div>
               <div className="div-block-9coo">
                 <div className="div-block-15"><div style={{ display: 'table-cell', width: '50%', verticalAlign: 'top' }}>
-                  <div className="btn-group image-buttons" style={{ clear: 'both' }}>
-                    <button className="btn btn-default" onClick={onReplaceImageClick}>Replace Image</button>
-                    <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
-                  </div>
+                <div className="btn-group image-buttons" style={{ clear: 'both' }}>
+                  <button className="btn btn-default" onClick={onReplaceImageClick}>Replace Image</button>
+                  <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
+                </div>
                   <div style={{ display: 'block' }}>
                     <div
                       ref={elem => this.imageContainer = elem}
@@ -444,6 +444,7 @@ class PickImageColorView extends Component {
                         onLoad={this.onImageLoad}
                       />
                       <canvas ref={elem => this.imageCanvas = elem} id="image-canvas" style={{ display: 'none' }}></canvas>
+
                       {
                         pickerKey && (
                           <div
@@ -454,7 +455,7 @@ class PickImageColorView extends Component {
                               width: `${PREVIEW_SIZE}px`,
                               height: `${PREVIEW_SIZE}px`,
                               backgroundColor: picker.color,
-                              border: '1px dotted lightgray',
+                              border: '1px solid lightgray',
                               zIndex: 3,
                             }}
                           />
@@ -472,11 +473,7 @@ class PickImageColorView extends Component {
                 </div>
               </div>
             </div>
-            <div className="row-21 w-row">
-              <div className="w-col w-col-1"></div>
-              <div className="w-col w-col-10"><a href="#" className="link-back">Start over</a></div>
-              <div className="w-col w-col-1"></div>
-            </div>
+            
           </div>
         </div>
       </div>

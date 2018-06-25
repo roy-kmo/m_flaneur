@@ -50,9 +50,10 @@ export default class HomepageInfo extends Component {
   <input type="checkbox" id="list-item-3"/>
   <label htmlFor="list-item-3" className="heading-2-nav">Explore</label>
   <ul>
-    <a href="/supply-chain"><li>Supply Chain</li></a>
-    <a href="/using-color"><li>Using Color</li></a>
-    <a href="/FAQ"><li>FAQ</li></a>
+    <a href="/pages/supply-chain"><li>Supply Chain</li></a>
+    <a href="/pages/using-color"><li>Using Color</li></a>
+    <a href="/pages/FAQ"><li>FAQ</li></a>
+    <a href="/color-houses"><li>Color Houses</li></a>
   </ul>
 </li>
 </ul>
