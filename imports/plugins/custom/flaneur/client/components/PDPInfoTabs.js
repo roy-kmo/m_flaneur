@@ -53,7 +53,7 @@ class PDPInfoTabs extends Component {
 
   render () {
     const { product } = this.props;
-    const { description, dimensions, careInstructions } = product;
+    const { description, dimensions, careInstructions, craftsmanship } = product;
     const { activeTab, colorDescription } = this.state;
 
     const tabs = [{
@@ -70,6 +70,12 @@ class PDPInfoTabs extends Component {
       tabs.push({
         field: 'careInstructions',
         label: 'Care Instructions'
+      });
+    }
+    if (craftsmanship) {
+      tabs.push({
+        field: 'Craftsmanship',
+        label: 'Craftsmanship'
       });
     }
 

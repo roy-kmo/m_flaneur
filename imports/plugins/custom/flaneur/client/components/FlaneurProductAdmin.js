@@ -337,6 +337,14 @@ class FlaneurProductAdmin extends Component {
               />
             </div>
             <div className="rui form-group">
+              <label><span>Craftsmanship</span></label>
+              <ContentEditor
+                value={this.product.craftsmanship}
+                onChange={(value) => this.handleFieldChange(null, value, 'craftsmanship')}
+                onBlur={(value) => this.handleFieldBlur(null, this.product.craftsmanship, 'craftsmanship')}
+              />
+            </div>
+            <div className="rui form-group">
               <label><span>Page Content</span></label>
               <ContentEditor
                 value={this.product.pageContent}

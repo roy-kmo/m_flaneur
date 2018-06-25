@@ -55,13 +55,13 @@ export default class EnterPantoneView extends Component {
                       placeholder="12-3456 TCX"
                       onChange={onPantoneCodeChange}
                       value={pantoneCode}
-                    />
-                    <input type="submit" className="btn btn-primary" value="Submit" />
+                    /><br></br>
+                    <input type="submit" className="button panton w-button" value="Submit" />
                   </form>
                 </div>
                 </div>
               </div>
-            </div><a href="#" className="button panton w-button">View</a></div>
+            </div></div>
         </div>
       </div>
         <h1>Enter a Pantone Code</h1>
