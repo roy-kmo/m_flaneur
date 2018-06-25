@@ -32,14 +32,14 @@ export default class HomepageInfo extends Component {
         <ul className="landing">
 <li>
   <input type="checkbox" id="list-item-1"/>
-  <label for="list-item-1" className="heading-2-nav">Design</label>
+  <label htmlFor="list-item-1" className="heading-2-nav">Design</label>
   <ul>
     <a href="/design-your-bedding"><li>Design Your Bedding</li></a>
   </ul>
 </li>
 <li>
   <input type="checkbox" id="list-item-2"/>
-  <label for="list-item-2" className="heading-2-nav">Capsule</label>
+  <label htmlFor="list-item-2" className="heading-2-nav">Capsule</label>
   <ul>
     <a href="/product/sasha-bikoff"><li>Sasha Bikoff</li></a>
     <a href="/product/estee-stanley"><li>Estee Stanley</li></a>
@@ -48,7 +48,7 @@ export default class HomepageInfo extends Component {
 </li>
 <li>
   <input type="checkbox" id="list-item-3"/>
-  <label for="list-item-3" className="heading-2-nav">Explore</label>
+  <label htmlFor="list-item-3" className="heading-2-nav">Explore</label>
   <ul>
     <a href="/supply-chain"><li>Supply Chain</li></a>
     <a href="/using-color"><li>Using Color</li></a>

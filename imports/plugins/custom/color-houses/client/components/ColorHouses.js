@@ -42,7 +42,7 @@ export default class ColorHouses extends Component {
         <div className="w-col w-col-4">
           <div className="cr-block">
             <div className="static-title image-block">{title}</div>
-            <p className="paragraph french-seem">  <div className="description" dangerouslySetInnerHTML={{__html: description}} /></p>
+            <p className="color-house-p">  <div className="description" dangerouslySetInnerHTML={{__html: description}} /></p>
           </div>
         </div>
       </div>
