@@ -33,23 +33,13 @@ export default class HelpView extends Component {
                 <div data-w-id="38f658d3-bdab-30c1-6a3d-777d0556dc52" className="column-center-2 w-col w-col-4 option capsules" onClick={onCapsulesClick}><a href="#" className="link-2 column_center_link">See Designer Capsules</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
                 <div className="column-right-3 w-col w-col-3"><a href="/color-houses" className="link-2">See Color Houses</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
                 <div className="w-col w-col-1"></div>
+
               </div>
             </div>
           </div>
         </div>
-      </div>
-        <h1>I need inspiration.</h1>
-        <p className="title-desc">Select one.</p>
-        <div className="options-container">
-          <div className="option color-tips" onClick={onColorTipsClick}>
-            <h3>Get Color Tips</h3>
-          </div>
-          <div className="option capsules" onClick={onCapsulesClick}>
-            <h3>See Designer Capsules</h3>
-          </div>
-          <ColorHousesOption {...this.props} />
-        </div>
-        <BackLink {...this.props} />
+        <BackLink {...this.props} /></div>
+        
       </div>
     );
   }

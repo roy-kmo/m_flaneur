@@ -76,16 +76,7 @@ export default class IndexView extends Component {
           </div>
         </div>
       </div>
-        <h1>Bedding Builder</h1>
-        <p className="title-desc">Select one.</p>
-        <div className="options-container">
-          <div className="option have-color" onClick={onHaveClick}>
-            <h3>I have a color in mind</h3>
-          </div>
-          <div className="option need-help" onClick={onHelpClick}>
-            <h3>I need help finding a color</h3>
-          </div>
-        </div>
+      
       </div>
     );
   }

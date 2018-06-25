@@ -382,62 +382,105 @@ class PickImageColorView extends Component {
     const picker = pickerMap[`${pickerKey}`];
     return (
       <div className="view">
-        <h1>Pick a Color</h1>
-        <p className="title-desc">Use your cursor to pick a color from the image.</p>
-        <div style={{ display: 'table-cell', width: '50%', verticalAlign: 'top' }}>
-          <div className="btn-group image-buttons" style={{ clear: 'both' }}>
-            <button className="btn btn-default" onClick={onReplaceImageClick}>Replace Image</button>
-            <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
+      <div className="color-section">
+        <div className="row-20 w-row">
+          <div className="progress-bar w-col w-col-3">
+            <div className="progress-bar-div current"></div>
           </div>
-          <div style={{ display: 'block' }}>
-            <div
-              ref={elem => this.imageContainer = elem}
-              className="uploaded-image"
-              style={{
-                position: 'relative',
-                display: 'inline-block',
-                width: imageWidth ? `${imageWidth}px` : '100%',
-                height: `${imageHeight}px`,
-                zIndex: 1
-              }}
-            >
-              <img
-                ref={elem => this.imageElem = elem}
-                src={image} id="picker-image"
-                style={{
-                  position: imageWidth ? 'absolute' : 'static',
-                  display: 'block',
-                  cursor: 'crosshair',
-                  zIndex: 2,
-                  margin: imageWidth ? 'inherit' : '0 auto',
-                  maxWidth: '100%',
-                }}
-                onLoad={this.onImageLoad}
-              />
-              <canvas ref={elem => this.imageCanvas = elem} id="image-canvas" style={{ display: 'none' }}></canvas>
-              {
-                pickerKey && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
-                      width: `${PREVIEW_SIZE}px`,
-                      height: `${PREVIEW_SIZE}px`,
-                      backgroundColor: picker.color,
-                      border: '1px dotted lightgray',
-                      zIndex: 3,
-                    }}
-                  />
-                )
-              }
-              {this.dominantCursors()}
+          <div className="progress-bar w-col w-col-3">
+            <div className="progress-bar-div current"></div>
+          </div>
+          <div className="progress-bar w-col w-col-3">
+            <div className="progress-bar-div current"></div>
+          </div>
+          <div className="progress-bar w-col w-col-2">
+            <div className="progress-bar-div"></div>
+          </div>
+          <div className="progress-bar w-col w-col-1">
+            <div className="progress-bar-div"></div>
+          </div>
+        </div>
+        <div className="div-block-39">
+          <div className="container-2 w-container">
+            <div>
+              <div className="div-block-17 w-clearfix">
+                  <h1 className="heading-3-no-tooltip-2">Upload an Image</h1>
+
+              </div>
+              <div className="div-block-19">
+                <div className="text-block-15">You can refine it on the next page</div>
+              </div>
+            </div>
+            <div>
+              <div className="div-block-9coo">
+                <div className="div-block-15"><div style={{ display: 'table-cell', width: '50%', verticalAlign: 'top' }}>
+                  <div className="btn-group image-buttons" style={{ clear: 'both' }}>
+                    <button className="btn btn-default" onClick={onReplaceImageClick}>Replace Image</button>
+                    <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
+                  </div>
+                  <div style={{ display: 'block' }}>
+                    <div
+                      ref={elem => this.imageContainer = elem}
+                      className="uploaded-image"
+                      style={{
+                        position: 'relative',
+                        display: 'inline-block',
+                        width: imageWidth ? `${imageWidth}px` : '100%',
+                        height: `${imageHeight}px`,
+                        zIndex: 1
+                      }}
+                    >
+                      <img
+                        ref={elem => this.imageElem = elem}
+                        src={image} id="picker-image"
+                        style={{
+                          position: imageWidth ? 'absolute' : 'static',
+                          display: 'block',
+                          cursor: 'crosshair',
+                          zIndex: 2,
+                          margin: imageWidth ? 'inherit' : '0 auto',
+                          maxWidth: '100%',
+                        }}
+                        onLoad={this.onImageLoad}
+                      />
+                      <canvas ref={elem => this.imageCanvas = elem} id="image-canvas" style={{ display: 'none' }}></canvas>
+                      {
+                        pickerKey && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: 0,
+                              right: 0,
+                              width: `${PREVIEW_SIZE}px`,
+                              height: `${PREVIEW_SIZE}px`,
+                              backgroundColor: picker.color,
+                              border: '1px dotted lightgray',
+                              zIndex: 3,
+                            }}
+                          />
+                        )
+                      }
+                      {this.dominantCursors()}
+                    </div>
+                  </div>
+                </div>
+                <div style={{ display: 'table-cell', width: '50%', }}>
+                  {this.colorPickers()}
+                </div></div>
+                <div>
+
+                </div>
+              </div>
+            </div>
+            <div className="row-21 w-row">
+              <div className="w-col w-col-1"></div>
+              <div className="w-col w-col-10"><a href="#" className="link-back">Start over</a></div>
+              <div className="w-col w-col-1"></div>
             </div>
           </div>
         </div>
-        <div style={{ display: 'table-cell', width: '50%', }}>
-          {this.colorPickers()}
-        </div>
+      </div>
+
       </div>
     );
   }
