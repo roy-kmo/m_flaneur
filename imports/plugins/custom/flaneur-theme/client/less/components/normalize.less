@@ -1918,4 +1918,18 @@ button.rui.btn.btn-default.flat.button.swatchbook-remove-button {}
     margin-left: auto;
     text-align: center;
   }
+
 div.uploaded-image{max-width:800px;}
+
+
+@media only screen
+and (min-device-width : 375px)
+and (max-device-width : 667px) {
+  div.rui.item.full.start.axis.vertical.product-container-whole {
+  min-width: none;
+  margin: 50px auto 50px auto;
+  flex-direction:column;
+}
+.rui.media-gallery.featuredImage > div{height:auto;}
+.featuredImage{height:auto;}
+}
