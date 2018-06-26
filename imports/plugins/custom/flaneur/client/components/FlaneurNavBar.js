@@ -186,10 +186,10 @@ class FlaneurNavBar extends Component {
           <div className="nav-container w-container">
           <div className="rui navbar cart-navbar">
             {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()}
-            {this.props.visibility.search && this.renderSearchButton()}
+          
             {this.props.visibility.notifications && this.renderNotificationIcon()}
 
-            {this.props.visibility.currency && this.renderCurrency()}
+
           </div>
 
 
