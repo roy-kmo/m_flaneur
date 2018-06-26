@@ -14,72 +14,84 @@ export default class HaveView extends Component {
     const { onUploadClick, onEnterPantoneClick } = this.props;
 
     return (
-      <div className="view">
-      <div className="color-section">
-        <div className="row-20 w-row">
-          <div className="progress-bar w-col w-col-3">
-            <div className="progress-bar-div current"></div>
-          </div>
-          <div className="progress-bar w-col w-col-3">
-            <div className="progress-bar-div current"></div>
-          </div>
-          <div className="progress-bar w-col w-col-3">
-            <div className="progress-bar-div"></div>
-          </div>
-          <div className="progress-bar w-col w-col-2">
-            <div className="progress-bar-div"></div>
-          </div>
-          <div className="progress-bar w-col w-col-1">
-            <div className="progress-bar-div"></div>
-          </div>
+<div className="view">
+  <div className="bedding-builder-section">
+    <div className="progressbarrow w-row">
+      <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
+        <div className="progress-bar-div current"></div>
+      </div>
+      <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
+        <div className="progress-bar-div current"></div>
+      </div>
+      <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
+        <div className="progress-bar-div"></div>
+      </div>
+      <div className="progress-bar w-col w-col-2 w-col-medium-2 w-col-small-2 w-col-tiny-2">
+        <div className="progress-bar-div"></div>
+      </div>
+      <div className="progress-bar w-col w-col-1 w-col-medium-1 w-col-small-1 w-col-tiny-1">
+        <div className="progress-bar-div"></div>
+      </div>
+    </div>
+    <div className="div-block-39">
+      <div className="div-block-9">
+        <div className="div-block-17-no-tooltip">
+          <h1 className="heading-3-no-tooltip-2">I know what (color) I want.</h1>
         </div>
-        <div className="div-block-39">
-          <div className="div-block-9">
-            <div className="div-block-17-no-tooltip">
-              <h1 className="heading-3-no-tooltip-2">I have a color in mind.</h1>
-            </div>
-            <div className="div-block-19">
-              <div className="text-block-15">Select one.</div>
-            </div>
-          </div>
-          <div className="w-container">
-            <div className="div-block-40">
-              <div className="row-11 w-row">
-                <div className="w-col w-col-1"></div>
-                <div className="column-center-2 w-col w-col-3 option upload-image" onClick={onUploadClick}><a href="#" className="link-2">Upload an Image</a>
-                  <div data-hover="1" data-delay="0" className="dropdown-10 w-dropdown">
-                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="/images/question-mark-1question-mark.png" className="question-centered" width="19"/></div>
-                    <nav className="dropdown-list-10 w-dropdown-list">
-                      <div className="text-block-41">Already have an image in mind? Upload and start with that.</div>
-                    </nav>
-                  </div>
-                </div>
-                <div data-w-id="752a8a1c-d23e-4816-c8bd-fce5379942c9" className="column-center-2 w-col w-col-4 option enter-pantone" onClick={onEnterPantoneClick}><a href="#" className="link-2 column_center_link">Enter Pantone Code</a>
-                  <div data-hover="1" data-delay="0" className="dropdown-10 w-dropdown">
-                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="/images/question-mark-1question-mark.png" className="question-centered" width="19"/></div>
-                    <nav className="dropdown-list-10 w-dropdown-list">
-                      <div className="text-block-41">The standard has already been set. Add the Pantone number here.</div>
-                    </nav>
-                  </div>
-                </div>
-                <div className="column-right-3 w-col w-col-3"><a href="/color-houses" className="link-2">See Color Houses</a>
-                  <div data-hover="1" data-delay="0" className="dropdown-10 w-dropdown">
-                    <div className="dropdown-toggle-7 w-dropdown-toggle"><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
-                    <nav className="dropdown-list-10 w-dropdown-list">
-                      <div className="text-block-41">The stories of our color palettes live here. Get inspired.</div>
-                    </nav>
-                  </div>
-                </div>
-                <div className="w-col w-col-1"></div>
+        <div className="div-block-19">
+          <div className="text-block-15">Select one.</div>
+        </div>
+      </div>
+      <div className="bedding-container-whole w-container">
+        <div className="bedding-builder-holder">
+          <div className="row-bedding w-row">
+            <div className="bedding-builder-3-column w-col w-col-1 w-col-stack"></div>
+            <div className="bedding-builder-3-column w-col w-col-3 w-col-stack">
+              <div className="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="259" srcset="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="220px" className="bedding-oval-shape"/>
+                <div className="bedding-build-1-line option upload-image" onClick={onUploadClick}><a href="#" className="bedding-link">Upload Image</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
               </div>
-                <BackLink {...this.props} />
-
             </div>
-            <BackLink {...this.props} /></div>
+            <div className="bedding-builder-3-column w-col w-col-4 w-col-stack">
+              <div className="bedding-builder-containerblock"><img src="/images/Oval-23.png" width="259" className="bedding-oval-shape"/>
+                <div className="bedding-build-1-line option enter-pantone" onClick={onEnterPantoneClick}><a href="#" className="bedding-link">Enter Pantone Code</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+              </div>
+            </div>
+            <div className="bedding-builder-3-column w-col w-col-3 w-col-stack">
+              <div className="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="259" srcset="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="220px" className="bedding-oval-shape"/>
+                <div className="bedding-build-1-line"><a href="/color-houses" className="bedding-link">View Color Houses</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+              </div>
+            </div>
+            <div className="bedding-builder-3-column w-col w-col-1 w-col-stack"></div>
+          </div>
         </div>
       </div>
-
+    </div>
+    <div className="help-block w-container">
+      <div className="row-28 w-row">
+        <div className="column-22 w-col w-col-4">
+          <div>
+            <h1 className="heading-7">Chat with us</h1>
+            <p className="paragraph-3">Our concierge is available to assist you with color selections and more. </p><a href="#" className="side-button">Chat</a></div>
+        </div>
+        <div className="column-22 w-col w-col-4">
+          <div>
+            <h1 className="heading-7">Get color tips</h1>
+            <p className="paragraph-3">Get practical expert color advice from interior design insiders.</p>
+          </div><a href="#" className="side-button">See Color Tips</a></div>
+        <div className="column-22 w-col w-col-4">
+          <div>
+            <h1 className="heading-7">Explore the blog</h1>
+            <p className="paragraph-3">Read our blog for color inspiration, how-to guides, and much more. </p><a href="#" className="side-button">Go to Salon</a></div>
+        </div>
       </div>
+    </div>
+  </div>
+    <BackLink {...this.props} />
+    <BackLink {...this.props} />
+</div>
+
+
+
     );
   }
 }

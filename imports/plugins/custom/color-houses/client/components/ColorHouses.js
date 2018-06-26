@@ -21,7 +21,7 @@ export default class ColorHouses extends Component {
       onSwatchbookAddClick
     } = this.props;
     return (
-<div id="color-houses-container">
+<div className="color-house-container-box w-container">
         <h1>Color Houses</h1>
         {colorHouses.length && colorHouses.map(colorHouse => {
           const {
@@ -34,20 +34,21 @@ export default class ColorHouses extends Component {
           const imageURL = getImageURL(imageFileId, imageFileName);
 
           return (
-            <div className="color-container" key={colorHouse._id}>
+        <div className="color-house-box" key={colorHouse._id}>
+          <div className="colorhouse-view">
       <div className="color-house-block w-row">
-        <div className="w-col w-col-8"> <img src={imageURL} alt={title} />
-          <div className="french-seam-footer"></div>
+        <div className="color-house-image-column w-col w-col-8"> <img src={imageURL} alt={title} />
         </div>
-        <div className="w-col w-col-4">
+        <div className="color-house-detail-column w-col w-col-4">
           <div className="cr-block">
             <div className="static-title image-block">{title}</div>
-            <p className="color-house-p">  <div className="description" dangerouslySetInnerHTML={{__html: description}} /></p>
+          <p className="color-house-description" dangerouslySetInnerHTML={{__html: description}} />
           </div>
         </div>
       </div>
-      <div className="row-29 w-row">
-        <div className="w-col w-col-15">
+
+      <div className="colors-container-box">
+        <div className="color-box w-inline-block">
         {colors.map(color => {
           const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
           return (
@@ -66,7 +67,7 @@ export default class ColorHouses extends Component {
           );
         })}
         </div>
-
+</div>
       </div>
     </div>
 
