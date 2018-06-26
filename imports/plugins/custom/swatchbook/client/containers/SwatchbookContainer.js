@@ -46,7 +46,7 @@ class SwatchbookContainer extends Component {
     return (
 
       <div className="swatchbook-drawer-container" ref={ref => this.container = ref}>
-    
+
           <div className="cart-drawer-swiper-slide swatch">
 
           {!colors.length && (
@@ -55,9 +55,8 @@ class SwatchbookContainer extends Component {
           {colors.map(color => {
             const { _id, name, hexCode, slug, pantoneCode, pdpURL } = color;
             return (
-                <div className="cart-items swatch">
-                <ColorLink
-                key={_id}
+            <div className="cart-items swatch" key={_id}>
+              <ColorLink
                 _id={_id}
                 name={name}
                 hexCode={hexCode}
@@ -66,7 +65,8 @@ class SwatchbookContainer extends Component {
                 pdpURL={pdpURL}
                 isInSwatchbook={true}
                 onSwatchbookRemoveClick={handleSwatchbookRemoveClick}
-              /></div>
+              />
+            </div>
             );
           })}
           <button
@@ -75,7 +75,7 @@ class SwatchbookContainer extends Component {
             <i className="rui font-icon fa fa-plus fa-3x"></i>
           </button>
 
-      
+
       </div>
       </div>
     );

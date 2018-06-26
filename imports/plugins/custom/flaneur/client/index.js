@@ -49,4 +49,19 @@ import './containers/FlaneurProductDetailContainer';
 
 Meteor.startup(function () {
   Blaze.render(Template.intercom, $('body')[0]);
+
+  // Intercept internal link clicks, using Reaction's Router
+  $(document).ready(() => {
+    Meteor.setTimeout(function () {
+      $('a').on('click', e => {
+        alert('test');
+      	const link = e.target;
+      	const href = link.getAttribute('href');
+      	if (href.startsWith('/')) {
+      		e.preventDefault();
+      		ReactionRouter.go(href);
+        }
+      });
+    }, 2000);
+  })
 });
