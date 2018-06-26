@@ -10,25 +10,48 @@
  class FlaneurVariantList extends Component {
     // Customization: automatically click first child variant
     componentDidMount () {
-      this.autoClickFirstVariant();
+      if (!this.props.variants || !this.props.variants.length) {
+        return;
+      }
+      const firstVariant = this.props.variants[0];
+      this.autoClickVariant(firstVariant);
     }
 
-    autoClickFirstVariant = () => {
-      const firstVariant = this.props.variants[0];
+    autoClickVariant = variant => {
       const firstChild = this.props.childVariants.find(childVariant => {
-        return childVariant.ancestors.includes(firstVariant._id);
+        return childVariant.ancestors.includes(variant._id);
       });
 
-      if (firstVariant && firstChild) {
+      if (variant && firstChild) {
         this.handleChildVariantClick(null, firstChild, 1);
       }
-    }
+    };
 
     componentDidUpdate (prevProps) {
-      const prevFirstVariantId = prevProps.variants[0]._id;
-      const currentFirstVariantId = this.props.variants[0]._id;
-      if (currentFirstVariantId !== prevFirstVariantId) {
-        this.autoClickFirstVariant();
+      if (!this.props.variants || !this.props.variants.length) {
+        return;
+      }
+
+      const { variantIsSelected } = this.props;
+
+      // If no child variant is selected, auto-select the first
+      const selectedVariant = this.props.variants.find(variant => {
+        return variantIsSelected(variant._id);
+      });
+      if (selectedVariant) {
+        // A parent variant is selected, determine if one of its child variant is
+        let isAnyChildSelected = false;
+        const childVariants = this.props.childVariants.filter(childVariant => {
+          return childVariant.ancestors.includes(selectedVariant._id);
+        });
+        childVariants.forEach(childVariant => {
+          if (variantIsSelected(childVariant._id)) {
+            isAnyChildSelected = true;
+          }
+        });
+        if (isAnyChildSelected === false) {
+          this.autoClickVariant(selectedVariant);
+        }
       }
     }
 
