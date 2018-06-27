@@ -1129,20 +1129,7 @@ textarea.w-select {
     position: static;
   }
 }
-/**
- * ## Note
- * Safari (on both iOS and OS X) does not handle viewport units (vh, vw) well.
- * For example percentage units do not work on descendants of elements that
- * have any dimensions expressed in viewport units. It also doesn’t handle them at
- * all in `calc()`.
- */
-/**
- * Wrapper around all lightbox elements
- *
- * 1. Since the lightbox can receive focus, IE also gives it an outline.
- * 2. Fixes flickering on Chrome when a transition is in progress
- *    underneath the lightbox.
- */
+
 .w-lightbox-backdrop {
   color: #000;
   cursor: auto;
@@ -1330,7 +1317,7 @@ textarea.w-select {
 }
 /*
  * 1. We use content-box to avoid having to do `width: calc(10vh + 2vw)`
- *    which doesn’t work in Safari anyway.
+ *    which doesn't work in Safari anyway.
  * 2. Chrome renders images pixelated when switching to GPU. Making sure
  *    the parent is also rendered on the GPU (by setting translate3d for
  *    example) fixes this behavior.
@@ -3045,20 +3032,7 @@ textarea.w-select {
     position: static;
   }
 }
-/**
- * ## Note
- * Safari (on both iOS and OS X) does not handle viewport units (vh, vw) well.
- * For example percentage units do not work on descendants of elements that
- * have any dimensions expressed in viewport units. It also doesn’t handle them at
- * all in `calc()`.
- */
-/**
- * Wrapper around all lightbox elements
- *
- * 1. Since the lightbox can receive focus, IE also gives it an outline.
- * 2. Fixes flickering on Chrome when a transition is in progress
- *    underneath the lightbox.
- */
+
 .w-lightbox-backdrop {
   color: #000;
   cursor: auto;
@@ -3246,7 +3220,7 @@ textarea.w-select {
 }
 /*
  * 1. We use content-box to avoid having to do `width: calc(10vh + 2vw)`
- *    which doesn’t work in Safari anyway.
+ *    which doesn't work in Safari anyway.
  * 2. Chrome renders images pixelated when switching to GPU. Making sure
  *    the parent is also rendered on the GPU (by setting translate3d for
  *    example) fixes this behavior.
@@ -4894,23 +4868,11 @@ textarea.w-select {
     position: static;
   }
 }
-/**
- * ## Note
- * Safari (on both iOS and OS X) does not handle viewport units (vh, vw) well.
- * For example percentage units do not work on descendants of elements that
- * have any dimensions expressed in viewport units. It also doesn’t handle them at
- * all in `calc()`.
- */
-/**
- * Wrapper around all lightbox elements
- *
- * 1. Since the lightbox can receive focus, IE also gives it an outline.
- * 2. Fixes flickering on Chrome when a transition is in progress
- *    underneath the lightbox.
- */
+
 .w-lightbox-backdrop {
   color: #000;
   cursor: auto;
+  border:none;
   font-family: serif;
   font-size: medium;
   font-style: normal;
@@ -5095,7 +5057,7 @@ textarea.w-select {
 }
 /*
  * 1. We use content-box to avoid having to do `width: calc(10vh + 2vw)`
- *    which doesn’t work in Safari anyway.
+ *    which doesn't work in Safari anyway.
  * 2. Chrome renders images pixelated when switching to GPU. Making sure
  *    the parent is also rendered on the GPU (by setting translate3d for
  *    example) fixes this behavior.
