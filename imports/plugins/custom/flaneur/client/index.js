@@ -47,6 +47,7 @@ import './components/FlaneurCoreLayout';
 import './components/FlaneurCompletedOrder';
 import './containers/ProductNavTabsContainer';
 import './containers/FlaneurProductDetailContainer';
+import './lib/webflow';
 
 Meteor.startup(function () {
   Blaze.render(Template.intercom, $('body')[0]);
