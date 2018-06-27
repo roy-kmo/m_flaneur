@@ -44,6 +44,7 @@ import './components/FlaneurCompletedOrderItem';
 import './components/FlaneurCartItems';
 import './components/FlaneurLineItems';
 import './components/FlaneurCoreLayout';
+import './components/FlaneurCompletedOrder';
 import './containers/ProductNavTabsContainer';
 import './containers/FlaneurProductDetailContainer';
 import './lib/webflow';
@@ -57,7 +58,7 @@ Meteor.startup(function () {
       $('a').on('click', e => {
       	const link = e.target;
       	const href = link.getAttribute('href');
-      	if (href.startsWith('/')) {
+      	if (href && href.startsWith('/')) {
       		e.preventDefault();
       		ReactionRouter.go(href);
         }
