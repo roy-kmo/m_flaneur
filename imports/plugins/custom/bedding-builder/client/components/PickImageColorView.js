@@ -126,7 +126,7 @@ class PickImageColorView extends Component {
 
   getPantoneCodes(rgbList, callback) {
     const pantoneCodesList = rgbList.map((rgb) => {
-      const matches = new hexToPantone(rgb, 1);
+      const matches = new hexToPantone(rgb, 3);
       return matches.map(match => `${match} TCX`);
     });
     Meteor.call('Colors.getByPantoneCodesList', pantoneCodesList, (err, imageColorsList) => {
@@ -473,7 +473,7 @@ class PickImageColorView extends Component {
                 </div>
               </div>
             </div>
-            
+
           </div>
         </div>
       </div>

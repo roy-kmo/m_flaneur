@@ -3,7 +3,7 @@ import { Meteor } from "meteor/meteor";
 import { Session } from "meteor/session";
 import { Orders } from "/lib/collections";
 import { Reaction } from "/client/api";
-import { registerComponent, composeWithTracker } from "@reactioncommerce/reaction-components";
+import { composeWithTracker } from "@reactioncommerce/reaction-components";
 import CompletedOrder from "../components/completedOrder";
 
 function composer(props, onData) {
@@ -51,9 +51,5 @@ function composer(props, onData) {
     }
   }
 }
-
-registerComponent("CompletedOrder", CompletedOrder, [
-  composeWithTracker(composer)
-]);
 
 export default compose(composeWithTracker(composer))(CompletedOrder);

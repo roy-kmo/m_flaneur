@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import CompletedOrder from "../../../checkout/client/components/completedOrder";
+import { Components } from "@reactioncommerce/reaction-components";
 
 /**
  * @summary React component to display an array of completed orders
@@ -18,6 +18,7 @@ class OrdersList extends Component {
 
   render() {
     const { allOrdersInfo } = this.props;
+    console.log('OrdersList');
 
     if (allOrdersInfo) {
       return (
@@ -25,7 +26,7 @@ class OrdersList extends Component {
           {allOrdersInfo.map((order) => {
             const orderKey = order.orderId;
             return (
-              <CompletedOrder
+              <Components.CompletedOrder
                 key={orderKey}
                 shops={order.shops}
                 order={order.order}

@@ -1,10 +1,17 @@
+/**
+ * @file
+ * Customized core CompletedOrder component
+ * Added order status
+ */
+
+
 import React from "react";
 import PropTypes from "prop-types";
-import { registerComponent, Components } from "@reactioncommerce/reaction-components";
-import CompletedShopOrders from "./completedShopOrders";
-import CompletedOrderPaymentMethod from "./completedOrderPaymentMethods";
-import CompletedOrderSummary from "./completedOrderSummary";
-import AddEmail from "./addEmail";
+import { replaceComponent, Components } from "@reactioncommerce/reaction-components";
+import CompletedShopOrders from "/imports/plugins/core/checkout/client/components/completedShopOrders";
+import CompletedOrderPaymentMethod from "/imports/plugins/core/checkout/client/components/completedOrderPaymentMethods";
+import CompletedOrderSummary from "/imports/plugins/core/checkout/client/components/completedOrderSummary";
+import AddEmail from "/imports/plugins/core/checkout/client/components/addEmail";
 
 /**
  * @summary Displays a summary/information about the order the user has just completed
@@ -17,7 +24,7 @@ import AddEmail from "./addEmail";
  * @property {Booleam} isProfilePage - A boolean value that checks if current page is user profile page
  * @return {Node} React node containing the top-level component for displaying the completed order/receipt page
  */
-const CompletedOrder = ({ order, shops, orderSummary, paymentMethods, isProfilePage }) => {
+const FlaneurCompletedOrder = ({ order, shops, orderSummary, paymentMethods, isProfilePage }) => {
   if (!order) {
     return (
       <Components.NotFound
@@ -45,9 +52,15 @@ const CompletedOrder = ({ order, shops, orderSummary, paymentMethods, isProfileP
     );
   }
 
+  const { status } = order.workflow;
+  const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
+
   return (
     <div className="container order-completed">
       { headerText }
+      <div className="order-details-header">
+        <p><strong>Status:</strong> {statusLabel}</p>
+      </div>
       <div className="order-details-main">
         <div className="order-details-content-title">
           <p><Components.Translation defaultValue="Your Items" i18nKey={"cartCompleted.yourItems"} /></p>
@@ -105,7 +118,7 @@ const CompletedOrder = ({ order, shops, orderSummary, paymentMethods, isProfileP
   );
 };
 
-CompletedOrder.propTypes = {
+FlaneurCompletedOrder.propTypes = {
   isProfilePage: PropTypes.bool,
   order: PropTypes.object,
   orderSummary: PropTypes.object,
@@ -113,6 +126,6 @@ CompletedOrder.propTypes = {
   shops: PropTypes.array
 };
 
-registerComponent('CompletedOrder', CompletedOrder);
+replaceComponent('CompletedOrder', FlaneurCompletedOrder);
 
-export default CompletedOrder;
+export default FlaneurCompletedOrder;
