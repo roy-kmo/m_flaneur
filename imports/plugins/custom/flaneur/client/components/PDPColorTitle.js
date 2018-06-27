@@ -50,7 +50,7 @@ class PDPColorTitle extends Component {
     return (
       <div>
         {name && (
-          <h3 className="pdp-color-name">{name}</h3>
+          <h3 className="pdp-color-name"><div id="pdp-color-name-background">{name}</div></h3>
         )}
       </div>
     );
