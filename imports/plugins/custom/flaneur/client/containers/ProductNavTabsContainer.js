@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { registerComponent } from '@reactioncommerce/reaction-components';
 import { Products } from '/lib/collections';
+import { doesProductHaveOneOfTags } from '/imports/plugins/custom/flaneur/lib/products';
 
 export default class ProductNavTabsContainer extends Component {
 
@@ -43,6 +44,11 @@ export default class ProductNavTabsContainer extends Component {
   render () {
     const { product } = this.props;
     const { products } = this.state;
+
+    if (doesProductHaveOneOfTags(product, ['capsule', 'bundle', 'swatch-box', 'swatchbox'])) {
+      return ( <div></div> );
+    }
+
     const pathParts = window.location.pathname.split('/');
     const lastPathArg = pathParts[pathParts.length - 1];
     const pathColor = lastPathArg !== product.handle && `/${lastPathArg}` || '';
