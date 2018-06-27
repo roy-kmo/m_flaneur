@@ -10,6 +10,9 @@
  class FlaneurVariantList extends Component {
     // Customization: automatically click first child variant
     componentDidMount () {
+      if (this.props.viewAs !== 'customer') {
+        return;
+      }
       if (!this.props.variants || !this.props.variants.length) {
         return;
       }
@@ -28,6 +31,9 @@
     };
 
     componentDidUpdate (prevProps) {
+      if (this.props.viewAs !== 'customer') {
+        return;
+      }
       if (!this.props.variants || !this.props.variants.length) {
         return;
       }
