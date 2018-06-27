@@ -100,7 +100,7 @@
         "DaPnrGybWWbAaayeg"
     ],
     "type" : "variant",
-    "title" : "No Pillowcase",
+    "title" : "Queen - No Pillowcase",
     "price" : 400,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -129,7 +129,7 @@
         "DaPnrGybWWbAaayeg"
     ],
     "type" : "variant",
-    "title" : "With Pillowcase",
+    "title" : "Queen - With Pillowcase",
     "price" : 425,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -186,7 +186,7 @@
         "rHuaP45RuuuzozvGB"
     ],
     "type" : "variant",
-    "title" : "No Pillowcase",
+    "title" : "King - No Pillowcase",
     "price" : 450,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -215,7 +215,7 @@
         "rHuaP45RuuuzozvGB"
     ],
     "type" : "variant",
-    "title" : "With Pillowcase",
+    "title" : "King - With Pillowcase",
     "price" : 475,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -272,7 +272,7 @@
         "8c7N2kgNJXHMoJDGv"
     ],
     "type" : "variant",
-    "title" : "No Pillowcase",
+    "title" : "CA King - No Pillowcase",
     "price" : 475,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -301,7 +301,7 @@
         "8c7N2kgNJXHMoJDGv"
     ],
     "type" : "variant",
-    "title" : "With Pillowcase",
+    "title" : "CA King - With Pillowcase",
     "price" : 500,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -358,7 +358,7 @@
         "TxNvEbrjSRuaZHd6H"
     ],
     "type" : "variant",
-    "title" : "No Pillowcase",
+    "title" : "Queen - No Pillowcase",
     "price" : 360,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -387,7 +387,7 @@
         "TxNvEbrjSRuaZHd6H"
     ],
     "type" : "variant",
-    "title" : "With Pillowcase",
+    "title" : "Queen - With Pillowcase",
     "price" : 385,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -444,7 +444,7 @@
         "37aiXY3a6SpSPcxXd"
     ],
     "type" : "variant",
-    "title" : "No Pillowcase",
+    "title" : "King - No Pillowcase",
     "price" : 390,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -473,7 +473,7 @@
         "37aiXY3a6SpSPcxXd"
     ],
     "type" : "variant",
-    "title" : "With Pillowcase",
+    "title" : "King - With Pillowcase",
     "price" : 415,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -530,7 +530,7 @@
         "79PgPJQ3yhMQwZnYi"
     ],
     "type" : "variant",
-    "title" : "No Pillowcase",
+    "title" : "CA King - No Pillowcase",
     "price" : 400,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
@@ -559,7 +559,7 @@
         "79PgPJQ3yhMQwZnYi"
     ],
     "type" : "variant",
-    "title" : "With Pillowcase",
+    "title" : "CA King - With Pillowcase",
     "price" : 425,
     "inventoryQuantity" : 100,
     "isDeleted" : false,
