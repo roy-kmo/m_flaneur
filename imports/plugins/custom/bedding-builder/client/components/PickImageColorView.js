@@ -327,9 +327,12 @@ class PickImageColorView extends Component {
         color = '#ffffff';
       }
 
+      let className = color ? '' : 'color-transition';
+
       if (key === pickerKey) {
         const invertedColor = this.invertColor(color);
         style.border = `2px dotted ${invertedColor}`;
+        className += className && ' active-picker-color' || 'active-picker-color';
       }
 
       const swatchbookColorIds = Meteor.user().profile.swatchbookColorIds || [];
@@ -341,7 +344,7 @@ class PickImageColorView extends Component {
           <div
             key={`picker_${key}`}
             style={style}
-            className={color ? '' : 'color-transition'}
+            className={className}
             onClick={() => this.selectColorPicker(key, color)}
           />
           {
