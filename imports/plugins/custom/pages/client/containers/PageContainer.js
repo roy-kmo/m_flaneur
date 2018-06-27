@@ -16,11 +16,19 @@ export default class PageContainer extends Component {
   }
 
   componentDidMount () {
-    Meteor.call('Pages.get', Router.getParam('path'), (err, page) => {
+    const path = Router.getParam('path');
+    this.loadPage(path);
+  }
+
+  loadPage = path => {
+    Meteor.call('Pages.get', path, (err, page) => {
       if (err) {
         alert(err.reason);
       } else if (page) {
-        this.setState(page);
+        this.setState({
+          path,
+          ...page
+        });
         // Add meta description
         Reaction.DOM.setMetaTag({
           name: 'description',
@@ -34,6 +42,13 @@ export default class PageContainer extends Component {
         this.setState({ isNotFound: true });
       }
     });
+  };
+
+  componentDidUpdate () {
+    const path = Router.getParam('path');
+    if (path !== this.state.path) {
+      this.loadPage(path);
+    }
   }
 
   render () {
