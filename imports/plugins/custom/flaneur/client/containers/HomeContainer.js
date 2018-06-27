@@ -21,6 +21,7 @@ export default class HomeContainer extends Component {
     const { homepageInfo } = this.state;
 
     return (
+
       <div id="home-container">
         {homepageInfo.title && <HomepageInfo info={homepageInfo} />}
       </div>
