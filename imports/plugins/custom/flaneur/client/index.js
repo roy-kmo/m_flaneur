@@ -54,7 +54,6 @@ Meteor.startup(function () {
   $(document).ready(() => {
     Meteor.setTimeout(function () {
       $('a').on('click', e => {
-        alert('test');
       	const link = e.target;
       	const href = link.getAttribute('href');
       	if (href.startsWith('/')) {
