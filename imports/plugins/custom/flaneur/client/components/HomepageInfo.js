@@ -30,7 +30,7 @@ export default class HomepageInfo extends Component {
       <div className="div-landing w-clearfix">
         <div className="landing-drops">
         <div className="intro"> Welcome to a world of color.</div>
-        <div className="start">Start here:</div>
+        <div className="start">START HERE</div>
           <ul className="landing">
             <li>
               <input type="checkbox" id="list-item-1"/>
