@@ -108,9 +108,12 @@ class PickImageColorView extends Component {
     };
     if (pixelSelected) {
       updateState.pickerKey = null;
+      if (!paletteMap[pickerKey]) {
+        return;
+      }
       this.getPantoneCodes([color], (imageColorsList) => {
         if (imageColorsList && imageColorsList.length && imageColorsList[0] && imageColorsList[0][0]) {
-          paletteMap[pickerKey].pantone = imageColorsList[0][0];
+          paletteMap[pickerKey].pantones = imageColorsList[0];
           updateState.paletteMap = paletteMap;
           this.setState(updateState);
         }
@@ -191,7 +194,7 @@ class PickImageColorView extends Component {
               imageColorsList.forEach((imageColors) => {
                 paletteMap[`${mapIndex}`].delta = delta;
                 if (imageColors && imageColors.length) {
-                  paletteMap[`${mapIndex}`].pantone = imageColors[0];
+                  paletteMap[`${mapIndex}`].pantones = imageColors;
                 }
                 mapIndex++;
               });
@@ -301,7 +304,7 @@ class PickImageColorView extends Component {
     const pickers = [];
     for (let key of Object.keys(paletteMap)) {
       const item = paletteMap[key];
-      const pantone = item.pantone;
+      const pantones = item.pantones;
 
       const picker = pickerMap[`${key}`];
       let color;
@@ -342,7 +345,7 @@ class PickImageColorView extends Component {
             onClick={() => this.selectColorPicker(key, color)}
           />
           {
-            pantone && (
+            pantones.length && pantones.map(pantone => (
               <ColorLink
                 key={pantone._id}
                 _id={pantone._id}
@@ -355,7 +358,7 @@ class PickImageColorView extends Component {
                 onSwatchbookAddClick={handleSwatchbookAddClick}
                 onSwatchbookRemoveClick={handleSwatchbookRemoveClick}
               />
-            )
+            ))
           }
         </div>
       );
@@ -405,7 +408,6 @@ class PickImageColorView extends Component {
             <div>
               <div className="div-block-17 w-clearfix">
                   <h1 className="heading-3-no-tooltip-2">Refine Your Image</h1>
-
               </div>
               <div className="div-block-19">
                 <div className="text-block-15">Select the colors to view product colors</div>
