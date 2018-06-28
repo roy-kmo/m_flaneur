@@ -69,11 +69,11 @@ export default class IndexView extends Component {
           <div>
             <h1 className="heading-7">Get color tips</h1>
             <p className="paragraph-3">Get practical expert color advice from interior design insiders.</p>
-          </div><a href="#" className="side-button">See Color Tips</a></div>
+          </div><a href="/pages/using-color" className="side-button">See Color Tips</a></div>
         <div className="column-22 w-col w-col-4">
           <div>
             <h1 className="heading-7">Explore the blog</h1>
-            <p className="paragraph-3">Read our blog for color inspiration, how-to guides, and much more. </p><a href="#" className="side-button">Go to Salon</a></div>
+            <p className="paragraph-3">Read our blog for color inspiration, how-to guides, and much more. </p><a href="www.hiflaneur.com/salon" className="side-button">Go to Salon</a></div>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@
  */
 
 export default function blocks() {
+
   return [
 
   // Header block (Full Width)
@@ -71,7 +72,7 @@ export default function blocks() {
     }
   ]
 },
-  
+
     // Media block
     // Contains
     // - Medai Gallery

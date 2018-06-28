@@ -186,7 +186,7 @@ class FlaneurNavBar extends Component {
           <div className="nav-container w-container">
           <div className="rui navbar cart-navbar">
             {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()}
-          
+
             {this.props.visibility.notifications && this.renderNotificationIcon()}
 
 
@@ -194,11 +194,10 @@ class FlaneurNavBar extends Component {
 
 
           <div className="nav-div w-clearfix">
-
-
-            {this.props.visibility.tags && this.renderTagNav()}
-
-        {this.props.visibility.mainDropdown && this.renderMainDropdown()}</div></div>
+          <div id="menu-and-accounts-container">
+                        {this.props.visibility.tags && this.renderTagNav()}
+                        {this.props.visibility.mainDropdown && this.renderMainDropdown()}
+                      </div></div></div>
           {featureLine.isEnabled && (
             <div className="rui navbar feature-line" dangerouslySetInnerHTML={{__html: featureLine.content}} />
           )}
