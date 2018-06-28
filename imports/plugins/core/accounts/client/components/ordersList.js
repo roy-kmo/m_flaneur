@@ -18,7 +18,6 @@ class OrdersList extends Component {
 
   render() {
     const { allOrdersInfo } = this.props;
-    console.log('OrdersList');
 
     if (allOrdersInfo) {
       return (
