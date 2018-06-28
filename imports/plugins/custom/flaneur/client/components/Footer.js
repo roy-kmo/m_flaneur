@@ -64,8 +64,8 @@ export default class Footer extends Component {
               <div className="text-block footer">Receive exclusive access to promotions, collection announcements, tips, designer interviews, and more.</div>
               <div className="w-form">
 
-                  <div className="w-row">
-                   <MailchimpSubscribe url={Meteor.settings.public.mailchimpFormURL || ''} />
+                  <div className="w-row"><div className="mailchimpe-container">
+                   <MailchimpSubscribe url={Meteor.settings.public.mailchimpFormURL || ''} /></div>
                   </div>
 
 

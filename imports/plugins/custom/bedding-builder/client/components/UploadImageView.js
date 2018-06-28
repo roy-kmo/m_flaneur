@@ -54,18 +54,12 @@ export default class UploadImageView extends Component {
             </div>
             <div className="row-21 w-row">
               <div className="w-col w-col-1"></div>
-              <div className="w-col w-col-10"><a href="#" className="link-back">Start over</a></div>
+              <div className="w-col w-col-10"><a href="#" className="link-back"> <BackLink {...this.props} /></a></div>
               <div className="w-col w-col-1"></div>
             </div>
           </div>
         </div>
       </div>
-        <h1>Upload an Image</h1>
-        <p className="title-desc">You will be able to pull colors from the image on the next page.</p>
-        <div className="image-uploader">
-          <input type="file" onChange={onImageChange} />
-        </div>
-        <BackLink {...this.props} />
       </div>
     );
   }
