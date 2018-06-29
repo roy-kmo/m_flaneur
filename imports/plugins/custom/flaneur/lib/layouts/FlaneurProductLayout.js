@@ -56,7 +56,7 @@ export default function blocks() {
            {
              component: "ProductField",
              permissions: ["admin"],
-             audience: ["admin"],
+             audience: ["guest", "anonymous"],
              props: {
                // editable: this.editable,
                fieldName: "pageTitle",
