@@ -49,9 +49,9 @@ class PDPColorTitle extends Component {
     const { name } = this.state;
     return (
       <div>
-        {name && (
-          <h3 className="pdp-color-name"><div id="pdp-color-name-background">{name}</div></h3>
-        )}
+      {name && (
+         <h3 className="pdp-color-name"><div className="pdp-color-name-background">{name}</div></h3>
+       )}
       </div>
     );
   }
