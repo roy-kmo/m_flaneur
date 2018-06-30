@@ -46,12 +46,14 @@ export default class IndexView extends Component {
           <div className="row-bedding w-row">
             <div className="bedding-builder-3-column w-col w-col-6">
               <div className="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="315" srcSet="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="(max-width: 479px) 300px, 315px" className="bedding-oval-shape-large"/>
-                <div className="bedding-build-2-line option have-color" onClick={onHaveClick}><a href="#" className="bedding-link">I know what (color) I want</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+                <div className="bedding-build-2-line option have-color" onClick={onHaveClick}><a href="#" className="bedding-link">I know what (color) I want</a><div class="tooltip"><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/><span class="tooltiptext">Pick your Pantone, upload an image, or view color houses</span>
+</div></div>
               </div>
             </div>
             <div className="bedding-builder-3-column w-col w-col-6">
               <div className="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="315" srcSet="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="(max-width: 479px) 300px, 315px" className="bedding-oval-shape-large"/>
-                <div className="bedding-build-2-line option need-help" onClick={onHelpClick}><a href="#" className="bedding-link">I need inspiration</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+                <div className="bedding-build-2-line option need-help" onClick={onHelpClick}><a href="#" className="bedding-link">I need inspiration</a><div class="tooltip"><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/><span class="tooltiptext">Explore color tips, designer capsules, and more.</span>
+</div></div>
               </div>
             </div>
           </div>

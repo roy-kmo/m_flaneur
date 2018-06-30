@@ -48,21 +48,25 @@ export default class HelpView extends Component {
             <div class="bedding-builder-3-column w-col w-col-1 w-col-stack"></div>
             <div class="bedding-builder-3-column w-col w-col-3 w-col-stack">
               <div class="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="259" srcset="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="220px" class="bedding-oval-shape"/>
-                <div class="bedding-build-1-line option color-tips" onClick={onColorTipsClick}><a href="/pages/" class="bedding-link">Using Color Guide</a><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/></div>
+                <div class="bedding-build-1-line option color-tips"><a href="/pages/using-color" class="bedding-link">Using Color Guide</a><div class="tooltip"><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/><span class="tooltiptext">Get acquainted with these practical color ideas.</span>
+</div></div>
               </div>
             </div>
             <div class="bedding-builder-3-column w-col w-col-4 w-col-stack">
               <div class="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="259" srcset="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="220px" class="bedding-oval-shape"/>
-                <div class="bedding-build-1-line option capsules"><a href="/pages/capsule" class="bedding-link">See Designer Capsules</a><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/></div>
+                <div class="bedding-build-1-line option capsules"><a href="/pages/capsule" class="bedding-link">See Designer Capsules</a><div class="tooltip"><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/><span class="tooltiptext">Collaborations with top interior designers.</span>
+</div></div>
               </div>
             </div>
             <div class="bedding-builder-3-column w-col w-col-3 w-col-stack">
               <div class="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="259" srcset="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="220px" class="bedding-oval-shape"/>
-                <div class="bedding-build-1-line"><a href="/color-houses" class="bedding-link">See Color Houses</a><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/></div>
+                <div class="bedding-build-1-line"><a href="/color-houses" class="bedding-link">See Color Houses</a><div class="tooltip"><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/><span class="tooltiptext">View curated collections of colors by Flaneurs experts.</span>
+</div></div>
               </div>
             </div>
             <div class="bedding-builder-3-column w-col w-col-1 w-col-stack"></div>
           </div>
+          <BackLink {...this.props} />
         </div>
       </div>
     </div>
@@ -85,7 +89,7 @@ export default class HelpView extends Component {
       </div>
     </div>
     </div>
-    <BackLink {...this.props} />
+
   </div>
 
 

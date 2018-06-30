@@ -48,21 +48,25 @@ export default class HaveView extends Component {
             <div className="bedding-builder-3-column w-col w-col-1 w-col-stack"></div>
             <div className="bedding-builder-3-column w-col w-col-3 w-col-stack">
               <div className="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="259" srcset="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="220px" className="bedding-oval-shape"/>
-                <div className="bedding-build-1-line option upload-image" onClick={onUploadClick}><a href="#" className="bedding-link">Upload Image</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+                <div className="bedding-build-1-line option upload-image" onClick={onUploadClick}><a href="#" className="bedding-link">Upload Image</a><div class="tooltip"><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/><span class="tooltiptext">Already have an image in mind? Upload and start with that.</span>
+</div></div>
               </div>
             </div>
             <div className="bedding-builder-3-column w-col w-col-4 w-col-stack">
               <div className="bedding-builder-containerblock"><img src="/images/Oval-23.png" width="259" className="bedding-oval-shape"/>
-                <div className="bedding-build-1-line option enter-pantone" onClick={onEnterPantoneClick}><a href="#" className="bedding-link">Enter Pantone Code</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+                <div className="bedding-build-1-line option enter-pantone" onClick={onEnterPantoneClick}><a href="#" className="bedding-link">Enter Pantone Code</a><div class="tooltip"><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/><span class="tooltiptext">The standard has already been set. Add the Pantone number here.</span>
+</div></div>
               </div>
             </div>
             <div className="bedding-builder-3-column w-col w-col-3 w-col-stack">
               <div className="bedding-builder-containerblock"><img src="/images/Oval-21.png" width="259" srcset="/images/Oval-21-p-500.png 500w, /images/Oval-21.png 518w" sizes="220px" className="bedding-oval-shape"/>
-                <div className="bedding-build-1-line"><a href="/color-houses" className="bedding-link">View Color Houses</a><img src="/images/question-mark-1question-mark.png" width="19" className="question-centered"/></div>
+                <div className="bedding-build-1-line"><a href="/color-houses" className="bedding-link">View Color Houses</a><div class="tooltip"><img src="/images/question-mark-1question-mark.png" width="19" class="question-centered"/><span class="tooltiptext">View curated collections of colors by Flaneurs experts.</span>
+</div></div>
               </div>
             </div>
             <div className="bedding-builder-3-column w-col w-col-1 w-col-stack"></div>
           </div>
+              <BackLink {...this.props} />
         </div>
       </div>
     </div>
@@ -85,7 +89,7 @@ export default class HaveView extends Component {
       </div>
     </div>
     </div>
-    <BackLink {...this.props} />
+
   </div>
 
 

@@ -7725,7 +7725,7 @@ div.rui.navbar.feature-line {
 a.color .color-name{  font-family: 'Montserrat', sans-sans-serif;
 }
 ul.nav.nav-tabs.profile-tabs{
-  width:700px;
+  width:640px;
    margin:0 auto 0 auto;
  }
 
@@ -7743,7 +7743,7 @@ button.btn{
 .btn-group.image-buttons{margin-bottom:10px;}
 .heading-7{text-align:left;}
 .paragraph-3{text-align:left;}
-p.back-link{color:#fff;}
+p.back-link a{color:#fff; font-family:'montserrat', sans-serif;}
 .column-22 {
   padding-right: 30px;
   padding-left: 30px;
@@ -7754,7 +7754,7 @@ p.back-link{color:#fff;}
   padding-top: 0px;
   padding-right: 0px;
   padding-bottom: 20px;
-  border-bottom: 5px solid #5fbeff;
+  border-bottom: 2px solid #5fbeff;
 }
 
 .progress-bar-div.current {
@@ -7763,7 +7763,7 @@ p.back-link{color:#fff;}
   padding-right: 0px;
   padding-bottom: 20px;
   border-style: none none solid;
-  border-bottom-width: 5px;
+  border-bottom-width: 2px;
   border-bottom-color: #fff;
   font-family: Montserrat, sans-serif;
   color: #e7e7e7;
@@ -11243,8 +11243,49 @@ div.pdp-static .image-31{transform:none;-webkit-transform:none;}
 div.image-26{transform:none;-webkit-transform:none;}
 .image-uploader input{width:200px;margin:-150px auto 0 auto;}
 .help-block.w-container{padding:10px;}
-.pantone-input input{font-size:20px; }
+.pantone-input input{font-size:20px;padding:10px;width:250px; }
 input[type="file"]{color:#fff;}
 
 .landing-row.pdp-selections{margin-bottom:50px;}
 .swatchbook-drawer-container .no-colors-message{float:none;font-family:'cormorant', serif;}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+        width: 160px;
+    top: 100%;
+    font-size:12px;
+    left: 50%;
+    margin-top:10px;
+    margin-left: -80px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.uploaded-image{max-width:500px;}
+.text-block-115 {
+  display: block;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 40px;
+  font-family: Montserrat, sans-serif;
+  color: #000;
+  text-align: center;
+}
+.nav-tabs.profile-tabs > li.profile-tab{float:none;
+}
+  .nav-tabs.profile-tabs > li.profile-tab a{  font-family:'cormorant', serif; font-size:25px; color:#006cb6;}
+.fa.fa-plus.fa-lg.address-icons{display:none;}
+h3.panel-title{font-size:20px;}
+.account-holder-box.flex.flex-column.flex-align-center.flex-2x.container-lg{padding-top:0px !important;}
