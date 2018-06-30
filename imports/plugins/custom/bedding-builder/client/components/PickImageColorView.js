@@ -315,9 +315,9 @@ class PickImageColorView extends Component {
       }
 
       const style = {
-        width: '80%',
+        width: '90%',
         height: '30px',
-        marginLeft: '20px',
+        margin: '0 auto 0 auto',
         marginBottom: '10px',
       };
 
@@ -331,7 +331,7 @@ class PickImageColorView extends Component {
 
       if (key === pickerKey) {
         const invertedColor = this.invertColor(color);
-        style.border = `2px dotted ${invertedColor}`;
+        style.border = `2px solid ${invertedColor}`;
         className += className && ' active-picker-color' || 'active-picker-color';
       }
 
@@ -339,7 +339,7 @@ class PickImageColorView extends Component {
       pickers.push(
         <div
           key={`cp_${key}`}
-          style={{ clear: 'both' }}
+          style={{ display: 'inline-block' }}
         >
           <div
             key={`picker_${key}`}
@@ -418,11 +418,12 @@ class PickImageColorView extends Component {
             </div>
             <div>
               <div className="div-block-9coo">
-                <div className="div-block-15"><div style={{ display: 'table-cell', width: '50%', verticalAlign: 'top' }}>
+                <div className="div-block-15"><div style={{ display: 'block', width: '100%', verticalAlign: 'top' }}>
                 <div className="btn-group image-buttons" style={{ clear: 'both' }}>
                   <button className="btn btn-default" onClick={onReplaceImageClick}>Replace Image</button>
                   <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
                 </div>
+
                   <div style={{ display: 'block' }}>
                     <div
                       ref={elem => this.imageContainer = elem}
@@ -444,7 +445,7 @@ class PickImageColorView extends Component {
                           cursor: 'crosshair',
                           zIndex: 2,
                           margin: imageWidth ? 'inherit' : '0 auto',
-                          maxWidth: '100%',
+                          maxWidth: '%',
                         }}
                         onLoad={this.onImageLoad}
                       />
@@ -470,7 +471,10 @@ class PickImageColorView extends Component {
                     </div>
                   </div>
                 </div>
-                <div style={{ display: 'table-cell', width: '50%', }}>
+                <div className="div-block-19">
+                  <div className="text-block-115">Click any color bar below to begin fine-tuning. See the curated color pairings change based on your position on the image. Click the bookmark to add a color to your swatchbook. </div>
+                </div>
+                <div className="block-pickers" style={{ display: 'inline-block' }}>
                   {this.colorPickers()}
                 </div></div>
                 <div>
