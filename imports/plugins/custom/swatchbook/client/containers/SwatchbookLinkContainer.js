@@ -12,7 +12,7 @@ class SwatchbookLinkContainer extends Component {
     isOpen: false
   };
 
-  handleClick = e => {
+  handleSwatchViewClick = e => {
     e.preventDefault();
     const { isOpen } = this.state;
     const swatchbookDrawer = $('.swatchbook-drawer-container');
@@ -34,7 +34,7 @@ class SwatchbookLinkContainer extends Component {
         <a
           href="javascript:void(0)"
           className="swatchbook-link"
-          onClick={this.handleClick}>Swatchbook ({colorCount})</a>
+          onClick={this.handleSwatchViewClick}>Swatchbook ({colorCount})</a>
       </Fragment>
 
     );
