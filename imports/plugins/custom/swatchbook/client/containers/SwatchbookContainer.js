@@ -41,12 +41,29 @@ class SwatchbookContainer extends Component {
     ReactionRouter.go('/design-your-bedding');
   };
 
+  handleSwatchViewClick = e => {
+    e.preventDefault();
+    const { isOpen } = this.state;
+    const swatchbookDrawer = $('.swatchbook-drawer-container');
+
+    if (isOpen) {
+      swatchbookDrawer.hide();
+    } else {
+      swatchbookDrawer.show();
+    }
+
+    this.setState({ isOpen: !isOpen });
+  };
+
+
   render () {
     const { colors } = this.state;
     return (
 
       <div className="swatchbook-drawer-container" ref={ref => this.container = ref}>
-
+      <button
+        className="rui btn btn-default flat button swatchbook-link-closer"
+        onClick={this.handleSwatchViewClick}>Close Swatchbook</button>
           <div className="cart-drawer-swiper-slide swatch">
 
           {!colors.length && (

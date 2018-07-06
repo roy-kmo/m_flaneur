@@ -75,7 +75,7 @@ export default class HelpView extends Component {
       <div className="column-22 w-col w-col-4">
         <div>
           <h1 className="heading-7">Chat with us</h1>
-          <p className="paragraph-3">Our concierge is available to assist you with color selections and more. </p><a href="#" className="side-button">Chat</a></div>
+          <p className="paragraph-3">Our concierge is available to assist you with color selections and more. </p><a href="#" onClick={()=>{ Intercom('show'); }} className="side-button">Chat</a></div>
       </div>
       <div className="column-22 w-col w-col-4">
         <div>

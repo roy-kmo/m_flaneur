@@ -108,16 +108,9 @@ class MainDropdown extends Component {
           <div style={{ paddingRight: 5 }}>
             <Components.DropDownMenu
               buttonElement={this.buttonElement()}
-              attachment="bottom right"
-              targetAttachment="top right"
               menuStyle={menuStyle}
               className="accounts-li-tag"
-              onChange={this.props.handleChange}
-              constraints={[{
-                to: "window",
-                attachment: "together"
-              }]}
-            >
+              onChange={this.props.handleChange}>
               {this.renderUserIcons()}
               {this.renderAdminIcons()}
               {this.renderSignOutButton()}

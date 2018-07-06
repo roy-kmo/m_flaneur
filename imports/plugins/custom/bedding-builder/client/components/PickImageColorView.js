@@ -388,106 +388,90 @@ class PickImageColorView extends Component {
     const picker = pickerMap[`${pickerKey}`];
     return (
       <div className="view">
-      <div className="color-section">
-      <div className="progressbarrow w-row">
-        <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
-          <div className="progress-bar-div current"></div>
-        </div>
-        <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
-          <div className="progress-bar-div current"></div>
-        </div>
-        <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
-          <div className="progress-bar-div current"></div>
-        </div>
-        <div className="progress-bar w-col w-col-2 w-col-medium-2 w-col-small-2 w-col-tiny-2">
-          <div className="progress-bar-div current"></div>
-        </div>
-        <div className="progress-bar w-col w-col-1 w-col-medium-1 w-col-small-1 w-col-tiny-1">
-          <div className="progress-bar-div"></div>
-        </div>
-        </div>
-        <div className="div-block-39">
-          <div className="container-2 w-container">
-            <div>
-              <div className="div-block-17 w-clearfix">
-                  <h1 className="heading-3-no-tooltip-2">Refine Your Color</h1>
-              </div>
-              <div className="div-block-19">
-                <div className="text-block-15">Select the colors to view product colors</div>
-              </div>
+        <div className="color-section">
+          <div className="progressbarrow w-row">
+            <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
+              <div className="progress-bar-div current"></div>
             </div>
-            <div>
-              <div className="div-block-9coo">
-                <div className="div-block-15"><div style={{ display: 'block', width: '100%', verticalAlign: 'top' }}>
-                <div className="btn-group image-buttons" style={{ clear: 'both' }}>
-                  <button className="btn btn-default" onClick={onReplaceImageClick}>Replace Image</button>
-                  <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
-                </div>
-
-                  <div style={{ display: 'block' }}>
-                    <div
-                      ref={elem => this.imageContainer = elem}
-                      className="uploaded-image"
-                      style={{
-                        position: 'relative',
-                        display: 'inline-block',
-                        width: imageWidth ? `${imageWidth}px` : '100%',
-                        height: `${imageHeight}px`,
-                        zIndex: 1
-                      }}
-                    >
-                      <img
-                        ref={elem => this.imageElem = elem}
-                        src={image} id="picker-image"
-                        style={{
-                          position: imageWidth ? 'absolute' : 'static',
-                          display: 'block',
-                          cursor: 'crosshair',
-                          zIndex: 2,
-                          margin: imageWidth ? 'inherit' : '0 auto',
-                          maxWidth: '%',
-                        }}
-                        onLoad={this.onImageLoad}
-                      />
-                      <canvas ref={elem => this.imageCanvas = elem} id="image-canvas" style={{ display: 'none' }}></canvas>
-
-                      {
-                        pickerKey && (
-                          <div
-                            style={{
-                              position: 'absolute',
-                              top: 0,
-                              right: 0,
-                              width: `${PREVIEW_SIZE}px`,
-                              height: `${PREVIEW_SIZE}px`,
-                              backgroundColor: picker.color,
-                              border: '1px solid lightgray',
-                              zIndex: 3,
-                            }}
-                          />
-                        )
-                      }
-                      {this.dominantCursors()}
-                    </div>
-                  </div>
+            <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
+              <div className="progress-bar-div current"></div>
+            </div>
+            <div className="progress-bar w-col w-col-3 w-col-medium-3 w-col-small-3 w-col-tiny-3">
+              <div className="progress-bar-div current"></div>
+            </div>
+            <div className="progress-bar w-col w-col-2 w-col-medium-2 w-col-small-2 w-col-tiny-2">
+              <div className="progress-bar-div current"></div>
+            </div>
+            <div className="progress-bar w-col w-col-1 w-col-medium-1 w-col-small-1 w-col-tiny-1">
+              <div className="progress-bar-div"></div>
+            </div>
+          </div>
+          <div className="div-block-39">
+            <div className="container-2 w-container">
+              <div>
+                <div className="div-block-17 w-clearfix">
+                  <h1 className="heading-3-no-tooltip-2">Refine Your Color</h1>
                 </div>
                 <div className="div-block-19">
-                  <div className="text-block-115">Click any color bar below to begin fine-tuning. See the curated color pairings change based on your position on the image. Click the bookmark to add a color to your swatchbook. </div>
+                  <div className="text-block-15">Select the colors to view product colors</div>
                 </div>
-                <div className="block-pickers" style={{ display: 'inline-block' }}>
-                  {this.colorPickers()}
-                </div></div>
-                <div>
+              </div>
+              <div>
+                <div className="div-block-9coo">
+                  <div className="div-block-15">
+                    <div style={{ display: 'block', width: '100%', verticalAlign: 'top' }}>
+                      <div className="btn-group image-buttons" style={{ clear: 'both' }}>
+                        <button className="btn btn-default" onClick={onReplaceImageClick}>Replace Image</button>
+                        <button className="btn btn-default" onClick={onBackClick}>Cancel</button>
+                      </div>
 
+                      <div style={{ display: 'block' }}>
+                        <div ref={elem=> this.imageContainer = elem} className="uploaded-image" style={{ position: 'relative', display: 'inline-block', width: imageWidth ? `${imageWidth}px` : '100%', height: `${imageHeight}px`, zIndex: 1 }} >
+                          <img ref={elem=> this.imageElem = elem} src={image} id="picker-image" style={{ position: imageWidth ? 'absolute' : 'static', display: 'block', cursor: 'crosshair', zIndex: 2, margin: imageWidth ? 'inherit' : '0 auto', maxWidth: '%',
+                          }} onLoad={this.onImageLoad} />
+                          <canvas ref={elem=> this.imageCanvas = elem} id="image-canvas" style={{ display: 'none' }}></canvas> { pickerKey && (
+                          <div style={{ position: 'absolute', top: 0, right: 0, width: `${PREVIEW_SIZE}px`, height: `${PREVIEW_SIZE}px`, backgroundColor: picker.color, border: '1px solid lightgray', zIndex: 3, }} /> ) } {this.dominantCursors()}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="div-block-19">
+                      <div className="text-block-115">Click any color bar below to begin fine-tuning. See the curated color pairings change based on your position on the image. Click the bookmark to add a color to your swatchbook. </div>
+                    </div>
+                    <div className="block-pickers" style={{ display: 'inline-block' }}>
+                      {this.colorPickers()}
+                    </div>
+                  </div>
+                  <div>
+
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
+        </div>
+        <div className="help-block w-container">
+          <div className="row-28 w-row">
+            <div className="column-22 w-col w-col-4">
+              <div>
+                <h1 className="heading-7">Chat with us</h1>
+                <p className="paragraph-3">Our concierge is available to assist you with color selections and more. </p><a href="#" onClick={()=>{ Intercom('show'); }} className="side-button">Chat</a></div>
+            </div>
+            <div className="column-22 w-col w-col-4">
+              <div>
+                <h1 className="heading-7">Get color tips</h1>
+                <p className="paragraph-3">Get practical expert color advice from interior design insiders.</p>
+              </div><a href="/pages/using-color" className="side-button">See Color Tips</a></div>
+            <div className="column-22 w-col w-col-4">
+              <div>
+                <h1 className="heading-7">Explore the blog</h1>
+                <p className="paragraph-3">Read our blog for color inspiration, how-to guides, and much more. </p><a href="www.hiflaneur.com/salon" className="side-button">Go to Salon</a></div>
+            </div>
           </div>
         </div>
       </div>
 
-      </div>
+
     );
   }
 }
