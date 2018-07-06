@@ -34,6 +34,7 @@ export default class ColorLink extends Component {
     } = this.props;
 
     return (
+      <div className="color-div">
       <a
         key={_id}
         className="color"
@@ -58,6 +59,7 @@ export default class ColorLink extends Component {
         </div>
         <span className="color-name">{name}</span>
       </a>
+      </div>
     )
   }
 }
