@@ -61,7 +61,9 @@ class SwatchbookContainer extends Component {
     return (
 
       <div className="swatchbook-drawer-container" ref={ref => this.container = ref}>
-      <button className="rui btn btn-default flat button swatchbook-link-closer" onClick={this.handleSwatchViewClick}>Close Swatchbook</button>
+      <button
+        className="rui btn btn-default flat button swatchbook-link-closer"
+        onClick={this.handleSwatchViewClick}>Close Swatchbook</button>
           <div className="cart-drawer-swiper-slide swatch">
 
           {!colors.length && (

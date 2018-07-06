@@ -24,6 +24,7 @@ export default class HomepageInfo extends Component {
     }
     return (
       <div id="home-info">
+
   <div className="content-section landing">
     <div className="container-8 w-container">
       <div className="div-landing w-clearfix">
