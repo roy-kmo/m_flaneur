@@ -14,8 +14,7 @@ export default class MainMenu extends Component {
 
 
       <header className="menu" role="banner">
-        <ul className="nav navbar-nav" id="main-menu"><li>  <a href="/" className="w-inline-block w-clearfix">
-          <img src="/images/Flaneur-logo-blue.png" width="127" className="image-50"/></a></li></ul>
+
           <div className="sign-in-block">
 
         <ul className="nav navbar-nav menu" id="main-menu">

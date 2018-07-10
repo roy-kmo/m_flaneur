@@ -66,8 +66,8 @@
 }
 
 .sign-in-block {
-  margin-left: 135px;
-  float: left;
+  margin-left: 0px;
+  float: none;
   font-weight: 400;
   text-align: right;
 }
@@ -11310,3 +11310,81 @@ button.btn.btn-default.variant-button{border:1px solid #cfcfcf; color:#cfcfcf;}
 .rui.btn.btn-default.flat.button.swatchbook-link-closer{text-align:right;}
 .color-div{float:left;}
 a.color span.color-name{height:50px;}
+.accounts{margin-top:0px; float:right;bottom:0px;}
+div.accounts .dropdown-toggle{display:inline-block;margin-top:0px;}
+ul#main-menu.nav.navbar-nav.menu{margin-top:0px;}
+ul#main-menu{width:100%;}
+.navbar-nav{
+  float:left;
+}
+#menu-and-accounts-container{
+  padding-top:40px;
+}
+#my-icon{
+  display:none;
+}
+@media only screen and (max-width: 770px) {
+  #my-icon {
+    display:inline-block;
+    background-color:#fff;
+    color:#006cb6;
+    float:right;
+    padding:20px;
+    padding-bottom:40px;
+    font-family:"montserrat";
+
+  }
+  #menu-and-accounts-container{
+    display:none;
+    width:100%;
+  }
+  #main-menu li.dropdown{
+    text-align:center;
+  }
+  li.main-menu-top{
+    display:inline-block;
+    width:50%;
+  }
+  .nav.navbar-nav#main-menu{
+    width:100%;
+  }
+  .my-icon:hover + #menu-and-accounts-container{
+    display:block;
+    padding-top:0px;
+  }
+  .accounts{
+    width:100%;
+  }
+  #main-menu li.dropdown:hover ul{
+    width:100%;
+  }
+  #menu-and-accounts-container.popover-element.popover-open{
+    width:100%;
+  }
+  .accounts.rui.btn-default.flat{
+    width:100%;
+  }
+  #menu-and-accounts-container ul.dropdown-menu{
+    text-align:center;
+  }
+  #my-icon:hover{
+    font-weight:bold;
+  }
+  #menu-and-accounts-container button.rui.btn-default.flat{
+    width:100%;
+  }
+  #menu-and-accounts-container:hover{
+    display:block;
+  }
+  #menu-and-accounts-container header.menu{
+    width:100%;
+  }
+  .accounts-dropdown{
+    text-align:center;
+  }
+  .navbar-nav .open .dropdown-menu{width:100%;}
+}
+#menu-and-accounts-container header.menu{
+  display:inline-block;
+
+}

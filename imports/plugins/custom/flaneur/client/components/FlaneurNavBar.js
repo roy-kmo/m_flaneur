@@ -182,27 +182,32 @@ class FlaneurNavBar extends Component {
     //- Added SwatchbookContainer
     const { featureLine } = this.state;
     return (
-        <div>
-          <div className="nav-container w-container">
-          <div className="rui navbar cart-navbar">
-            {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()}
+      <div>
+<div className="nav-container w-container">
+  <div className="rui navbar cart-navbar">
+    {this.props.visibility.cartContainer && this.renderCartContainerAndPanel()} {this.props.visibility.notifications && this.renderNotificationIcon()}
+  </div>
+  <div className="nav-div w-clearfix">
+    <ul className="nav navbar-nav" id="main-menu">
+      <li className="main-menu-top">
+      <a href="/" className="w-inline-block w-clearfix">
+          <img src="/images/Flaneur-logo-blue.png" width="127" className="image-50"/></a>
+      </li>
+    <li className="main-menu-top my-icon"><div id="my-icon">Menu</div></li>
 
-            {this.props.visibility.notifications && this.renderNotificationIcon()}
+<li id="menu-and-accounts-container">
+
+      {this.props.visibility.tags && this.renderTagNav()} {this.props.visibility.mainDropdown && this.renderMainDropdown()}
+    </li>
+    </ul>
+  </div>
+</div>
+{featureLine.isEnabled && (
+  <div className="rui navbar feature-line" dangerouslySetInnerHTML={{__html: featureLine.content}} /> )}
+  <SwatchbookContainer />
+  </div>
 
 
-          </div>
-
-
-          <div className="nav-div w-clearfix">
-          <div id="menu-and-accounts-container">
-                        {this.props.visibility.tags && this.renderTagNav()}
-                        {this.props.visibility.mainDropdown && this.renderMainDropdown()}
-                      </div></div></div>
-          {featureLine.isEnabled && (
-            <div className="rui navbar feature-line" dangerouslySetInnerHTML={{__html: featureLine.content}} />
-          )}
-		   <SwatchbookContainer />
-        </div>
     );
   }
 }
