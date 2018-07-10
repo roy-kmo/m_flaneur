@@ -8,6 +8,14 @@ export default class HomepageInfo extends Component {
     info: PropTypes.object.isRequired
   }
 
+  mailChimpInit () {
+    !function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/9d3fe8212429db65ff383e4df/2a7ae496a6fc1fd45a2f23f8f.js");
+  }
+
+  componentDidMount () {
+    this.mailChimpInit();
+  }
+
   render () {
     const {
       title,
@@ -22,9 +30,9 @@ export default class HomepageInfo extends Component {
     if (imageFileId) {
       imageUrl = getImageURL(imageFileId, imageFileName);
     }
-    return (
-      <div id="home-info">
 
+    return (
+<div id="home-info">
   <div className="content-section landing">
     <div className="container-8 w-container">
       <div className="div-landing w-clearfix">
